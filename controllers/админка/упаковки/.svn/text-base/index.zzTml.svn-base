@@ -1,0 +1,102 @@
+<@Admin_>
+    <~Body title="Упаковки">
+        <~Html>
+            <table class="mainList">
+                <tr>
+                    <td>
+                        <a href="/админка/флешки">Флешки</a>
+                        <a href="/админка/упаковки">Упаковки</a>
+                <tr>
+                    <td>
+                        <div id="Mcat"></div>
+                    <td>
+                        <div id="Mview"></div>
+            </table>
+        </~>
+        <~List_Table.editor viewID="#Mcat">
+            <~List_Table_Create>Создать</~>
+            <~List_Table_Tbody>
+                <tr>
+                    <td class="name">
+                        ~$name~ #~$id~
+            </~>
+        </~>
+        <~View.editor viewID="#Mview">
+            <~Block.editor !created>
+                <~Input name="name" title="Название" ?Input_Empty />
+                <~Input name="price" title="Цена" value="0" ?Input_Empty />
+                <~Input name="count" title="Количество" value="0" ?Input_Empty />
+                <~Input name="index" title="Index" value="0" ?Input_Empty />
+                <~Input name="description" title="Описание" />
+                <~Checkbox name="instock" title="На складе" value="1" />
+            </~>
+            <~List_UL.colors name="Цвета и фотографии упаковки" >
+                <~List_UL_LI data-ident=~#Admin_List_UL.colors$id~>
+                    <@_>
+                        <~Market_ColorMaker color=~$color_html~ />
+                    </@>
+                </~>
+                <~List_UL_LICreate !id=~#Admin_List_UL.colors$id~>
+                    Новый цвет
+                </~>
+            </~>
+            <~View.colors>
+                <~Block.colors !onlycreated>
+                    <~Select name="color_id" title="Новый цвет">
+                        <~Options.selectedcolors value="id" text="name" />
+                    </~>
+                </~>
+                <~List_UL.photo name="Фотографии упаковки" >
+                    <~List_UL_LICreate !id=~#Admin_List_UL.photo$id~>
+                        Добавить
+                    </~>
+                    <~List_UL_LI>
+                        <img src="<~Image_Link.photo !id=~$id~ />" style="height:105px" />
+                    </~>
+                </~>
+                <~View.photo>
+                    <~Block.photo !created>
+                        <~Image name="photo" !src="thumbnail" ?File_Exists title="Новая картинка">
+                            <~Image_Thumbnail name="body" !width="600" !height="450" />
+                            <~Image_Thumbnail name="thumbnail" !width="280" !height="210" />
+                        </~>
+                    </~>
+                </~>
+                <~List_UL.colorchange name="Цвета на картинке" >
+                    <~List_UL_LI>
+                        <@Market_>
+                            <~ColorMaker color=~$color_html~ />
+                        </~>
+                    </~>
+                    <~List_UL_LICreate !id=~#Admin_List_UL.colorchange$id~ data-ident=~$ident~>
+                        Добавить цвет
+                    </~>
+                </~>
+                <~View.colorchange>
+                    <~Block.colorchange !created>
+                        <~Hidden name="ident" value="~$ident~" />
+                        <~Select name="color_id" title="Цвет">
+                            <~Options.selectedcolors value="id" text="name" />
+                        </~>
+                    </~>
+                </~>
+            </~>
+            <~List_UL.catalogs name="Выводить в каталоги">
+                <~List_UL_LI>
+                    ~$name~
+                </~>
+                <~List_UL_LICreate !id=~#Admin_List_UL.catalogs$id~>Добавить</~>
+            </~>
+            <~View.catalogs>
+                <~Block.catalogs !created>
+                    <~Select name="catalog_id" title="Каталог">
+                        <~Options.selectedcatalogs value="id" text="name" />
+                    </~>
+                </~>
+            </~>
+            <~Block.searcher>
+                <~Input name="words" title="Поисковые фразы" />
+            </~>
+        </~>
+    </~>
+</@>

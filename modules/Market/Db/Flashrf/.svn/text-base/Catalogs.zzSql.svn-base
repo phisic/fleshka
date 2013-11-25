@@ -1,0 +1,73 @@
+<~Config_Link />
+
+<~My_Query.adminList link=~#My_Link~>
+    SELECT * FROM ~#@self~ ORDER BY `index`
+</~>
+
+<~My_Query.adminListValue link=~#My_Link~>
+    SELECT ~&id~ as `selecteditemid`
+</~>
+
+<~My_Query.adminLoad.adminCheck link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+
+<~My_Query.adminUpdate link=~#My_Link~>
+    UPDATE ~#@self~
+    SET
+        `name` = ~&name~,
+        `header` = ~&header~,
+        `url` = ~&url~,
+        `show` = ~&show~,
+        `index` = ~&index~,
+        `image` = ~&image~
+    WHERE self.id = ~&id~
+</~>
+
+<~Q.adminCreate>
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~
+            (`name`, `header`, `index`, `url`, `show`, `image`)
+        VALUES
+            (~&name~, ~&header~, ~&index~, ~&url~, ~&show~, ~&image~)
+    </~>
+    <~My_Query link=~#My_Link~>
+        SELECT LAST_INSERT_ID() as `id`
+    </~>
+</~>
+
+<~Q.adminRemove>
+    <~My_Query link=~#My_Link~>
+        DELETE FROM ~#@table~
+        WHERE `id` = ~&id~
+    </~>
+</~>
+
+<~My_Query.catalogByName link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    WHERE self.`url` = ~&name~ AND self.`show` = 1 LIMIT 1
+</~>
+
+<~My_Query.goodsIdByCatalogName link=~#My_Link~>
+    SELECT DISTINCT relgoodscatalog.goods_id as `id` FROM ~#@self~
+    JOIN ~#@base~.relgoodscatalog ON relgoodscatalog.`catalog_id` = self.`id`
+    WHERE self.`url` = ~&name~ AND self.`show` = 1
+</~>
+
+<~My_Query.allGoodsId link=~#My_Link~>
+    SELECT DISTINCT relgoodscatalog.goods_id as `id` FROM ~#@self~
+    JOIN ~#@base~.relgoodscatalog ON relgoodscatalog.`catalog_id` = self.`id`
+    WHERE self.`url` != '' AND self.`show` = 1
+</~>
+
+<~My_Query_Group.goodsId group="id" link=~#My_Link~>
+    SELECT relgoodscatalog.goods_id, self.`id` FROM ~#@self~
+    JOIN ~#@base~.relgoodscatalog ON relgoodscatalog.`catalog_id` = self.`id`
+    WHERE self.`url` != '' AND self.`show` = 1 
+</~>
+
+<~My_Query.listMenu link=~#My_Link~>
+    SELECT * FROM ~#@self~ WHERE `show` = 1 ORDER BY `index`
+</~>
+

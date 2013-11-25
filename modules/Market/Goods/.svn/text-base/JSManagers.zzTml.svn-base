@@ -1,0 +1,21 @@
+<script>
+    $(document).ready(function(){
+        $('ul.order li.manager a').click(function(){
+            $(this).parents('li').toggleClass('selected');
+            
+            $(this).parents('li').next('li').toggle();
+            
+            return false;
+        })
+        
+        $('div.ask textarea').keyup(function(){
+            $(this).css('height', '0px');
+            var h = 19+this.scrollHeight;
+            if (h < 26)
+                h = 26;
+            if (h > 136)
+                h = 136;
+            $(this).css('height', h+'px');
+        }).keyup();
+    });
+</script>

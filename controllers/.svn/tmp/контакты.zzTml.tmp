@@ -1,0 +1,264 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Контакты fleshka.ru</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="интернет магазин, инет магазин" />
+    <meta name="description" content="Контакты магазина fleshka.ru для покупки товаров через интернет, Category: Shop" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/jquery.datepicker.js"></script>
+    <link REL="StyleSheet" type="text/css" href="/css/main.css" />
+    <link REL="StyleSheet" type="text/css" href="/css/datepicker.css" />
+    <script type="text/javascript">
+        function order(){
+            var colors = [], sizes = [];
+
+            this.getColors = function(){
+                colors = $.cookie('colors').split('_');
+            }
+            
+            this.getSizes = function(){
+                sizes = $.cookie('sizes').split('_');
+            }
+            
+            this.setColors = function(){
+                $.cookie('colors', colors.join('_'), { expires: 1, path: '/'});
+            }
+            
+            this.setSizes = function(){
+                $.cookie('sizes', sizes.join('_'), { expires: 1, path: '/'});
+            }
+            
+            this.indexColor = function(need){
+                for (var i = 0; i<colors.length; i++)
+                    if (colors[i] == need)
+                        return i;
+                
+                return -1;
+            }
+            
+            this.indexSize = function(need){
+                for (var i = 0; i<sizes.length; i++)
+                    if (sizes[i] == need)
+                        return i;
+                
+                return -1;
+            }
+            
+            if ($.cookie('colors'))
+                this.getColors();
+            
+            if ($.cookie('sizes'))
+                this.getSizes();
+            
+            this.addColor = function($id){
+                if (this.indexColor($id) == -1){
+                    colors.push($id);
+                    this.setColors();
+                }
+            };
+            
+            this.removeColor = function($id){
+                var idx = this.indexColor($id);
+                if (idx != -1){
+                    colors.splice(idx, 1);
+                    this.setColors();
+                }
+            };
+            
+            this.addSize = function(id, size){
+                if (this.indexSize(id+'-'+size) == -1){
+                    sizes.push(id+'+'+size);
+                    this.setSizes();
+                }
+            };
+            
+            this.removeSize = function(id, size){
+                var idx = this.indexSize(id+'-'+size);
+                
+                if (idx != -1){
+                    sizes.splice(idx, 1);
+                    this.setSizes();
+                }
+            };
+        }
+        
+        var order = new order();
+
+        function helper($table, text, clas){
+            $('#helper').attr('class', '').hide().appendTo( $table );
+            $('#helper').html(text).fadeIn('fast').addClass(clas);
+        }
+
+        $(document).ready(function(){
+            function colorMouseOver(){
+                $('img.image', $(this).parents('div.flash')).attr('src', '/p/t'+$(this).data().id);
+            }
+            $('table.price ul.colors li').bind('mouseover', colorMouseOver).click(function(){
+                var $box = $('div.colorbox', this);
+                $box.toggleClass('selected')
+                
+                if ($box.hasClass('selected')){
+                    $('img.image', $(this).parents('div.flash')).attr('src', '/p/t'+$(this).data().id);
+                    
+                    $('li', $(this).parents('ul.colors')).unbind('mouseover');
+                    
+                    //add to order
+                    order.addColor($(this).data().id);
+                    
+                }else{
+                    if(!$('div.colorbox.selected', $(this).parents('ul.colors')).length){
+                        $('li', $(this).parents('ul.colors')).bind('mouseover', colorMouseOver);
+                        
+                        $('#helper').hide();
+                    }
+                    
+                    //remove from order
+                    order.removeColor($(this).data().id);
+                }
+
+                var $table = $(this).parents('div.flash');
+                helper( $table , 'Изменения приняты', 'info');
+            });
+            
+            $('ul.colorfilters li').click(function(){
+                var div = $('div.colorbox', this);
+                if (div.length){
+                    var id = div.data().id;
+                    window.open('?<~Qs color="'+id+'" !glue="&" />', '_self');
+                }else
+                    window.open('?<~Qs color !glue="&" />', '_self');
+            });
+            
+            $('table.price div.button').click(function(){
+                var data = $(this).data();
+                
+                $(this).toggleClass('selected');
+                
+                if ($(this).hasClass('selected')){
+                    order.addSize(data.id, data.size);
+                }else{
+                    order.removeSize(data.id, data.size);
+
+                    $('#helper').hide();
+                }
+
+                var $table = $(this).parents('div.flash');
+                helper( $table , 'Изменения приняты', 'info');
+            });
+            
+            $('div.commentform textarea').keyup(function(){
+                $(this).css('height', '0px');
+                var h = 19+this.scrollHeight;
+                if (h < 76)
+                    h = 76;
+                $(this).css('height', h+'px');
+            }).keyup();
+            
+            var date = '<~Date>d.m.Y</~>';
+
+            if ($('#expireDate').val()){
+                $('#pickExpireDate').html(
+                    date = $('#expireDate').val()
+                );
+            }
+
+            if ($('#expireDateTo').val()){
+                $('#pickExpireDateTo').html(
+                    date = $('#expireDateTo').val()
+                );
+            }
+            
+            $('#pickExpireDate').DatePicker({
+                format:'d.m.Y',
+                date: date,
+                current: date,
+                starts: 1,
+                position: 'r',
+                onChange: function(formated, dates){
+                    $('#expireDate').val(formated);
+                    $('#pickExpireDate').html(formated);
+                    $('#pickExpireDate').DatePickerHide();
+                }
+            }).click(function(){return false;});
+
+            $('#pickExpireDateTo').DatePicker({
+                format:'d.m.Y',
+                date: date,
+                current: date,
+                starts: 1,
+                position: 'r',
+                onChange: function(formated, dates){
+                    $('#expireDateTo').val(formated);
+                    $('#pickExpireDateTo').html(formated);
+                    $('#pickExpireDateTo').DatePickerHide();
+                }
+            }).click(function(){return false;});
+            
+            $('#ordersend').click(function(){
+                $('#addemail').show();
+                $(this).hide();
+            });
+        });
+    </script>
+    <~Market_Goods_Var />
+  </head>
+  <body>
+      <div id="helper" class="small"></div>
+      <div class="center">
+          <~Market_Goods_Header />
+          <table class="main">
+              <tr>
+                  <td style="width: 212px">
+                      <div class="testfixed">
+                      <~Market_Goods_Menu />
+                      <~Market_Order_Menu />
+                      </div>
+                  <td>
+                      <div class="catalog">
+                          <h1>Контакты</h1>
+                          <div class="border">
+<<<<<<< .mine
+                             <span style="font-size: large;"><span style="font-size: large;">
+</span><span style="font-size: large;"><br /></span><span style="font-size: large;">
+</span><strong><span style="font-size: large;">ОПТОВЫЙ ОТДЕЛ (РОССИЯ, СНГ)</span></strong><span style="font-size: large;"><br /></span><span style="font-size: large;">
+</span><span style="font-size: large;"><br /></span><span style="font-size: large;">+7 (495) 780-80-85<br />+7 (968) 898-63-38<br /></span></span>
+<p> </p>
+<p><span style="font-size: large;"><span style="font-size: large;">
+• <strong>Лизунов Алексей Александрович</strong> (рекламные сувениры, носители информации, импорт на заказ)</span><span style="font-size: large;"><br /></span><span style="font-size: large;">
+e-mail: </span></span><span style="font-size: large;"><span style="font-size: large;"><a href="mailto:alex@fleshka.ru">alex@fleshka.ru</a>, SKYPE: alex_fleshka.ru, ICQ: 602-753-819, </span></span></p>
+<p><span style="font-size: large;"><span style="font-size: large;">телефон: +7 (962) 999-31-25</span></span></p>
+<p><span style="font-size: large;"><br /></span></p>
+<p><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;">• <strong>Филиппова Ирина Александровна</strong> (рекламные сувениры, носители информации, импорт на заказ)</span><span style="font-size: large;"><br /></span><span style="font-size: large;">e-mail: </span></span><span style="font-size: large;"><span style="font-size: large;"><a href="mailto:irina@fleshka.ru">irina@fleshka.ru</a>, SKYPE: irina-100zakazov, ICQ: 623-276-603</span></span></span></span></p>
+<p><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;">телефон: +7 (916) 735-99-51</span></span></span></span></p>
+<p><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><br /></span></span></span></p>
+<p><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;">• <strong>Калиновский Анатолий Евгеньевич</strong> (рекламные сувениры, носители информации, импорт на заказ)</span><span style="font-size: large;"><br /></span><span style="font-size: large;">e-mail: <a href="mailto:akalin@fleshka.ru">akalin@fleshka.ru</a>, SKYPE: xzonemi27, </span></span></span></span></span></span></p>
+<p><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;">телефон: +7 (916) 417-34-22</span></span></span></span></span></span></p>
+<p><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><br /></span></span></span></span></span></p>
+<p><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;">• <strong>Масленников Денис Игоревич</strong> (рекламные сувениры, носители информации, импорт на заказ)</span><span style="font-size: large;"><br /></span><span style="font-size: large;">e-mail: </span></span><span style="font-size: large;"><span style="font-size: large;"><a href="mailto:denis@fleshka.ru">denis@fleshka.ru</a>, SKYPE: denis-100zakazov, ICQ: 615-794-235</span></span></span></span></span></span></span></span></p>
+<p><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;">телефон: +7 (985) 196-93-90</span></span></span></span></span></span></span></span></p>
+<p><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><br /></span></span></span></span></span></span></span></p>
+<p><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;"><span style="font-size: large;">• <strong>Шабаев Эльдар Рафикович</strong> (рекламные сувениры, носители информации, импорт на заказ)</span><span style="font-size: large;"><br /></span><span style="font-size: large;">e-mail: </span></span><span style="font-size: large;"><span style="font-size: large;"><a title="eldar@100zakazov.ru" href="mailto:eldar@100zakazov.ru">eldar@100zakazov.ru</a></span></span><span style="font-size: large;"><span style="font-size: large;">, ICQ 267-575-646, SKYPE shabaev_eldar</span></span></span></span></span></span></span></span></span></span><span style="font-family: Calibri, sans-serif; font-size: 14pt; line-height: 115%;"> </span></p>
+<p><span style="font-family: Calibri, sans-serif; font-size: 14pt; line-height: 115%;"><br /></span></p>
+<p>
+<span style="font-size: large;"><span style="font-size: large;"><span style="font-size: medium;">• <strong>Стич Валерий Васильевич</strong> (рекламные сувениры, носители информации, импорт на заказ)</span></span><span style="font-size: large;"><br /></span></span>
+<span style="font-size: large;"><span style="font-size: large;">e-mail: </span></span><span style="font-size: large;"><span style="font-size: large;"><a title="valery@100zakazov.ru" href="mailto:valery@100zakazov.ru">valery@100zakazov.ru</a></span></span><span style="font-size: large;"><span style="font-size: large;">, </span></span><span style="font-size: large;"><span style="font-size: large;">ICQ 621-387-027, SKYPE valery-100zakazov</span></span> <span style="font-size: large;"><span style="font-size: large;"><br /></span></span></p>
+<p> </p>
+<p> </p>
+=======
+                              <address style="margin-top: 0px">Контактный телефон: <b>+7 (495)780-80-83</b></address>
+<br /><address>Адрес: Москва, м. Шоссе Энтузиастов, ул. Электродная д.2, стр.25, этаж 2.</address>
+<br />Часы работы: 10.00-19.00 пн-пт.
+>>>>>>> .r2403
+<br />
+<br />Мы готовы ответить на вопросы наших покупателей, а также принять заказ любым удобным способом связи.
+<br />
+                          </div>
+                      </div>
+          </table>
+          <~Market_Footer />
+      </div>
+      <~Market_YMetrica />
+  </body>
+</html>

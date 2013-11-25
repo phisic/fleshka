@@ -1,0 +1,12 @@
+                      <div class="leftmenu">
+                          <div class="catheader">Заказы</div>
+                          <ul class="middle order">
+                              <li<~Market_Goods_MenuSelect test="new"> class="selected"</~>><a href="/запрос/">Мой новый заказ</a>
+                              <~Each_ValueNumber>
+                                  <li<~Market_Goods_MenuSelect test=~@value~> class="selected"</~>><a href="/запрос/~@value~">Заказ №~@number~</a>
+                              </~>
+                              <~Market_Order_Manager>
+                                  <li><a href="/админка/запросы">Вернуться в админку</a>
+                              </~>
+                          </ul>
+                      </div>

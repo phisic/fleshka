@@ -1,0 +1,112 @@
+html{
+    position: relative;
+    min-height: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    display: block;
+    font-family: "Verdana";
+    font-size: 14px;
+    background: url(../i/bg.gif) #DED7F4;
+    position: relative;
+    color: black;
+    min-height: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px 0px;
+}
+
+div, p, table{
+    position: relative;
+}
+
+a{
+    color: #800080;
+}
+
+a img{
+    border-width: 0px;
+}
+
+div.leftmenu ul.middle{
+    margin: 0px;
+    padding: 0px;
+    background: url(../i/catalogbg.jpg) no-repeat #D6D5D5;
+    list-style: none;
+    padding-bottom: 0px;
+    border-bottom: 2px solid #6B6876;
+    -webkit-border-bottom-right-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-bottomright: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+div.leftmenu{
+    width: 199px;
+    margin-bottom: 15px;
+    margin-top: 1px;
+}
+
+div.leftmenu div.header{
+    height: 31px;
+    font-weight: bold;
+    color: #D8D6D6;
+    text-align: center;
+    padding-top: 7px;
+    background: url(../i/cataloghead.jpg);
+}
+
+div.leftmenu ul.middle li{
+    position: relative;
+    height: 30px;
+}
+
+div.leftmenu ul.middle li.small{
+    font-size: 12px;
+    height: 19px;
+}
+
+div.leftmenu ul.middle li.small a{
+    height: 18px;
+    padding: 0px 0px 0px 10px;
+    top: 1px;
+}
+
+div.leftmenu ul.middle li a{
+    position: absolute;
+    left: 0px;
+    width: 189px;
+    height: 20px;
+    top: 0px;
+    color: black;
+    text-decoration: none;
+    vertical-align: middle;
+    padding: 5px 0px 5px 10px;
+}
+
+div.leftmenu ul.middle li a var{
+    color: #404040;
+    font-size: 12px;
+}
+
+div.leftmenu ul.middle li a:hover{
+    background: rgba(80, 5, 87, 0.1);
+}
+
+div.leftmenu ul.middle li.selected a{
+    background: #53055B;
+    color: white;
+}
+
+div.leftmenu ul.middle li.selected a var{
+    color: #8B8A88;
+}
+
+td{
+    vertical-align: top;
+    
+}

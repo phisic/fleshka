@@ -1,0 +1,32 @@
+<~Config_Link />
+<~My_Query.adminList link=~#My_Link~>
+    SELECT * FROM ~#@self~
+</~>
+
+<~My_Query.adminListValue link=~#My_Link~>
+    SELECT ~&id~ as `selecteditemid`
+</~>
+
+<~Market_Db_SearchAddWords.adminLoad.adminCheck>
+    <~My_Query link=~#My_Link~>
+        SELECT * FROM ~#@self~
+        WHERE self.goods_id = ~&id~
+    </~>
+</~>
+
+<~My_Query.goodsIdBySearchWord link=~#My_Link~>
+    SELECT DISTINCT self.goods_id as id FROM ~#@self~
+    WHERE self.word = ~&word~
+</~>
+
+<~Market_Db_Search.adminCreate.adminUpdate>
+    <~My_Query link=~#My_Link~>
+        DELETE FROM ~#@table~ WHERE `goods_id` = ~&id~
+    </~>
+    <~Q_Each_Value>
+        <~My_Query link=~#My_Link~>
+            INSERT INTO ~#@table~ (`goods_id`, `word`)
+            VALUES (~&id~, ~&value~)
+        </~>
+    </~>
+</~>

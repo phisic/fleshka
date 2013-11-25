@@ -1,0 +1,1 @@
+~#@day~ <~H.month.1>января</~><~H.month.2>февраля</~><~H.month.3>марта</~><~H.month.4>апреля</~><~H.month.5>мая</~><~H.month.6>июня</~><~H.month.7>июля</~><~H.month.8>августа</~><~H.month.9>сентября</~><~H.month.10>октября</~><~H.month.11>ноября</~><~H.month.12>декабря</~><~H.withyear> ~#@year~</~><~H.withtime> ~#@hour~:~#@minute~</~><~H><~O.insideDate>~@@~</~></~>

@@ -1,0 +1,16 @@
+<script type="text/javascript">
+        $(document).ready(function(){
+            $('input.gray').click(function(){
+                if ($(this).hasClass('gray')){
+                    $(this).removeClass('gray');
+                    $(this).val('');
+                }
+            })
+
+            $('#searchform').submit(function(){
+                window.open('/запрос/'+$('input',this).val(), '_self');
+
+                return false;
+            });
+        });
+    </script>

@@ -1,0 +1,79 @@
+<~Config_Link />
+
+<~My_Query.load link=~#My_Link~>
+    SELECT * FROM ~#@table~
+    WHERE `order_id` = ~&order_id~
+    AND `state` < 3
+    LIMIT 1
+</~>
+
+<~My_Query.loadByGroup link=~#My_Link~>
+    SELECT * FROM ~#@table~
+    WHERE `group` = ~$group~
+    ORDER BY `date_created` desc
+</~>
+
+<~Q.create>
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~ (`order_id`, `state`, `date_created`, `date_expire`, `date_expire_to`, `delivery`, `email`, `sizes`, `colors`)
+        VALUES (~&order_id~, 1, NOW(), ~&date_expire~, ~&date_expire_to~, ~&delivery~, ~&email~, ~&sizes~, ~&colors~)
+    </~>
+</~>
+
+<~My_Query.companyInfoByEmail link=~#My_Link~>
+    SELECT `company`, `address`, `phone` FROM ~#@table~
+    WHERE `email` = ~&email~
+    AND `state` in (2, 3)
+    ORDER BY `date_created` DESC
+    LIMIT 1
+</~>
+
+<~My_Query.updateHits link=~#My_Link~>
+    UPDATE ~#@table~
+    SET `hits` = `hits` + 1
+    WHERE `order_id` = ~&order_id~
+    LIMIT 1
+</~>
+
+<~My_Query.setCompany link=~#My_Link~>
+    UPDATE ~#@table~
+    SET `company` = ~&company~, `phone` = ~&phone~, `address` = ~&address~
+    WHERE `order_id` = ~&order_id~
+</~>
+
+<~My_Query.updateDateExpire link=~#My_Link~>
+    UPDATE ~#@table~
+    SET `date_expire` = ~&date_expire~
+    WHERE `order_id` = ~&order_id~
+</~>
+
+<~My_Query.updateDateExpireTo link=~#My_Link~>
+    UPDATE ~#@table~
+    SET `date_expire_to` = ~&date_expire_to~
+    WHERE `order_id` = ~&order_id~
+</~>
+
+<~My_Query.updateDelivery link=~#My_Link~>
+    UPDATE ~#@table~
+    SET `delivery` = ~&delivery~
+    WHERE `order_id` = ~&order_id~
+</~>
+
+<~My_Query.updateGroup link=~#My_Link~>
+    UPDATE ~#@table~
+    SET `group` = ~&group~
+    WHERE `order_id` = ~&order_id~
+</~>
+
+<~My_Query.updateGoods link=~#My_Link~>
+    UPDATE ~#@table~
+    SET `sizes` = ~&sizes~, `colors` = ~&colors~
+    WHERE `order_id` = ~&order_id~
+</~>
+
+<~My_Query.saveCompanyInfo link=~#My_Link~>
+    UPDATE ~#@table~
+    SET `company` = ~&company~, `phone` = ~&phone~,
+        `address` = ~&address~, `state` = 2
+    WHERE `order_id` = ~&order_id~
+</~>

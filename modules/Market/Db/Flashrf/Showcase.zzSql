@@ -1,0 +1,53 @@
+<~Config_Link />
+
+<~My_Query.adminList link=~#My_Link~>
+    SELECT * FROM ~#@self~ ORDER by `index`
+</~>
+
+<~My_Query.listShowcase link=~#My_Link~>
+    SELECT * FROM ~#@self~ WHERE `show` = 1 ORDER by rand()
+</~>
+
+<~My_Query.adminLoad.adminCheck link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+
+<~My_Query.adminRemove link=~#My_Link~>
+    DELETE FROM ~#@table~
+    WHERE `id` = ~&id~
+</~>
+
+<~My_Query.adminListValue link=~#My_Link~>
+    SELECT ~&id~ as `selecteditemid`
+</~>
+
+<~My_Query.photoThumb.adminThumb link=~#My_Link~>
+    SELECT `thumbnail` as `image` FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+
+<~My_Query.photoBody.adminBody link=~#My_Link~>
+    SELECT `body` as `image` FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+
+<~My_Query.adminUpdate link=~#My_Link~>
+    UPDATE ~#@self~
+    SET
+        `show` = ~&show~,
+        `thumbnail` = ~&thumbnail~, 
+        `body` = ~&body~
+    WHERE self.id = ~&id~
+</~>
+
+<~Q.adminCreate>
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~ (`body`, `thumbnail`, `show`)
+        VALUES (~&body~, ~&thumbnail~, ~&show~)
+    </~>
+    <~My_Query link=~#My_Link~>
+        SELECT LAST_INSERT_ID() as `id`
+    </~>
+</~>
+

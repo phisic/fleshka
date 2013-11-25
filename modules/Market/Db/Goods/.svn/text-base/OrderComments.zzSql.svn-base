@@ -1,0 +1,39 @@
+<~Config_Link />
+
+<~O.joinOrderGoods>~#@table~ order_goods</~>
+
+/*
+    CREATE TABLE `goods`.`ordercomments` (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`order_id` VARCHAR( 255 ) NOT NULL ,
+`date_created` DATETIME NOT NULL ,
+`manager_id` INT NOT NULL ,
+`comment` TEXT NOT NULL ,
+INDEX ( `order_id` )
+) ENGINE = InnoDB;
+*/
+
+<~My_Query.loadComments link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    WHERE order_id = ~&order_id~
+    ORDER BY `date_created`
+</~>
+
+<~My_Query.checkNew link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    WHERE order_id = ~&order_id~ AND `id` > ~$comments_id~
+    ORDER BY `date_created`
+</~>
+
+<~My_Query.addComment link=~#My_Link~>
+    INSERT INTO ~#@table~
+    (`order_id`, `date_created`, `comment`, `manager_id`)
+    VALUES
+    (~&order_id~, NOW(), ~&comment~, ~&manager_id~)
+</~>
+
+<~My_Query.removeOrderGoods link=~#My_Link~>
+    DELETE FROM ~#@table~
+    WHERE `order_id` = ~&order_id~ AND `goods_id` in ~&goods~
+</~>
+

@@ -1,0 +1,34 @@
+<@Admin_>
+    <~Body title="Флешки">
+        <~Html>
+            <table class="mainList">
+                <tr>
+                    <td>
+                        <div id="Mcat"></div>
+                    <td>
+                        <div id="Mview"></div>
+            </table>
+        </~>
+        <~List_Table.editor viewID="#Mcat">
+            <~List_Table_Create>Создать</~>
+            <~List_Table_Tbody>
+                <tr>
+                    <td class="name">
+                        ~$name~ (~$count~)
+                <tr>
+                    <td style="font-size: 0.8em">
+                        <a href="/админка/флешки/">товары</a>
+            </~>
+        </~>
+        <~View.editor viewID="#Mview">
+            <~Block.editor !created>
+                <~Input name="name" title="Название" ?Input_Empty />
+                <~Input name="header" title="Заголовок" />
+                <~Input name="url" title="URL" />
+                <~Input name="index" title="Index" value="0" ?Input_Empty />
+                <~Input name="image" title="Image" />
+                <~Checkbox name="show" title="Показывать" value="1" />
+            </~>
+        </~>
+    </~>
+</@>

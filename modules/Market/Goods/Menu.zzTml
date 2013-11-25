@@ -1,0 +1,14 @@
+<~Market_Goods_Var />
+                      <div class="leftmenu">
+                          <div class="catheader">Каталог</div>
+                          <ul class="middle order">
+                              <li <~Market_Goods_MenuSelect test="special">class="selected"</~> style="height: 43px" ><a href="/специальное_предложение" style="height: 33px">&rarr; Специальные предложения <var>3</var></a>
+                              <~Each_Param>
+                                <li <~Market_Goods_MenuSelect test=~$url~>class="selected"</~>><a href="/прайс/~#Each_Param$url~?<~Qs instock />">&rarr; ~#Each_Param$name~ <var>~#Each_Param$count~</var></a>
+                                <~Market_Goods_MenuSelect test=~$url~>
+                                    <li class="small<~T test="~#Market_Goods_Var$instockFilter~"> selected</~>"><a href="/прайс/~#Each_Param$url~?<~Qs instock="1" />">на складе</a>
+                                    <li class="small<~T test="~#Market_Goods_Var$instockFilter~" invert> selected</~>"><a href="/прайс/~#Each_Param$url~?<~Qs instock="0" />">на заказ</a>
+                                </~>
+                              </~>
+                          </ul>
+                      </div>

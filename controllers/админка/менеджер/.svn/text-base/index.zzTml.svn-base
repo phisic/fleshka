@@ -1,0 +1,21 @@
+<@Admin_>
+    <~Body title="Менеджеры">
+        <~List_Table.editor>
+            <~List_Table_Create>Создать</~>
+            <~List_Table_Tbody>
+                <tr>
+                    <td class="name">
+                        ~$name~<br />~$email~
+            </~>
+        </~>
+        <~View.editor>
+            <~Block.editor !created>
+                <~Input name="name" title="Имя" value="" ?Input_Empty />
+                <~Input name="login" title="Login" value="" ?Input_Empty />
+                <~Input name="password" title="Пароль" value="" ?Input_Empty />
+                <~Input name="email" title="Email" value="@100zakazov.ru" ?Input_Empty />
+                <~Checkbox name="active" title="Active" value="1" />
+            </~>
+        </~>
+    </~>
+</@>

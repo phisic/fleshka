@@ -1,0 +1,41 @@
+<~Config_Link />
+<@^>-- Get parent directory for include class Market_Db_Market
+    <~MarketConfig.config />
+</@>
+
+<~My_Query.adminList link=~#My_Link~>
+    SELECT * FROM ~#@self~
+</~>
+
+<~My_Query.adminLoad.adminCheck link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+
+<~My_Query.adminUpdate link=~#My_Link~>
+    UPDATE ~#@self~
+    SET
+        `name` = ~&name~,
+        `description` = ~&description~,
+        `pricesize2` = ~&pricesize2~,
+        `pricesize4` = ~&pricesize4~,
+        `pricesize8` = ~&pricesize8~,
+        `pricesize16` = ~&pricesize16~,
+        `pricesize32` = ~&pricesize32~
+    WHERE self.id = ~&id~
+</~>
+
+<~Q.adminCreate>
+    <~Q_Forward query=~#}.config}.incrementGoodsCount~ />
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~
+            (`id`, `name`, `description`, `pricesize2`, `pricesize4`, `pricesize8`, `pricesize16`, `pricesize32`, `index`)
+        VALUES
+            (~#}.config}.incrementGoodsCount}.value&value~, ~&name~, ~&description~, ~&pricesize2~, ~&pricesize4~, ~&pricesize8~, ~&pricesize16~, ~&pricesize32~, ~&index~)
+    </~>
+</~>
+
+<~My_Query.adminRemove link=~#My_Link~>
+    DELETE FROM ~#@table~
+    WHERE `id` = ~&id~
+</~>

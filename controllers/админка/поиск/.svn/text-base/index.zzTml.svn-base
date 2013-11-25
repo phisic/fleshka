@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Фразы поиска флешка.рф</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="интернет магазин, инет магазин" />
+    <meta name="description" content="Страница товаров магазина 100 заказов для покупки товаров через интернет, Category: Shop" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <link REL="StyleSheet" type="text/css" href="/css/order.css" />
+  </head>
+  <body>
+      <div class="center">
+          <table class="main">
+              <tr>
+                  <td style="width: 212px">
+                  <td>
+              <~Each_Param.search>
+                <p>~$phrase~ [~$hits~] = ~$results~</p>
+              </~>
+          </table>
+      </div>
+  </body>
+</html>

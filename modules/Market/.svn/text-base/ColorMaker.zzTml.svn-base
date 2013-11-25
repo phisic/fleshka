@@ -1,0 +1,4 @@
+<div class="colorbox<~H.selected> selected</~>">
+    <~Each_Param><div class="inline" style="width: ~#@percent~%;background: ~$color_html~">&nbsp;</div></~>
+    <div class="top"></div>
+</div>

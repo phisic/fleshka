@@ -1,0 +1,68 @@
+<~Config_Link />
+<@^>-- Get parent directory for include class Market_Db_Goods_RelGoodsFeature
+    <~RelCatalogFeature.relcf />
+</@>
+
+<~My_Query.load link=~#My_Link~>
+    SELECT * FROM ~#@self~ ORDER by `index`
+</~>
+
+<~My_Query.loadMenuCatalog link=~#My_Link~>
+    SELECT * FROM ~#@self~ WHERE `view` = 1 AND `count` != 0 ORDER by `index`
+</~>
+
+<~My_Query.loadCatalogFilters link=~#My_Link~>
+    SELECT relcatalogfeature.feature_id, self.id
+    FROM ~#@self~
+    JOIN ~#O.joinRelCatalogFeature~ ON `relcatalogfeature`.catalog_id = self.id
+    WHERE `view` = 1
+</~>
+
+<~Q.setCatalogCount>
+    <~Q_Each source="$counts">
+        <~My_Query link=~#My_Link~>
+            UPDATE ~#@table~ SET `count` = ~$count~ WHERE `id` = ~$id~
+        </~>
+    </~>
+</~>
+
+<~My_Query.loadAdminMenuCatalog link=~#My_Link~>
+    SELECT * FROM ~#@self~ WHERE `view` != 0 ORDER by `index`
+</~>
+
+<~My_Query.loadById link=~#My_Link~>
+    SELECT * FROM ~#@self~ WHERE `id` = ~&id~
+</~>
+
+<~My_Query.getFilterByUrl link=~#My_Link~>
+    SELECT relcatalogfeature.feature_id
+    FROM ~#@self~
+    JOIN ~#O.joinRelCatalogFeature~ ON `relcatalogfeature`.catalog_id = self.id
+    WHERE `url` = ~&url~
+</~>
+
+<~My_Query.loadByUrl link=~#My_Link~>
+    SELECT *
+    FROM ~#@self~
+    WHERE `url` = ~&url~
+</~>
+
+<~Q.insertNew>
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~ (`name`, `group`, `url`, `header`, `description`, `index`, `view`, `photo`) VALUES
+        (~&name~, ~&group~, ~&url~, ~&header~, ~&description~, ~&index~, ~&view~, ~&photo~)
+    </~>
+    <~My_Query link=~#My_Link~>
+        SELECT LAST_INSERT_ID() as last_id;
+    </~>
+</~>
+
+<~My_Query.updateById link=~#My_Link~>
+    UPDATE ~#@table~ SET `name` = ~&name~, `group` = ~&group~, `url` = ~&url~, `header` = ~&header~,
+        `description` = ~&description~, `index` = ~&index~, `view` = ~&view~, `photo` = ~&photo~
+    WHERE `id` = ~&id~
+</~>
+
+<~My_Query.loadById link=~#My_Link~>
+    SELECT * FROM ~#@self~ WHERE `id` = ~&id~
+</~>

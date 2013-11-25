@@ -1,0 +1,35 @@
+      <!-- Yandex.Metrika counter -->
+    <div style="display:none;"><script type="text/javascript">
+    (function(w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter4484290 = new Ya.Metrika({id:4484290,
+                        clickmap:true,
+                        trackLinks:true});
+            }
+            catch(e) { }
+        });
+    })(window, 'yandex_metrika_callbacks');
+    </script></div>
+    <script src="//mc.yandex.ru/metrika/watch_visor.js" type="text/javascript" defer="defer"></script>
+    <noscript><div><img src="//mc.yandex.ru/watch/4484290" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+      <div class="header">
+          <div class="logo">
+            <h2>Любые флешки</h2>
+            <form id="searchform"><input class="search gray" type="text" value="Найти запрос или флешку..."></form>
+          </div>
+          <ul>
+              <~H.order><li class="order<~H.orderselected> selected</~>"><a href="/запрос/~$order~">Запросы на флешка.рф</a></~>
+              <li<~H.indexselected> class="selected"</~>><a href="/">Каталог</a>
+              <~_Market_Menu_Each.marketmenu>
+              <li class="small<~H.selected> selected</~>"><a href="/~#@catname~/~$url~">~$name~</a> <span>~$count~</span>
+              </~>
+          </ul>
+          <ul>
+              <li><a href="http://100zakazov.ru/images/Standart%20Contract.doc">Стандартный договор</a>
+              <~_Market_Menu_Each.marketmenu2>
+              <li <~H.selected> class="selected"</~>><a href="/~$url~">~$name~</a>
+              </~>
+          </ul>
+      </div>

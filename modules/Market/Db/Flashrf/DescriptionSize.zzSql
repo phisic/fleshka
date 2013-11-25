@@ -1,0 +1,97 @@
+<~Config_Link />
+<~My_Query.adminList link=~#My_Link~>
+    SELECT * FROM ~#@self~
+</~>
+
+<~My_Query.adminListValue link=~#My_Link~>
+    SELECT ~&id~ as `selecteditemid`
+</~>
+
+<~Q.adminLoad.adminCheck>
+    <~My_Query link=~#My_Link~>
+        SELECT * FROM ~#@self~
+        WHERE self.id = ~&id~ LIMIT 1
+    </~>
+</~>
+
+<~Q.adminUpdate>
+    <~My_Query link=~#My_Link~>
+        UPDATE ~#@self~
+        SET
+            `name` = ~&name~,
+            `description` = ~&description~,
+            `pricesize2` = ~&pricesize2~,
+            `pricesize4` = ~&pricesize4~,
+            `pricesize8` = ~&pricesize8~,
+            `pricesize16` = ~&pricesize16~,
+            `pricesize32` = ~&pricesize32~,
+            `count2` = ~&count2~,
+            `count4` = ~&count4~,
+            `count8` = ~&count8~,
+            `count16` = ~&count16~,
+            `count32` = ~&count32~,
+            `instock` = ~&instock~,
+            `index` = ~&index~
+        WHERE self.id = ~&id~
+    </~>
+</~>
+
+<~Q.adminCreate>
+    <~Q_Forward.config db="Market_Db_Flashrf_Config" query="incrementGoodsCount" />
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~
+            (`id`, `name`, `description`, `pricesize2`, `pricesize4`, `pricesize8`, `pricesize16`, `pricesize32`, `index`, `instock`, 
+            `count2`, `count4`, `count8`, `count16`, `count32`)
+        VALUES
+            (~#Q.adminCreate*.config$value|sqlExpr~, ~&name~, ~&description~, ~&pricesize2~, ~&pricesize4~, ~&pricesize8~, ~&pricesize16~, ~&pricesize32~, ~&index~, ~&instock~, 
+            ~&count2~, ~&count4~, ~&count8~, ~&count16~, ~&count32~)
+    </~>
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@base~.search (`goods_id`, `word`)
+        VALUES (~#Q.adminCreate*.config$value|sqlExpr~, ~#Q.adminCreate*.config$value|sqlExpr~)
+    </~>
+    <~My_Query link=~#My_Link~>
+        SELECT ~#Q.adminCreate*.config$value|sqlExpr~ as `id`
+    </~>
+</~>
+
+<~My_Query.adminRemove link=~#My_Link~>
+    DELETE FROM ~#@table~
+    WHERE `id` = ~&id~
+</~>
+
+<~Q.adminCopy>
+    <~Q_Forward.config db="Market_Db_Flashrf_Config" query="incrementGoodsCount" />
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~
+            (`id`, `name`, `description`, `pricesize2`, `pricesize4`, `pricesize8`, `pricesize16`, `pricesize32`, `index`, `instock`)
+        SELECT  ~#Q.adminCopy*.config$value|sqlExpr~ as id, `name`, `description`, `pricesize2`, `pricesize4`, `pricesize8`, `pricesize16`, `pricesize32`, `index`, `instock`
+        FROM ~#@table~ WHERE id = ~&id~
+    </~>
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@base~.relgoodscatalog
+            (`catalog_id`, `goods_id`)
+        SELECT `catalog_id`, ~#Q.adminCopy*.config$value|sqlExpr~ as id
+        FROM ~#@base~.relgoodscatalog WHERE goods_id = ~&id~
+    </~>
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@base~.search
+            (`word`, `goods_id`)
+        SELECT `word`, ~#Q.adminCopy*.config$value|sqlExpr~ as goods_id
+        FROM ~#@base~.search WHERE goods_id = ~&id~
+    </~>
+    <~My_Query link=~#My_Link~>
+        SELECT ~#Q.adminCopy*.config$value|sqlExpr~ as `id`
+    </~>
+</~>
+
+<~My_Query.goodsByIds link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    WHERE `id` in ~&ids~
+</~>
+
+<~My_Query.goodsOfferByIds link=~#My_Link~>
+    SELECT self.*, specialoffer.header, specialoffer.description FROM ~#@self~
+    JOIN ~#@base~.specialoffer ON specialoffer.`id` = self.`id`
+    WHERE self.`id` in ~&ids~ ORDER by self.`index`, self.`id`
+</~>

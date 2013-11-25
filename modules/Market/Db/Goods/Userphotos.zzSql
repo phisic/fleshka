@@ -1,0 +1,26 @@
+<~Config_Link />
+<~Q.insertPhotoBody>
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~
+            (`body`, `thumbnail`) VALUES (~&body~, ~&thumbnail~)
+    </~>
+    <~My_Query link=~#My_Link~>
+        SELECT LAST_INSERT_ID() as id
+    </~>
+</~>
+
+<~My_Query.getBodyByIds link=~#My_Link~>
+    SELECT self.body
+    FROM ~#@self~
+    WHERE
+        `id` in ~&ids~
+    LIMIT 1
+</~>
+
+<~My_Query.getThumbByIds link=~#My_Link~>
+    SELECT self.thumbnail
+    FROM ~#@self~
+    WHERE
+        `id` in ~&ids~
+    LIMIT 1
+</~>

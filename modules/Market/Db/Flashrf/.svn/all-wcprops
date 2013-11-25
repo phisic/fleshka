@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Flashrf
+END
+Catalogs.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Flashrf/Catalogs.zzSql
+END
+Colors.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Flashrf/Colors.zzSql
+END
+Colorprice.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Flashrf/Colorprice.zzSql
+END
+Specialoffer.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Flashrf/Specialoffer.zzSql
+END
+Search.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Flashrf/Search.zzSql
+END
+Config.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Flashrf/Config.zzSql
+END
+ColorGroupFilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Flashrf/ColorGroupFilter.php
+END
+ChangePrice.zzTml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Flashrf/ChangePrice.zzTml
+END
+DescriptionPrice.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Flashrf/DescriptionPrice.zzSql
+END
+SearchLog.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Flashrf/SearchLog.zzSql
+END
+RelGoodsCatalog.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Flashrf/RelGoodsCatalog.zzSql
+END
+Order.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Flashrf/Order.zzSql
+END
+Showcase.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Flashrf/Showcase.zzSql
+END
+Photos.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Flashrf/Photos.zzSql
+END
+DescriptionSize.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Flashrf/DescriptionSize.zzSql
+END
+OrderComments.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Flashrf/OrderComments.zzSql
+END

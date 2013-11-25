@@ -1,0 +1,7 @@
+<~Config_Link />
+
+<~O.joinFeature>~#@table~ priclist</~>
+
+<~My_Query.getByPassword link=~#My_Link~>
+    SELECT * FROM ~#@self~ WHERE `password` = ~&password~
+</~>

@@ -1,0 +1,6 @@
+#Пример корректно составленного robots.txt, при обработке
+#которого директива Host учитывается
+User-Agent: *
+Disallow:
+Host: wwww.fleshka.ru
+

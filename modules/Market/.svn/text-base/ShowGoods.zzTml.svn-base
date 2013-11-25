@@ -1,0 +1,174 @@
+<~Market_Goods_Size>
+                              <div class="flash">
+                                  <table class="price flash">
+                                      <tr>
+                                          <th class="header"><h2><span>Флешка </span>~$name~ #~$id~</h2>
+                                          <th class="c">Выбор цвета
+                                          <th class="c size">Выбор объема
+                                          <th>500 шт
+                                          <th>1000 шт
+                                          <th>2000 шт
+                                          <th>5000 шт
+                                          <th class="gradient">кол-во
+                                      <tr>
+                                          <td rowspan="6" class="image">
+                                              <div class="imagebg">
+                                                <img src="<~Market_Goods_ImageLink !goods_id=~#Market_Goods_Size$id~ />" class="image" />
+                                                  <~Market_Goods_HasPhotos !goods_id=~#Market_Goods_Size$id~>
+                                                  <div class="thumbnails">
+                                                      <~Market_Goods_AllPhotos.size !goods_id=~#Market_Goods_Size$id~>
+                                                      <img src="<~Market_Goods_ImageLink !goods_id=~#Market_Goods_Size$id~ !index="~#Market_Goods_AllPhotos.size@number~" />" />
+                                                      </~>
+                                                  </div>
+                                                  </~>
+                                              </div>
+                                          <td rowspan="5" class="color">
+                                              <ul class="colors">
+                                              <~Market_Goods_GoodsColors !goods_id=~#Market_Goods_Size$id~>
+                                                <li data-id="~$color_group~">
+                                                <~Market_ColorMaker color=~$color_html~ id=~$color_group~ />
+                                              </~>
+                                              </ul>
+                                          <~T test="~#Market_Goods_Size$instock~">
+                                              <~T test="~#Market_Goods_Size$pricesize2~">
+                                                  <td class="odd">
+                                                      <~Market_Goods_SizeButton size="2" id=~#Market_Goods_Size$id~ />
+                                                  <td>~#Market_Goods_Size$pricesize2~ руб
+                                                  <td class="odd">~#Market_Goods_Size$pricesize2|Market_Goods_Minus minus="10"~ руб
+                                                  <td>~#Market_Goods_Size$pricesize2|Market_Goods_Minus minus="20"~ руб
+                                                  <td class="odd">~#Market_Goods_Size$pricesize2|Market_Goods_Minus minus="35"~ руб
+                                                  <td><~T test="~#Market_Goods_Size$count2~">~#Market_Goods_Size$count2~ шт</~>
+                                              </~>
+                                              <~T test="~#Market_Goods_Size$pricesize2~" invert>
+                                                  <td class="odd"><td><td class="odd"><td><td class="odd"><td>
+                                              </~>
+                                          <tr>
+                                              <~T test="~#Market_Goods_Size$pricesize4~">
+                                                  <td class="odd">
+                                                      <~Market_Goods_SizeButton size="4" id=~#Market_Goods_Size$id~ />
+                                                  <td>~#Market_Goods_Size$pricesize4~ руб
+                                                  <td class="odd">~#Market_Goods_Size$pricesize4|Market_Goods_Minus minus="10"~ руб
+                                                  <td>~#Market_Goods_Size$pricesize4|Market_Goods_Minus minus="20"~ руб
+                                                  <td class="odd">~#Market_Goods_Size$pricesize4|Market_Goods_Minus minus="35"~ руб
+                                                  <td><~T test="~#Market_Goods_Size$count4~">~#Market_Goods_Size$count4~ шт</~>
+                                              </~>
+                                              <~T test="~#Market_Goods_Size$pricesize4~" invert>
+                                                  <td class="odd"><td><td class="odd"><td><td class="odd"><td>
+                                              </~>
+                                          <tr>
+                                              <~T test="~#Market_Goods_Size$pricesize8~">
+                                                  <td class="odd">
+                                                      <~Market_Goods_SizeButton size="8" id=~#Market_Goods_Size$id~ />
+                                                  <td>~#Market_Goods_Size$pricesize8~ руб
+                                                  <td class="odd">~#Market_Goods_Size$pricesize8|Market_Goods_Minus minus="10"~ руб
+                                                  <td>~#Market_Goods_Size$pricesize8|Market_Goods_Minus minus="20"~ руб
+                                                  <td class="odd">~#Market_Goods_Size$pricesize8|Market_Goods_Minus minus="35"~ руб
+                                                  <td><~T test="~#Market_Goods_Size$count8~">~#Market_Goods_Size$count8~ шт</~>
+                                              </~>
+                                              <~T test="~#Market_Goods_Size$pricesize8~" invert>
+                                                  <td class="odd"><td><td class="odd"><td><td class="odd"><td>
+                                              </~>
+                                          <tr>
+                                              <~T test="~#Market_Goods_Size$pricesize16~">
+                                                  <td class="odd">
+                                                      <~Market_Goods_SizeButton size="16" id=~#Market_Goods_Size$id~ />
+                                                  <td>~#Market_Goods_Size$pricesize16~ руб
+                                                  <td class="odd">~#Market_Goods_Size$pricesize16|Market_Goods_Minus minus="10"~ руб
+                                                  <td>~#Market_Goods_Size$pricesize16|Market_Goods_Minus minus="20"~ руб
+                                                  <td class="odd">~#Market_Goods_Size$pricesize16|Market_Goods_Minus minus="35"~ руб
+                                                  <td><~T test="~#Market_Goods_Size$count16~">~#Market_Goods_Size$count16~ шт</~>
+                                              </~>
+                                              <~T test="~#Market_Goods_Size$pricesize16~" invert>
+                                                  <td class="odd"><td><td class="odd"><td><td class="odd"><td>
+                                              </~>
+                                          <tr>
+                                              <~T test="~#Market_Goods_Size$pricesize32~">
+                                                  <td class="odd">
+                                                      <~Market_Goods_SizeButton size="32" id=~#Market_Goods_Size$id~ />
+                                                  <td>~#Market_Goods_Size$pricesize32~ руб
+                                                  <td class="odd">~#Market_Goods_Size$pricesize32|Market_Goods_Minus minus="10"~ руб
+                                                  <td>~#Market_Goods_Size$pricesize32|Market_Goods_Minus minus="20"~ руб
+                                                  <td class="odd">~#Market_Goods_Size$pricesize32|Market_Goods_Minus minus="35"~ руб
+                                                  <td><~T test="~#Market_Goods_Size$count32~">~#Market_Goods_Size$count32~ шт</~>
+                                              </~>
+                                              <~T test="~#Market_Goods_Size$pricesize32~" invert>
+                                                  <td class="odd"><td><td class="odd"><td><td class="odd"><td>
+                                              </~>
+                                          </~>
+                                          <~T test="~#Market_Goods_Size$instock~" invert>
+                                              <td class="odd">
+                                                  <~Market_Goods_SizeButton size="2" id=~#Market_Goods_Size$id~ />
+                                              <td colspan="5" style="color:#E0F0FF">Цену уточнит менеджер. Отправьте ему запрос.
+                                          <tr>
+                                              <td class="odd">
+                                                  <~Market_Goods_SizeButton size="4" id=~#Market_Goods_Size$id~ />
+                                              <td colspan="5" style="color:#E0F0FF">Цену уточнит менеджер. Отправьте ему запрос.
+                                          <tr>
+                                              <td class="odd">
+                                                  <~Market_Goods_SizeButton size="8" id=~#Market_Goods_Size$id~ />
+                                              <td colspan="5" style="color:#E0F0FF">Цену уточнит менеджер. Отправьте ему запрос.
+                                          <tr>
+                                              <td class="odd">
+                                                  <~Market_Goods_SizeButton size="16" id=~#Market_Goods_Size$id~ />
+                                              <td colspan="5" style="color:#E0F0FF">Цену уточнит менеджер. Отправьте ему запрос.
+                                          <tr>
+                                              <td class="odd">
+                                                  <~Market_Goods_SizeButton size="32" id=~#Market_Goods_Size$id~ />
+                                              <td colspan="5" style="color:#E0F0FF">Цену уточнит менеджер. Отправьте ему запрос.
+                                          </~>
+                                      <tr>
+                                          <td class="description" colspan="7">
+                                              <p>~$description~</p>
+                                  </table>
+                              </div>
+                              </~>
+                              <~Market_Goods_Price>
+                              <div class="flash" data-id="~$id~">
+                                  <table class="price package">
+                                      <tr>
+                                          <th class="header"><h2><span>Упаковка </span>~$name~ #~$id~</h2>
+                                          <th class="c">Выбор цвета
+                                          <th>100 шт
+                                          <th>300 шт
+                                          <th>500 шт
+                                          <th>под заказ
+                                          <th class="gradient">кол-во
+                                      <tr>
+                                          <td rowspan="6" class="image">
+                                              <div class="imagebg">
+                                                  <img src="<~Market_Goods_ImageLink !goods_id=~#Market_Goods_Price$id~ />" class="image" />
+                                                  <~Market_Goods_HasPhotos !goods_id=~#Market_Goods_Price$id~>
+                                                  <div class="thumbnails">
+                                                      <~Market_Goods_AllPhotos.price !goods_id=~#Market_Goods_Price$id~>
+                                                      <img src="<~Market_Goods_ImageLink !goods_id=~#Market_Goods_Price$id~ !index="~#Market_Goods_AllPhotos.price@number~" />" />
+                                                      </~>
+                                                  </div>
+                                                  </~>
+                                              </div>
+                                          <td rowspan="5" class="color">
+                                              <ul class="colors">
+                                              <~Market_Goods_GoodsColors !goods_id=~#Market_Goods_Price$id~>
+                                                <li data-id="~$color_group~">
+                                                  <~Market_ColorMaker color=~$color_html~ id=~$color_group~ />
+                                              </~>
+                                              </ul>
+                                          <~T test="~$price~">
+                                              <td class="odd">~#Market_Goods_Price$price~ руб
+                                              <td>~#Market_Goods_Price$price|Market_Goods_Minus minus="5"~ руб
+                                              <td class="odd">~#Market_Goods_Price$price|Market_Goods_Minus minus="10"~ руб
+                                              <td>~#Market_Goods_Price$price|Market_Goods_Minus minus="15"~ руб
+                                              <td class="odd"><~T test="~#Market_Goods_Price$count~">~#Market_Goods_Price$count~ шт</~>
+                                          </~>
+                                          <~T test="~$price~" invert>
+                                              <td colspan="5" style="color:#E0F0FF">Цену уточнит менеджер. Отправьте ему запрос.
+                                          </~>
+                                      <tr><td class="odd"><td><td class="odd"><td><td class="odd">
+                                      <tr><td class="odd"><td><td class="odd"><td><td class="odd">
+                                      <tr><td class="odd"><td><td class="odd"><td><td class="odd">
+                                      <tr><td class="odd"><td><td class="odd"><td><td class="odd">
+                                      <tr>
+                                          <td class="description" colspan="7">
+                                              <p>~$description~</p>
+                                  </table>
+                              </div>
+                              </~>

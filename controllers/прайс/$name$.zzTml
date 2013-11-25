@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>~#Market_Goods_Var$header~ - Прайс-лист fleshka.ru</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="флешки оптом, флешки под логотип, флешки нанесение, флешка цена, fleshka, usb flash" />
+    <meta name="description" content="Страница товаров магазина fleshka.ru для покупки товаров через интернет, Category: Shop" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <link REL="StyleSheet" type="text/css" href="/css/main.css" />
+    <script type="text/javascript">
+        function order(){
+            var colors = [], sizes = [];
+
+            this.getColors = function(){
+                colors = $.cookie('colors').split('_');
+            }
+            
+            this.getSizes = function(){
+                sizes = $.cookie('sizes').split('_');
+            }
+            
+            this.setColors = function(){
+                $.cookie('colors', colors.join('_'), { expires: 1, path: '/'});
+            }
+            
+            this.setSizes = function(){
+                $.cookie('sizes', sizes.join('_'), { expires: 1, path: '/'});
+            }
+            
+            this.indexColor = function(need){
+                for (var i = 0; i<colors.length; i++)
+                    if (colors[i] == need)
+                        return i;
+                
+                return -1;
+            }
+            
+            this.indexSize = function(need){
+                for (var i = 0; i<sizes.length; i++)
+                    if (sizes[i] == need)
+                        return i;
+                
+                return -1;
+            }
+            
+            if ($.cookie('colors'))
+                this.getColors();
+            
+            if ($.cookie('sizes'))
+                this.getSizes();
+            
+            this.addColor = function($id){
+                if (this.indexColor($id) == -1){
+                    colors.push($id);
+                    this.setColors();
+                }
+            };
+            
+            this.removeColor = function($id){
+                var idx = this.indexColor($id);
+                if (idx != -1){
+                    colors.splice(idx, 1);
+                    this.setColors();
+                }
+            };
+            
+            this.addSize = function(id, size){
+                if (this.indexSize(id+'-'+size) == -1){
+                    sizes.push(id+'-'+size);
+                    this.setSizes();
+                }
+            };
+            
+            this.removeSize = function(id, size){
+                var idx = this.indexSize(id+'-'+size);
+                
+                if (idx != -1){
+                    sizes.splice(idx, 1);
+                    this.setSizes();
+                }
+            };
+        }
+        
+        var order = new order();
+        var $testfixed ;
+
+        function helper($table, text, clas){
+            $('#helper').attr('class', '').hide().appendTo( $table );
+            $('#helper').html(text).fadeIn('fast').addClass(clas);
+        }
+
+        $(document).ready(function(){
+            $('div.flash').mouseover(function(){
+                $('div.thumbnails.show').removeClass('show');
+                
+                $('div.thumbnails', this).addClass('show');
+            });
+            
+            $('div.thumbnails img').mouseover(function(){
+                $('img.image', $(this).parents('div.flash')).attr('src', $(this).attr('src'));
+            });
+            
+            function colorMouseOver(that){
+                if (this !== window)
+                    that = this;
+                
+                var id = $(that).data().id;
+                
+                $('img', $(that).parents('div.flash')).each(function(){
+                    $(this).attr('src', $(this).attr('src').replace(/\/p\/ph\d+x(\d+)\.jpg/, '/p/ph'+id+'x$1.jpg'));
+                });
+            }
+            
+            $('table.price.flash ul.colors li').bind('mouseover', colorMouseOver).click(function(){
+                var $box = $('div.colorbox', this);
+                $box.toggleClass('selected')
+                
+                if ($box.hasClass('selected')){
+                    colorMouseOver(this);
+                    
+                    $('li', $(this).parents('ul.colors')).unbind('mouseover');
+                    
+                    //add to order
+                    order.addColor($(this).data().id);
+                    
+                    var $table = $(this).parents('div.flash');
+                    
+                    if($('div.button.selected', $table).length){
+                        helper( $table , '<input type="button" value="Заказать флешки" onclick="window.open(\'/запрос/~#Market_Goods_Var$myorder~\',\'_self\')" /> &larr; вы можете задать вопрос и отправить заказ менеджеру.', 'add');
+                    }else{
+                        helper( $table , '<input type="button" value="Заказать" disabled /> Выберите интересующие вас объемы', 'selected');
+                    }
+                }else{
+                    if(!$('div.colorbox.selected', $(this).parents('ul.colors')).length){
+                        $('li', $(this).parents('ul.colors')).bind('mouseover', colorMouseOver);
+                        
+                        $('#helper').hide();
+                    }
+                    
+                    //remove from order
+                    order.removeColor($(this).data().id);
+                }
+            });
+            
+            $('table.price.flash div.button').click(function(){
+                var data = $(this).data();
+                
+                $(this).toggleClass('selected');
+                
+                if ($(this).hasClass('selected')){
+                    order.addSize(data.id, data.size);
+                    
+                    var $table = $(this).parents('div.flash');
+                    
+                    if($('div.colorbox.selected', $table).length){
+                        helper( $table , '<input type="button" value="Заказать флешки" onclick="window.open(\'/запрос/~#Market_Goods_Var$myorder~\',\'_self\')" /> &larr; вы можете задать вопрос и отправить заказ менеджеру.', 'add');
+                    }else{
+                        helper( $table , '<input type="button" value="Заказать" disabled /> Выберите интересующие вас цвета', 'selected');
+                    }
+                }else{
+                    order.removeSize(data.id, data.size);
+
+                    $('#helper').hide();
+                }
+            });
+            
+            $('table.price.package ul.colors li').bind('mouseover', colorMouseOver).click(function(){
+                var $box = $('div.colorbox', this);
+                $box.toggleClass('selected')
+                
+                if ($box.hasClass('selected')){
+                    colorMouseOver(this);
+                    //$('img.image', $(this).parents('div.flash')).attr('src', '/p/t'+$(this).data().id);
+                    
+                    $('li', $(this).parents('ul.colors')).unbind('mouseover');
+                    
+                    //add to order
+                    order.addColor($(this).data().id);
+                        
+                    var $table = $(this).parents('div.flash');
+                    order.addSize($table.data().id, 0);
+
+                    helper( $table , '<input type="button" value="Заказать упаковки" onclick="window.open(\'/запрос/~#Market_Goods_Var$myorder~\',\'_self\')" /> &larr; вы можете задать вопрос и отправить заказ менеджеру.', 'add');
+                }else{
+                    if(!$('div.colorbox.selected', $(this).parents('ul.colors')).length){
+                        $('li', $(this).parents('ul.colors')).bind('mouseover', colorMouseOver);
+                        
+                        $('#helper').hide();
+                        
+                        order.removeSize($(this).parents('div.flash').data().id, 0);
+                    }
+                    
+                    //remove from order
+                    order.removeColor($(this).data().id);
+                }
+            });
+            
+            $('ul.colorfilters li').click(function(){
+                var div = $('div.colorbox', this);
+                if (div.length){
+                    var id = div.data().id;
+                    window.open('?<~Qs color="'+id+'" !glue="&" />', '_self');
+                }else
+                    window.open('?<~Qs color !glue="&" />', '_self');
+            });
+            
+<~Market_Goods_InSearch>            if ($('table.flash').length)
+                helper($('div.flash:first'), '<input type="button" value="Заказать" disabled /> Вам нужно выбрать интересующие цвета и объемы флешек', 'selected');
+            else
+                helper($('div.flash:first'), '<input type="button" value="Заказать" disabled /> Вам нужно выбрать интересующие цвета упаковок', 'selected');</~>
+            
+            $testfixed = $('div.testfixed');
+            
+            window.setInterval(function(){
+                var y = window.pageYOffset?window.pageYOffset:document.documentElement.scrollTop;
+                
+                if (y > 245){
+                    if (!$testfixed.hasClass('fix'))
+                        $testfixed.addClass('fix')
+                }else{
+                    $testfixed.removeClass('fix')
+                }
+            }, 100);
+        });
+    </script>
+    <~Market_Goods_Var />
+  </head>
+  <body>
+      <div id="helper"></div>
+      <div class="center">
+          <~Market_Goods_Header />
+          <table class="main">
+              <tr>
+                  <td style="width: 212px;z-index: 10">
+                      <div>
+                          <div class="testfixed">
+                              <~Market_Goods_Menu />
+                              <~Market_Order_Menu />
+                          </div>
+                      </div>
+                  <td>
+                      <div class="catalog">
+                          <h1>~#Market_Goods_Var$header~</h1>
+                          <div class="border" style="padding-top: 0px">
+                              <div class="filter">Фильтр по цвету:
+                                  <ul class="colorfilters">
+                                      <li class="all<~T test=~#Market_Goods_Var$colorFilter~ invert> selected</~>">Все
+                                  <~Market_Goods_ColorsForm>
+                                    <li><~Market_Goods_ColorMaker id=~$id~ color=~@value~ selected=~#Market_Goods_Var$colorFilter~ />
+                                  </~>
+                                  </ul>
+                              </div>
+                              <~Market_Goods_Empty><p>Данных моделей сейчас нет в каталоге. Выберите другую категорию.</p></~>
+                              <~Market_ShowGoods />
+                          </div>
+                      </div>
+          </table>
+          <~Market_Footer />
+      </div>
+      <~Market_YMetrica />
+  </body>
+</html>

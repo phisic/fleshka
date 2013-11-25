@@ -1,0 +1,5 @@
+#Пример корректно составленного robots.txt, при обработке
+#которого директива Host учитывается
+User-Agent: *
+Disallow:
+Host: xn--e1agfc8b0a.xn--p1ai

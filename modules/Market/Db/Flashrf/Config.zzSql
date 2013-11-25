@@ -1,0 +1,18 @@
+<~Config_Link />
+
+<~Q_Return.incrementGoodsCount>
+    <~My_Query link=~#My_Link~>
+        LOCK TABLES ~#@table~ WRITE
+    </~>
+    <~My_Query link=~#My_Link~>
+        UPDATE ~#@table~
+        SET `value` = `value` + 1
+        WHERE `variable` = 'goods_id'
+    </~>
+    <~My_Query.return link=~#My_Link~>
+        SELECT `value` FROM ~#@table~ WHERE `variable` = 'goods_id'
+    </~>
+    <~My_Query link=~#My_Link~>
+        UNLOCK TABLES
+    </~>
+</~>

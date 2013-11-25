@@ -1,0 +1,28 @@
+<~Config_Link />
+<~Q.updatePhotoBodyById>
+    <~Q_Each source="$ids">
+        <~My_Query link=~#My_Link~>
+            INSERT INTO ~#@table~
+                (`goods_id`, `body`, `thumbnail`) VALUES (~&goods_id~, ~&body~, ~&thumbnail~)
+            ON DUPLICATE KEY UPDATE
+                `body` = ~&body~,
+                `thumbnail` = ~&thumbnail~
+        </~>
+    </~>
+</~>
+
+<~My_Query.getBodyByIds link=~#My_Link~>
+    SELECT self.body, self.id
+    FROM ~#@self~
+    WHERE
+        `goods_id` in ~&ids~
+    LIMIT 1
+</~>
+
+<~My_Query.getThumbByIds link=~#My_Link~>
+    SELECT self.thumbnail
+    FROM ~#@self~
+    WHERE
+        `goods_id` in ~&ids~
+    LIMIT 1
+</~>

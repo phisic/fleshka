@@ -1,0 +1,47 @@
+<~Config_Link />
+
+<~O.joinFeature>~#@table~ feature</~>
+
+<~My_Query.getTypes link=~#My_Link~>
+    SELECT `type` FROM ~#@self~ GROUP BY `type`
+</~>
+
+<~My_Query.getAllFeatures link=~#My_Link~>
+    SELECT * FROM ~#@self~
+</~>
+
+<~My_Query.getValues link=~#My_Link~>
+    SELECT `id`, `value`, `keywords` FROM ~#@self~ WHERE `type` = ~&type~
+</~>
+
+<~My_Query.getFeatureId link=~#My_Link~>
+    SELECT `id` FROM ~#@self~ WHERE `type` = ~&type~ AND `value` = ~&value~
+</~>
+
+<~My_Query.getFeatureTypeId link=~#My_Link~>
+    SELECT `id` FROM ~#@self~ WHERE `type` in (SELECT `type` FROM ~#@self~ WHERE `id` = ~$id~)
+</~>
+
+<~My_Query.getByIds link=~#My_Link~>
+    SELECT * FROM ~#@self~ WHERE `id` in ~&ids~
+</~>
+
+<~My_Query.getFeatures link=~#My_Link~>
+    SELECT `id`, `type`, `value` FROM ~#@self~
+</~>
+
+<~My_Query.updateKeywords link=~#My_Link~>
+    UPDATE ~#@self~ SET `keywords` = ~&keywords~ WHERE `id` = ~&id~
+</~>
+
+<~My_Query.editFeature link=~#My_Link~>
+    UPDATE ~#@self~ SET `keywords` = ~&keywords~, `type` = ~&type~, `html` = ~&html~, `value` = ~&value~ WHERE `id` = ~&id~
+</~>
+
+<~My_Query.newFeature link=~#My_Link~>
+    INSERT INTO ~#@table~ (`type`, `value`, `keywords`) VALUES (~&type~, ~&value~, ~&keywords~)
+</~>
+
+<~My_Query.removeFeature link=~#My_Link~>
+    DELETE FROM ~#@table~ WHERE `id` = ~&id~
+</~>

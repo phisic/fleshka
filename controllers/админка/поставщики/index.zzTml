@@ -1,0 +1,315 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Админка</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="интернет магазин, инет магазин" />
+    <meta name="description" content="Страница товаров магазина 100 заказов для покупки товаров через интернет, Category: Shop" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <link REL="StyleSheet" type="text/css" href="/css/admin.css" />
+    <style>
+        body{
+            font-family: serif;
+            font-size: 18px;
+        }
+
+        ul.main{
+            position: relative;
+            margin: 0px;
+            padding: 5px;
+            list-style: none;
+            padding-bottom: 430px;
+        }
+
+        ul.main li{
+            position: relative;
+            margin: 0px;
+            padding: 2px 4px;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+
+        ul.main li:hover{
+            background: #D0FFC0;
+        }
+
+        ul.main li span{
+            font-size: 0.7em;
+            color: #707070;
+            font-family: sans-serif;
+        }
+
+        ul.main li.selected{
+            background: chartreuse;
+        }
+
+        table{
+            position: relative;
+            width: 100%;
+        }
+
+        td{
+            vertical-align: top;
+            position: relative;
+            padding-right: 1em;
+        }
+
+        td input, td textarea{
+            position: relative;
+            width: 100%;
+        }
+
+        #editor{
+            position: fixed;
+            bottom: 0px;
+            background: #e0e0e0;
+            left: 0px;
+            right: 0px;
+            border-top: 1px solid #303030;
+            padding-top: 5px;
+            display: none;
+        }
+
+        #closeeditor{
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            z-index: 1000;
+        }
+
+        ul.autocomplete{
+            font-size: 0.7em;
+            font-family: sans-serif;
+            position: absolute;
+            z-index: 100;
+            list-style: none;
+            padding: 0px;
+            margin: 0px;
+            background: #f5f5f5;
+            border: 1px solid #0030B0;
+        }
+
+        ul.autocomplete li{
+            position: relative;
+            padding: 2px 4px;
+            margin: 2px 0px 0px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        ul.autocomplete li span{
+            font-weight: normal;
+        }
+
+        ul.autocomplete li:hover{
+            background: yellowgreen;
+        }
+
+        label{
+            cursor: pointer;
+        }
+    </style>
+    <script type="text/javascript">
+        function insertAtCursor(myField, myValue) {
+          //IE support
+          if (document.selection) {
+            myField.focus();
+            sel = document.selection.createRange();
+            sel.text = myValue;
+          }
+        }
+
+        $(document).ready(function(){
+            function setAC(){
+                $('#closeeditor').click(function(){
+                    $('#editor').hide();
+
+                    return false;
+                });
+
+                _AutocompleteEdit.element('#autocompleteEdit');
+                
+                $('textarea[name="support_types"]').keyup(function(){
+                    var pos = this.selectionEnd, val = this.value,
+                        start = val.lastIndexOf("\n", pos-1),
+                        end = val.indexOf("\n", pos);
+
+                    start++;
+
+                    if (end == -1)
+                        end = val.length;
+
+                    _AutocompleteEdit.autocomplete( val.substring(start, end) );
+                }).keydown(function(){
+                    _AutocompleteEdit.abort();
+                });
+
+
+                $('td.rating img').click(function(){
+                    $("input[name=rating]").val($('td.rating img').index(this)+1);
+                });
+            }
+
+            $('ul.main li').click(function(){
+                $('ul.main li.selected').removeClass('selected');
+                $(this).addClass('selected');
+
+                _EditAction({id: $(this).attr('eid')}, function(html){
+                    $('#editor').html( html ).show();
+                    setAC();
+                });
+            });
+
+            $('#search').keyup(function(){
+                _Autocomplete.autocomplete($(this).val());
+            }).keydown(function(){
+                _Autocomplete.abort();
+            });
+
+            $(document).click(function(){
+                _Autocomplete.hide();
+                _Autocomplete.abort();
+                _AutocompleteEdit.hide();
+                _AutocompleteEdit.abort();
+            });
+
+            _Autocomplete.load(function(){
+                $('li', _Autocomplete.$q).click(function(){
+                    $('#search').val( $.trim($(this).text()) );
+                });
+            });
+
+            _AutocompleteEdit.element('#autocompleteEdit')
+              .load(function(){
+                $('li', _AutocompleteEdit.$q).click(function(){
+                    var text = $.trim($(this).text());
+                    $('textarea[name="support_types"]').each(function(){
+                        var pos, start, end;
+                        var val = this.value;
+                        
+                        pos = this.selectionEnd;
+                        start = val.lastIndexOf("\n", pos-1);
+                        end = val.indexOf("\n", pos);
+
+                        start++;
+
+                        if (end == -1)
+                            end = val.length;
+
+                        this.value = val.substring(0, start) +
+                            text +
+                            val.substring(end, val.length);
+                    });
+                });
+            });
+        });
+    </script>
+  </head>
+  <body>
+      <div class="search">
+          <~_FormSearch autocomplete="off" method="GET">
+            <~Input name="filter" id="search" style="width:400px" /><~Select name="country"><~Option value="0">Страна</~><~Option value="1">Россия</~><~Option value="2">Китай</~></~><input type="submit" value="поиск" /> [<a href="~#@URL~" style="font-size:0.8em">Сбросить фильтр</a>]
+          </~>
+          <div>
+            <~_Autocomplete>
+            <ul class="autocomplete">
+              <~JSAction_Autocomplete_Each>
+                <li text="~$name~">~$name|Replace match="~$autocompleteInput~" replace="<span>$0</span>" ~
+              </~>
+            </ul>
+            </~>
+          </div>
+      </div>
+
+      <~_AutocompleteEdit>
+        <ul class="autocomplete">
+            <~JSAction_Autocomplete_Each>
+                <li text="~$name~">~$name|Replace match="~$autocompleteInput~" replace="<span>$0</span>" ~
+            </~>
+        </ul>
+      </~>
+
+      <ul class="main">
+          <li eid="0">
+              Новый поставщик
+          <~Each_ParamNumber.sup>
+          <li eid="~$id~">
+              ~@number~. ~$name~ <img src="/i/r~$rating~.jpg" alt="" />
+              <span>Менеджер: ~$manager~, ~$phones~, ~$email~</span>
+          </~>
+      </ul>
+      <div id="editor">
+        <~_EditAction>
+          <~_FormEdit enctype="multipart/form-data">
+            <a href="#" id="closeeditor">[Закрыть]</a>
+            <table>
+                <col align="right" style="text-align: right;width:100px">
+                <col width="300">
+                <tr>
+                    <td>
+                        Название:
+                        <~Input name="id" type="hidden" />
+                    <td>
+                        <~Input name="name" ?Input_Empty />
+                    <td class="rating">
+                        Рейтинг: <img src="/i/r1.jpg" /> <img src="/i/r2.jpg" /> <img src="/i/r3.jpg" /> <img src="/i/r4.jpg" /> <img src="/i/r5.jpg" /> <~Input name="rating" style="width: 20px" />
+                        <label><~Radio name="country" value="1" style="width:auto" />Россия</label> <label><~Radio name="country" value="2" style="width:auto" />Китай</label>
+                <tr>
+                    <td>
+                        Сайты:
+                    <td>
+                        <~Input name="sites" />
+                    <td rowspan="3">
+                        Условия работы:<br/><~Textarea name="operating_condition" style="height: 4.5em" />
+                <tr>
+                    <td>
+                        Менеджер:
+                    <td>
+                        <~Input name="manager" />
+                <tr>
+                    <td>
+                        Email:
+                    <td>
+                        <~Input name="email" />
+                <tr>
+                    <td>
+                        Skype:
+                    <td>
+                        <~Input name="skype" />
+                    <td rowspan="2">
+                        Выполнение заказов:<br/><~Textarea name="order_fulfment" style="height: 2em" />
+                <tr>
+                    <td>
+                        ICQ/MSN:
+                    <td>
+                        <~Input name="ICQ" />
+                <tr>
+                    <td>
+                        Адрес:
+                    <td>
+                        <~Textarea name="address" style="height: 3em" />
+                    <td rowspan="2">
+                        Виды поставок товаров:<br/><~Textarea name="support_types" style="height: 8em" />
+                <tr>
+                    <td>
+                        Телефоны:
+                    <td>
+                        <~Textarea name="phones" style="height: 6em" />
+                <tr>
+                    <td>
+                        Прайс:
+                    <td>
+                        <~File name="pricelist" !filename="pricename" />
+                        <~T test=~#_EditAction$filename~><~_DLPriceLink !id=~#_EditAction$id~ target="_blank">Скачать ~#_EditAction$filename~</~></~>
+                    <td style="height: 6em" rowspan="2">
+                        <div id="autocompleteEdit"></div>
+                <tr>
+                    <td>
+                        <input type="submit" value="Сохранить" />
+                    <td><~O.delete><~_Delete !id=~#_EditAction$id~ class="delete">удалить поставщика</~></~>
+            </table>
+          </~>
+        </~>
+      </div>
+  </body>
+</html>

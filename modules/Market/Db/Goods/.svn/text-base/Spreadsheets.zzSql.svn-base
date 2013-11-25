@@ -1,0 +1,29 @@
+<~Config_Link />
+
+<~My_Query.getAll link=~#My_Link~>
+    SELECT * FROM ~#@self~
+</~>
+
+<~My_Query.getById link=~#My_Link~>
+    SELECT * FROM ~#@self~ WHERE id = ~&id~
+</~>
+
+<~Q.addNew>
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~
+            (`name`, `serialized`, `serialTypes`)
+            VALUES
+            (~&name~, ~&serialized~, ~&serialTypes~)
+    </~>
+    <~My_Query link=~#My_Link~>
+        SELECT LAST_INSERT_ID() as lastid;
+    </~>
+</~>
+
+<~My_Query.getFeature link=~#My_Link~>
+    SELECT * FROM ~#@self~ WHERE id = ~&id~
+</~>
+
+<~My_Query.setSerialTypes link=~#My_Link~>
+    UPDATE ~#@table~ SET `serialTypes` = ~&serialTypes~ WHERE id = ~&id~
+</~>

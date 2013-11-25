@@ -1,0 +1,90 @@
+.phone {
+    font-size: 30px;
+    height: 60px;
+    line-height: 110%;
+    color: white;
+    font-weight: bold;
+}
+
+.my_description
+{
+    border:1px solid #aaa;
+    height:auto;
+    width: 40%;
+    margin:10px 0 10px 10px;
+    padding: 10px 10px 0 10px;
+    border-radius:10px;
+    background: #E9E9E9;
+    float:right;
+}
+
+.div_prices {
+     overflow: hidden;
+     min-height: 50px;
+}
+
+.my_unpressed
+{
+    width: 70px;
+    height: 20px;
+    background: #eee;
+    border: 1px solid #aaa;
+    float: left;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 0 10px 0;
+}
+
+.div_flesh_buttons
+{
+    margin:10px 0 0 10px;
+    width:120px;
+    float:left;
+}
+
+.single_item_li {
+    width: 100%;
+}
+
+ul.single_item_li {
+    padding: 0;
+    margin: 5px 0 0 0;
+    width: 100%;
+    display: table;
+    table-layout: fixed; /* optional */
+}
+
+ul.single_item_li li {
+    display: table-cell;
+    width: auto;
+    text-align: center;
+}
+
+.shapka {
+    background: #E9E9E9;
+    /*font-weight: bold;*/
+    font-size: 13px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    height: 23px;
+}
+
+.fleshka_colors_div
+{
+    margin:10px 0 0 10px;
+    height:150px;
+    width:120px;
+    float:left;
+}
+
+.my_color_icon
+{
+    border:1px solid;
+    float:left;
+    margin-left:2px;
+    margin-bottom:2px;
+    border-radius:5px;
+    cursor: pointer;
+}
+

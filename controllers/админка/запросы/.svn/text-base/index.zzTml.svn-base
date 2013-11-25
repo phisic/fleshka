@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Заказы флешка.рф</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="интернет магазин, инет магазин" />
+    <meta name="description" content="Страница товаров магазина 100 заказов для покупки товаров через интернет, Category: Shop" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <link REL="StyleSheet" type="text/css" href="/css/order.css" />
+  </head>
+  <body>
+      <div class="center">
+          <table class="main">
+              <tr>
+                  <td style="width: 212px">
+                      <div class="leftmenu">
+                          <div class="header">Категории заказа</div>
+                          <ul class="middle"><li><a href="?">Все</a>
+                              <li><a href="?order=0">Свежие заказы</a>
+                              <li><a href="?order=1">Ждут и думают</a>
+                              <li><a href="?order=2">Сейчас в работе</a>
+                              <li><a href="?order=3">Жду оплаты</a>
+                              <li><a href="?order=4">Закрытые заказы</a>
+                          </ul>
+                      </div>
+                  <td>
+          <~Each_Param.orders>
+            <p><a href="/запрос/~$order_id~">~$order_id~</a> ~$email~ ~$phone~ ~$date_created~</p>
+              </~>
+          </table>
+      </div>
+  </body>
+</html>

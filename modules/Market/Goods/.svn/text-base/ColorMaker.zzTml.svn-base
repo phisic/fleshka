@@ -1,0 +1,4 @@
+<div class="colorbox<~H.selected> selected</~>" data-id="~$color_id~">
+    <div class="inline" style="width: 100%;background: ~$color_html~">&nbsp;</div>
+    <div class="top"></div>
+</div>

@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>FLESHKA.RU ФЛЕШКА.РУ - продажа флешек с логотипом оптом</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="интернет магазин, инет магазин" />
+    <meta name="description" content="Категории магазина fleshka.ru для покупки товаров через интернет, Category: Shop" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <link REL="StyleSheet" type="text/css" href="/css/main.css" />
+  </head>
+  <body>
+      <div id="helper"></div>
+      <div class="center">
+          <~Market_Goods_Header />
+<~H>              
+              <img src="/i/bigimage.jpg" alt="флешки с логотипом" />
+</~><~H>
+              <div class="showcase">
+                  <div class="scroller">
+                  <~Each_Param.showcase>
+                      <img src="<~Admin_Image_Link.showcase !id=~$id~ />" alt="флешки с логотипом" />
+                  </~>
+                  </div>
+                  <div class="title">
+                      <h2>Наша продукция</h2>
+                      <p style="margin-bottom: 0px">Лучшие цены постоянным клиентам.</p>
+                  </div>
+              </div>
+</~>
+            <div style="text-align: center;margin-bottom: 10px;margin-top: 10px">
+                <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" 
+
+                codebase="http://download.macromedia.com/pub/shockwave/
+                cabs/flash/swflash.cab#version=6,0,40,0" 
+
+                width="800" height="90" 
+                 id="mymoviename"> 
+
+                <param name="movie"  
+
+                value="http://100zakazov.ru/images/banner101.swf" /> 
+
+                <param name="quality" value="high" /> 
+
+                <param name="bgcolor" value="#ffffff" /> 
+
+                <embed src="http://100zakazov.ru/images/banner101.swf" quality="high" bgcolor="#ffffff"
+
+                width="800" height="90" 
+
+                name="mymoviename" align="" type="application/x-shockwave-flash" 
+
+                pluginspage="http://www.macromedia.com/go/getflashplayer"> 
+
+
+                </embed> 
+
+                </object>
+            </div>
+          <div class="catalog">
+              <ul class="catalog shadow">
+                  <li class="special">
+                      <div class="image">
+                          <a href="/специальное_предложение"><img src="/i/special.jpg" alt="Специальные предложения" /></a>
+                      </div>
+                      <h2><a href="/специальное_предложение">Специальные предложения</a></h2>
+                  <~Each_Param.catalogs>
+                  <li>
+                      <div class="image">
+                          <a href="/прайс/~$url~"><img src="~$image~" alt="~$name~" /></a>
+                      </div>
+                      <h2><a href="/прайс/~$url~">~$name~</a></h2>
+                  </~>
+              </ul>
+          </div>                      
+          <~Market_Footer />
+      </div>
+      <~Market_YMetrica />
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<~Config_Link />
+
+<~My_Query.adminList link=~#My_Link~>
+    SELECT * FROM ~#@self~
+</~>
+
+<~My_Query.adminLoad.adminCheck link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+
+<~My_Query.adminRemove link=~#My_Link~>
+    DELETE FROM ~#@table~
+    WHERE `id` = ~&id~
+</~>
+
+<~My_Query.adminListValue link=~#My_Link~>
+    SELECT ~&id~ as `selecteditemid`
+</~>
+
+<~My_Query.adminUpdate link=~#My_Link~>
+    UPDATE ~#@self~
+    SET
+        `name` = ~&name~,
+        `html` = ~&html~
+    WHERE self.id = ~&id~
+</~>
+
+<~My_Query.adminRemove link=~#My_Link~>
+    DELETE FROM ~#@table~
+    WHERE self.id = ~&id~
+</~>
+
+<~Q.adminCreate>
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~
+            (`name`, `html`)
+        VALUES
+            (~&name~, ~&html~)
+    </~>
+    <~My_Query link=~#My_Link~>
+        SELECT LAST_INSERT_ID() as `id`
+    </~>
+</~>

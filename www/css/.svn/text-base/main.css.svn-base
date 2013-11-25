@@ -1,0 +1,621 @@
+html{
+    position: relative;
+    min-height: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    display: block;
+    font-family: "Verdana";
+    font-size: 14px;
+    background: #3986BC;
+    position: relative;
+    color: white;
+    min-height: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 20px;
+}
+
+div, p, table{
+    position: relative;
+}
+
+a{
+    color: #800080;
+}
+
+a img{
+    border-width: 0px;
+}
+
+img{
+    vertical-align: bottom;
+}
+
+div.header{}
+
+div.header div.left{
+    float: left;
+    margin-top: 10px;
+    width: 363px;
+    height: 124px;
+    background: url(../i/header.jpg);
+}
+
+div.header div.left a{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+div.header div.right{
+    float: right;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+div.header div.right div.img{
+    margin-top: 10px;
+}
+
+div.clear{
+    clear: both;
+}
+
+div.header div.mid{
+    position: absolute;
+    left: 560px;
+    top: 50px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 20px;
+    line-height: 1.1em;
+}
+
+div.header div.mid strong{
+    display: block;
+    color: #471070;
+    font-size: 24px;
+    text-shadow: 0px 0px 5px white, 0px 0px 2px white, 0px 0px 5px white;
+    padding-top: 3px;
+}
+
+
+
+div.headermenu{
+    border: 6px solid white;
+    border-radius: 50px;
+    background: #65278D;
+    padding: 10px;
+}
+
+
+
+div.headermenu table.menu{
+    width: 100%;
+}
+
+div.headermenu table.menu td{
+    text-align: center;
+    vertical-align: middle;
+    height: 28px;
+}
+
+div.headermenu table.menu td.separator{
+    width: 2px;
+    height: 28px;
+    padding: 0px;
+    background: url(../i/menu.jpg);
+}
+
+div.headermenu table.menu a{
+    color: #F0FF00;
+    font-weight: bold;
+}
+
+div.headermenu table.menu a:hover{
+    color: white;
+}
+
+div.catalog{
+    margin-bottom: 20px;
+    border: 6px solid white;
+    border-radius: 50px;
+    padding: 20px;
+}
+
+div.catalog h1{
+    margin: 0px;
+}
+
+ul.catalog{
+    vertical-align: top;
+    list-style: none;
+    margin: 5px 0px 5px 0px;
+    padding: 0px;
+}
+
+ul.catalog li{
+    border-radius: 20px;
+    vertical-align: top;
+    padding: 10px;
+    margin: 10px;
+    width: 10%;
+    min-width: 120px;
+    box-shadow: 4px 4px 5px rgba(0,0,0,0.5);
+    display: -moz-inline-stack;     display: inline-block;     zoom: 1;     *display: inline; 
+}
+
+ul.catalog li a{
+    color: white;
+    text-decoration: none;
+}
+
+ul.catalog li{
+    background: url(../i/indexbg.jpg) no-repeat;
+    text-align: center;
+}
+
+ul.catalog li img{
+    width: 100%;
+}
+
+ul.catalog li h2{
+    display: table-cell;
+    font-size: 14px;
+    margin: 0px;
+    height: 60px;
+    vertical-align: middle;
+    width: 200px;
+}
+
+table.main{
+    width: 100%;
+}
+
+table.main td{
+    vertical-align: top;
+}
+
+div.colorbox{
+    width: 37px;
+    height: 27px;
+    cursor: pointer;
+}
+
+div.colorbox:hover{
+    opacity: 0.8;
+}
+
+div.colorbox div.inline{
+    display: -moz-inline-stack;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    *margin-left:-1px;
+    *left: 1px;
+    height: 100%;
+    width: 10px;
+}
+
+div.colorbox div.top{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: url(../i/colorbutton.png);
+    z-index: 10;
+}
+
+div.colorbox.selected div.top{
+    background: url(../i/colorbuttonsel.png);
+}
+
+ul.colorfilters {
+    display: -moz-inline-stack;     display: inline-block;     zoom: 1;     *display: inline; 
+    background: #65278D;
+    border: 5px solid white;
+    border-radius: 50px;
+    margin: 0px;
+    padding: 0px 15px;
+    vertical-align: middle;
+}
+
+ul.colorfilters li{
+    display: -moz-inline-stack;     display: inline-block;     zoom: 1;     *display: inline; 
+    vertical-align: bottom;
+    margin: 0px 2px;
+}
+
+ul.colorfilters li.all{
+    width: 26px;
+    height: 19px;
+    padding: 0px 5px;
+    margin: 5px 8px 5px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0px 0px 2px 1px white, 3px 3px 2px 0px black, -3px -3px 2px 0px rgba(0,0,0,0.5) inset, 2px 2px 2px 0px rgba(255,255,255,0.5) inset;
+}
+
+ul.colorfilters li.all.selected{
+    box-shadow: 0px 0px 2px 1px white, 2px 2px 3px 1px rgba(0,0,0,0.5) inset;
+}
+
+ul.colorfilters div.colorbox{
+    width: 41px;
+    height: 29px;
+}
+
+ul.colorfilters div.colorbox div.top{
+    background: url(../i/colorfilter.png);
+}
+
+ul.colorfilters div.colorbox.selected div.top{
+    background: url(../i/colorfiltersel.png);
+}
+
+div.footer{
+    text-align: center;
+    font-size: 12px;
+    color: #6A1130;
+    height: 80px;
+    padding-top: 20px;
+}
+
+table.price{
+    width: 100%;
+    border-spacing: 0px;
+}
+
+table.price td{
+    height: 31px;
+}
+
+table.price th{
+    font-family: "Arial Narrow";
+    font-size: 14px;
+    font-weight: normal;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    background: #65278D;
+}
+
+table.price th.header{
+    border-left: 2px solid white;
+    width: 300px;
+}
+
+table.price th.c.size{
+    width: 100px;
+}
+
+table.price th.c{
+    width: 120px;
+}
+
+table.price th.gradient{
+    border-right: 2px solid white;
+}
+
+table.price th h2{
+    font-size: inherit;
+    margin: 0px;
+    padding: 0px;
+}
+
+table.price td{
+    vertical-align: top;
+    text-align: center;
+}
+
+div.filter{
+    margin: 5px 0px;
+}
+
+
+ul.colors{
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+}
+
+ul.colors li{
+    display: -moz-inline-stack;     display: inline-block;     zoom: 1;     *display: inline; 
+}
+
+table.price div.button{
+    width: 96px;
+    height: 27px;
+    background: url(../i/sizebutton.png);
+    text-align: center;
+    cursor: pointer;
+    padding: 1px 4px 1px 0px;
+}
+
+table.price div.button.selected{
+    background: url(../i/sizebuttonsel.png);
+}
+
+table.price div.imagebg{
+    margin: 0px 6px 6px 0px;
+    padding: 6px;
+    box-shadow: 3px 3px 4px 0px rgba(0,0,0,0.7), -3px -3px 4px 0px rgba(0,0,0,0.5) inset, 3px 3px 4px 0px rgba(255,255,255,0.5) inset;
+}
+
+table.price div.imagebg div.thumbnails{
+    padding: 5px 0px;
+}
+
+table.price div.imagebg div.thumbnails img{
+    height: 60px;
+}
+
+div.testfixed{
+    margin-right: -25px;
+    z-index: 10;
+}
+
+div.testfixed.fix{
+    position: fixed;
+    top: 0px;
+    width: 236px;
+}
+
+div.leftmenu div.catheader{
+    background: #65278D;
+    font-weight: bold;
+    text-align: center;
+    border: 5px solid white;
+    padding: 10px 10px;
+    border-radius: 50px;
+}
+
+div.leftmenu ul.middle{
+    padding: 10px 10px;
+    margin: -5px 15px 0px 5px;
+    background: #3986BC;
+    list-style: none;
+    border: 5px solid white;
+    border-radius: 20px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    font-size: 12px;
+}
+
+div.leftmenu ul.middle li a{
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+div.leftmenu ul.middle li.selected a{
+    color: #073E64;
+}
+
+div.leftmenu ul.middle li.small{
+    padding-left: 20px;
+}
+
+div.leftmenu ul.middle li.small a{
+    font-size: 14px;
+    font-weight: normal;
+}
+
+div.leftmenu ul.middle li.small.selected{
+    background: #471070;
+    border-radius: 5px;
+}
+
+div.leftmenu ul.middle li.small.selected a{
+    color: white;
+}
+
+div.special div#helper{
+    bottom: auto;
+}
+
+div#helper{
+    position: absolute;
+    top: auto;
+    bottom: 15px;
+    left: 320px;
+    padding: 3px 10px;
+    background: #65278D;
+    border: 5px solid white;
+    border-radius: 40px;
+}
+
+div.flash.small table.price th.header{
+    width: 200px;
+}
+
+div.flash.small div.imagebg img{
+    width: 200px;
+}
+
+div.oldmessages{
+    margin-bottom: 5px;
+}
+
+div.oldmessages a{
+    display: block;
+    text-align: center;
+}
+
+input[type=button][disabled], input[type=submit][disabled]{
+    background: gray;
+    color: #c0c0c0;
+}
+
+input[type=button], input[type=submit], a#showoldmessages{
+    background: #3986BC;
+    color: white;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.5), 0px 0px 2px white, 2px 2px 2px rgba(255,255,255,0.5) inset, -2px -2px 2px rgba(0,0,0,0.5) inset;
+    border-radius: 2px;
+    border: 2px solid inset;
+    text-decoration: none;
+    padding: 2px 4px;
+}
+
+input[type=button]:active, input[type=submit]:active{
+    border: 2px solid outset;
+}
+
+#pickExpireDate{
+    color: #e0e0e0;
+}
+
+#pickExpireDateTo{
+    color: #e0e0e0;
+}
+
+div#helper{
+    display: none;
+}
+
+div#helper.small{
+    width: 200px;
+    left: 220px;
+    bottom: 0px;
+}
+
+div.commentform{
+    background: url(../i/note.jpg) no-repeat white;
+    width: 305px;
+    padding: 32px 10px 10px;
+}
+
+div#addemail{
+    background: white;
+    width: 305px;
+    padding: 1px 10px 10px;
+    color: black;
+}
+
+div#addemail input.email{
+    border: 1px solid #3986BC;
+}
+
+div#addemail p{
+    margin: 2px 0px 0px;
+}
+
+div.commentform textarea{
+    background: url(../i/line.jpg);
+    width: 100%;
+    border-width: 0px;
+    font-size: 13px;
+    font-family: monospace;
+    line-height: 16px;
+}
+
+div.company{
+    background: white;
+    color: black;
+    padding: 1px 10px 10px;
+    border-radius: 5px;
+}
+
+div.company table.company{
+    width: 100%;
+}
+
+div.company table.company input.text{
+    width: 95%;
+    border: 1px solid #3986BC;
+}
+
+div.catalog h2{
+    margin-bottom: 5px;
+}
+
+div.note{
+    width: 325px;
+}
+
+div.message{
+    font-size: 12px;
+    background: white;
+    color: #3986BC;
+    padding: 1px 10px;
+}
+
+div.message h3{
+    margin-bottom: 2px;
+    margin-top: 5px;
+    font-size: 13px;
+}
+
+div.message.manager{
+    background: #d0d0e0;
+}
+
+img.pen{
+    position: absolute;
+    margin-top: -100px;
+    margin-left: 220px;
+    z-index: 10;
+}
+
+table.order{
+    width: 100%;
+}
+
+div.special ul.colors{
+    white-space: nowrap;
+}
+
+ul.colors img.selectchecker{
+    display: none;
+    position: absolute;
+    top: auto;
+    bottom: 5px;
+    right: 5px;
+}
+
+ul.colors div.colorbox.selected img.selectchecker{
+    display: block;
+}
+
+div.special div.flash{
+    border-radius: 10px;
+    padding: 5px;
+}
+
+div.special table.price td{
+    text-align: left;
+    vertical-align: top;
+}
+
+div.special table.price tr.sizes td{
+    vertical-align: middle;
+}
+
+div.special div.colorbox{
+    width: auto;
+    height: auto;
+    border: 2px outset #606060;
+    padding: 1px;
+    border-radius: 3px;
+    background: white;
+}
+
+div.special div.colorbox.selected{
+    border: 2px inset #606060;
+    padding: 2px 0px 0px 2px;
+}
+
+div.special div.colorbox img{
+    vertical-align: top;
+}
+
+div.special ul.colors li{
+    height: auto;
+    width: auto;
+}
+

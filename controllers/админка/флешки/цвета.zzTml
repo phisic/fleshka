@@ -1,0 +1,31 @@
+<@Admin_>
+    <~Body title="Цвета флешек">
+        <~Html>
+            <table class="mainList">
+                <tr>
+                    <td>
+                        <a href="/админка/флешки">Флешки</a>
+                        <a href="/админка/упаковки">Упаковки</a>
+                <tr>
+                    <td>
+                        <div id="Mcat"></div>
+                    <td>
+                        <div id="Mview"></div>
+            </table>
+        </~>
+        <~List_Table.editor viewID="#Mcat">
+            <~List_Table_Create>Создать</~>
+            <~List_Table_Tbody>
+                <tr>
+                    <td class="name">
+                        ~$name~
+            </~>
+        </~>
+        <~View.editor viewID="#Mview">
+            <~Block.editor !created>
+                <~Input name="name" title="Название" ?Input_Empty />
+                <~Input name="html" title="html" ?Input_Empty />
+            </~>
+        </~>
+    </~>
+</@>

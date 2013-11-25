@@ -1,0 +1,92 @@
+<~Config_Link />
+
+<@^>-- Get parent directory for include class Market_Db_Goods_RelGoodsFeature
+    <~OrderGoods.orderGoods />
+</@>
+
+/*
+CREATE TABLE `goods`.`order` (
+    `order_id` VARCHAR( 255 ) NOT NULL ,
+    `date_created` DATE NOT NULL ,
+    `state` INT NOT NULL ,
+    PRIMARY KEY ( `order_id` )
+) ENGINE = InnoDB;
+
+ALTER TABLE `order` ADD INDEX ( `date_created` );
+*/
+
+<~O.joinOrder>~#@table~ `order`</~>
+
+<~My_Select link=~#My_Link~>`order_id` = ~&order_id~</~>
+
+<~My_Query.loadAll link=~#My_Link~>
+    SELECT * FROM ~#@table~
+    WHERE `state` > 0 AND `group` = ~&group~
+    ORDER BY `state`, `date_created` DESC
+</~>
+
+
+<~My_Query.createOrder link=~#My_Link~>
+    INSERT INTO ~#@table~ (`order_id`, `state`, `date_created`)
+    VALUES (~&order_id~, 0, NOW())
+</~>
+
+<~My_Query.getLastEmail link=~#My_Link~>
+    SELECT `company`, `address`, `phone` FROM ~#@table~
+    WHERE `email` = ~&email~
+    AND `state` in (2, 3)
+    ORDER BY `date_created` DESC
+    LIMIT 1
+</~>
+
+<~My_Query.updateHits link=~#My_Link~>
+    UPDATE ~#@table~
+    SET `hits` = `hits` + 1
+    WHERE `order_id` = ~&order_id~
+    LIMIT 1
+</~>
+
+<~My_Query.updateEmail link=~#My_Link~>
+    UPDATE ~#@table~
+    SET `email` = ~&email~, `state` = 1,
+        `company` = ~&company~, `phone` = ~&phone~,
+        `address` = ~&address~
+    WHERE `order_id` = ~&order_id~
+</~>
+
+<~My_Query.updateDateExpire link=~#My_Link~>
+    UPDATE ~#@table~
+    SET `date_expire` = ~&date_expire~
+    WHERE `order_id` = ~&order_id~
+</~>
+
+<~My_Query.updateDateExpireTo link=~#My_Link~>
+    UPDATE ~#@table~
+    SET `date_expire_to` = ~&date_expire_to~
+    WHERE `order_id` = ~&order_id~
+</~>
+
+<~My_Query.updateDelivery link=~#My_Link~>
+    UPDATE ~#@table~
+    SET `delivery` = ~&delivery~
+    WHERE `order_id` = ~&order_id~
+</~>
+
+<~My_Query.updateGroup link=~#My_Link~>
+    UPDATE ~#@table~
+    SET `group` = ~&group~
+    WHERE `order_id` = ~&order_id~
+</~>
+
+<~My_Query.saveCompanyInfo link=~#My_Link~>
+    UPDATE ~#@table~
+    SET `company` = ~&company~, `phone` = ~&phone~,
+        `address` = ~&address~, `state` = 2
+    WHERE `order_id` = ~&order_id~
+</~>
+
+<~My_Query.getMaxNumber link=~#My_Link~>
+    SELECT MAX(`number`) FROM ~#@table~
+    WHERE `email` = ~&email~
+    GROUP BY `email`
+</~>

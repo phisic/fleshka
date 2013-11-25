@@ -1,0 +1,48 @@
+<~Config_Link />
+
+<~My_Query.adminList link=~#My_Link~>
+    SELECT * FROM ~#@self~ 
+</~>
+
+<~My_Query.adminListValue link=~#My_Link~>
+    SELECT ~&id~ as `selecteditemid`
+</~>
+
+<~My_Query.adminLoad.adminCheck link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+
+<~My_Query.adminUpdate link=~#My_Link~>
+    UPDATE ~#@self~
+    SET
+        `description` = ~&description~,
+        <~T test=~$photo~>`photo` = ~#My_Query.adminUpdate&photo~,</~>
+        `header` = ~&header~
+    WHERE self.id = ~&id~
+</~>
+
+<~Q.adminCreate>
+    <~My_Query.create link=~#My_Link~>
+        INSERT INTO ~#@table~
+            (`description`, `header`<~T test=~#Q.adminCreate$photo~>, `photo`</~>, `id`)
+        VALUES
+            (~&description~, ~&header~<~T test=~#Q.adminCreate$photo~>, ~#Q.adminCreate My_Query.create&photo~</~>, ~&id~)
+    </~>
+    <~My_Query link=~#My_Link~>
+        SELECT ~&id~ as `id`
+    </~>
+</~>
+
+<~Q.adminRemove>
+    <~My_Query link=~#My_Link~>
+        DELETE FROM ~#@table~
+        WHERE `id` = ~&id~
+    </~>
+</~>
+
+<~My_Query.photoById link=~#My_Link~>
+    SELECT `photo` FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+

@@ -1,0 +1,112 @@
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var tips = 0;
+
+            function colorMO(){
+                var $p = $(this).parents('tr');
+                $('td img', $p).attr('src', '/p/t'+$(this).attr('ids'));
+            }
+
+            function checkOrder(){
+                var count = 0;
+                var countc = 0;
+                var $p = $('table.price table');
+                $p.each(function(){
+                    var l = $('p.color input:checked', $(this).parents('tr')).length==0;
+
+                    count += (($('a.selected', this).length==0) || l)?0:1;
+                    countc += (($('a.selected', this).length!=0) && (l))?1:0;
+                });
+
+                if (count < 1){
+                    if (countc == 0)
+                        $('#order').attr('disabled','disabled').val('Выберите объем ~#@goodsname2~').hide().show();
+                    else
+                        $('#order').attr('disabled','disabled').val('Выберите цвет ~#@goodsname2~').hide().show();
+                }else{
+                    $('#order').removeAttr('disabled');
+
+                    var ending = false;
+                    ending = ending || ((count==0)?'~#@goodsname2~':false);
+                    ending = ending || ((count==1)?'~#@goodsname1~':false);
+                    ending = ending || ((count<5)?'~#@goodsname2~':false);
+                    ending = ending || ((count<21)?'~#@goodsname5~':false);
+                    ending = ending || (((count%10)==0)?'~#@goodsname5~':false);
+                    ending = ending || (((count%10)==1)?'~#@goodsname1~':false);
+                    ending = ending || (((count%10)<5)?'~#@goodsname2~':false);
+                    ending = ending || '~#@goodsname5~';
+
+                    $('#order').val('Добавить '+count+' '+ending+' в запрос »')
+                        .hide().show();//opera bug
+                }
+            }
+
+            function showTips($li){
+                $('#tips').hide('fast');
+
+                tips++;
+            }
+
+            $('p.color a:not(.unselected)').mouseover(colorMO).click(function(){
+                showTips($(this).parents('tr'));
+
+                var $img = $('td img', $(this).parents('tr')).attr('src', '/p/t'+$(this).attr('ids'));
+
+                $(this).toggleClass('selected');
+
+                if (!$(this).hasClass('selected')){
+                    $('input', this).removeAttr('checked');
+                }else{
+                    $('input', this).attr('checked', 'checked');
+                    $('a', $img.parents('p')).show();
+                }
+
+                if ($('a.selected', $(this).parents('p')).length > 0){
+                    $('a', $(this).parents('p')).unbind('mouseover');
+                    var p = $('td.orderhere', $(this).parents('tr'));
+                    $('#order').appendTo(p).show();
+                }else{
+                    $('a', $img.parents('p')).hide();
+                    $('a', $(this).parents('p')).mouseover(colorMO);
+                    $('#order').hide();
+                }
+
+                checkOrder();
+
+                return false;
+            });
+
+            $('p.order a').click(function(){
+                showTips($(this).parents('tr'));
+
+                $(this).toggleClass('selected');
+
+                if (!$(this).hasClass('selected')){
+                    $('input', this).removeAttr('checked');
+                }else{
+                    $('input', this).attr('checked', 'checked');
+
+                    if ($('p.color input:checked', $(this).parents('tr')).length == 0)
+                        $('#tips').insertAfter($('p.color', $(this).parents('tr'))).show('fast');
+                }
+
+                $('#order').appendTo($('td.orderhere', $(this).parents('tr'))).show();
+
+                checkOrder();
+
+                return false;
+            });
+
+            $('p a.dl').click(function(){
+                window.open($('img', $(this).parents('p')).attr('src').replace('/p/t', '/p/s'), '_self');
+
+                return false;
+            }).hide();
+
+            $('div.img a.dl').click(function(){
+                window.open($(this).parents('div.img').css('background').replace(/"/gmi, '').replace('url(', '').replace(')', '').replace('/p/t', '/p/s'), '_self');
+
+                return false;
+            }).hide();
+        });
+    </script>

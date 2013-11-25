@@ -1,0 +1,112 @@
+<~Config_Link />
+<@^>-- Get parent directory for include class Market_Db_Goods_RelGoodsFeature
+    <~Goods.goods />
+</@>
+
+<~My_Query.loadGoodsGroupByFilter link=~#My_Link~>
+    SELECT *, goods.id FROM ~#@self~
+    JOIN ~#O.joinGoods~ ON goods.`goodsgroup_id` = self.id
+    WHERE <~Each_Value glue=" AND " source="$filter">self.id in (
+        ~#zzSql.relgf}.filterGroupFeatures|Set !feature="~^Each@value~" ~
+    )</~>
+</~>
+
+<~My_Query.loadGoodsByFilter link=~#My_Link~>
+    SELECT *, goods.id FROM ~#@self~
+    JOIN ~#O.joinGoods~ ON goods.`goodsgroup_id` = self.id
+    WHERE <~Each_Value glue=" AND " source="$filter">goods.id in (
+        ~#zzSql.relgf}.filterFeatures|Set !feature="~^Each@value~" ~
+    )</~>
+</~>
+
+<~My_Query.loadGoodsByOrder link=~#My_Link~>
+    SELECT *, goods.id FROM ~#@self~
+    JOIN ~#O.joinGoods~ ON goods.`goodsgroup_id` = self.id
+    JOIN ~#O.joinOrderGoods~ ON `order_goods`.`goods_id` = goods.id
+    WHERE `order_goods`.`order_id` = ~&order_id~
+</~>
+
+<~My_Query.loadGoods link=~#My_Link~>
+    SELECT *, goods.id FROM ~#@self~
+    JOIN ~#O.joinGoods~ ON goods.`goodsgroup_id` = self.id
+</~>
+
+<~My_Query.loadGoodsByIds link=~#My_Link~>
+    SELECT *, goods.id FROM ~#@self~
+    JOIN ~#O.joinGoods~ ON goods.`goodsgroup_id` = self.id
+    WHERE goods.id in ~&ids~
+</~>
+
+<~Q.regroup>
+    <~Q_Each_IndexValue source=~$groups~>
+        <~My_Query link=~#My_Link~>
+            INSERT INTO ~#@table~
+            (`id`,`name`) VALUES (null,~&index~);
+        </~>
+        <~My_Query.last link=~#My_Link~>
+            SELECT LAST_INSERT_ID() as goodsgroup_id;
+        </~>
+        <~Q_Forward query=~#}.goods}.updateGoodsGroup~ !goodsgroup_id=~^Q .last$goodsgroup_id~ !ids=~$value~ />
+    </~>
+</~>
+
+<~My_Query.editGoods link=~#My_Link~>
+    UPDATE ~#@self~
+    SET `name` = ~&name~
+    WHERE self.id in
+    (SELECT goodsgroup_id
+        FROM ~#O.joinGoods~
+        WHERE goods.id in ~&ids~
+        GROUP by goodsgroup_id)
+</~>
+
+<~My_Query.editGoodsDescription link=~#My_Link~>
+    UPDATE ~#@self~
+    SET `description` = ~&description~
+    WHERE self.id in
+    (SELECT goodsgroup_id
+        FROM ~#O.joinGoods~
+        WHERE goods.id in ~&ids~
+        GROUP by goodsgroup_id)
+</~>
+
+<~My_Query_Join.loadGoodsByIds group="id" join="features" link=~#My_Link~>
+    SELECT goods.*, self.`name`, self.`description`, feature.type, feature.value, feature.id as type_id
+    FROM ~#@self~
+    JOIN ~#O.joinGoods~ ON goods.`goodsgroup_id` = self.id
+    JOIN ~#O.joinRelGoodsFeature~ ON relgoodsfeature.goods_id = goods.id
+    JOIN ~#O.joinFeature~ ON feature.id = relgoodsfeature.feature_id
+    WHERE goods.id in ~&ids~
+</~>
+
+<~Q.importGoods>
+    <~Market_SpreadsheetDb source="$spreadsheet">
+        <~My_Query link=~#My_Link~>
+            INSERT INTO ~#@table~
+            (`id`,<~H.model>`name`</~>)
+            VALUES
+            (null,<~H.model>~&model~</~>);
+        </~>
+        <~My_Query.last link=~#My_Link~>
+            SELECT LAST_INSERT_ID() as goodsgroup_id;
+        </~>
+        <~Q_Forward query=~#}.goods}.insertGoods Query~ !goodsgroup_id=~^Q .last$goodsgroup_id~ />
+    </~>
+</~>
+
+
+<~My_Query.adminList link=~#My_Link~>
+    SELECT * FROM ~#@self~
+</~>
+
+<~My_Query.adminLoad link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+
+<~My_Query.adminUpdate link=~#My_Link~>
+    UPDATE ~#@self~
+    SET `name` = ~&name~, `description` = ~&description~
+    WHERE self.id = ~&id~
+</~>
+

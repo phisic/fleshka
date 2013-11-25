@@ -1,0 +1,56 @@
+<~Config_Link />
+
+<~_SupplierLoad_Q.adminLoad>
+    <~My_Query link=~#My_Link~>
+        SELECT * FROM ~#@table~ WHERE `id` = ~&id~
+    </~>
+    <~Q_Forward db="Market_Db_Supplier_SupportTypes" query="loadSupportTypes" />
+</~>
+
+<~My_Query.adminLoadAll link=~#My_Link~>
+    SELECT * FROM ~#@table~ ORDER by `rating` DESC, `name` ASC
+</~>
+
+<~My_Query.adminPriceLoad link=~#My_Link~>
+    SELECT `file`, `filename` FROM ~#@table~ WHERE id = ~&id~
+</~>
+
+<~My_Query.adminLoadFilter link=~#My_Link~>
+    SELECT self.* FROM ~#@self~
+    JOIN ~#@base~.SupportTypes ON supporttypes.supplier_id = self.id
+    WHERE supporttypes.`name` like '%~$filter|sqlExpr~%' <~T test=~$country~>AND self.`country` = ~&country~</~>
+    GROUP BY self.`id`
+    ORDER BY self.`rating` DESC, self.`name` ASC
+</~>
+
+<~_Supplier_Q.adminInsertNew>
+    <~My_Query.insert link=~#My_Link~>
+        INSERT INTO ~#@table~
+        (`name`, `sites`, `email`, `skype`, `ICQ`, `phones`, `address`, `manager`, `operating_condition`, `order_fulfment`, `rating`, `country`<~T test=~#Q.adminInsertNew .insert$pricelist~>, `file`, `filename`</~>)
+        VALUES
+        (~&name~, ~&sites~, ~&email~, ~&skype~, ~&ICQ~, ~&phones~, ~&address~, ~&manager~, ~&operating_condition~, ~&order_fulfment~, ~&rating~, ~&country~<~T test=~#Q.adminInsertNew .insert$pricelist~>, ~#Q.adminInsertNew .insert&pricelist~, ~#Q.adminInsertNew .insert&pricename~</~>)
+    </~>
+    <~My_Query.last link=~#My_Link~>
+        SELECT LAST_INSERT_ID() as `id`
+    </~>
+    <~Q_Forward db="Market_Db_Supplier_SupportTypes" query="updateSupportTypes" !newid=~#Q.adminInsertNew .last$id~ />
+</~>
+
+<~_Supplier_Q.adminUpdate>
+    <~My_Query.up link=~#My_Link~>
+        UPDATE ~#@table~ SET
+        `name`=~&name~, `sites`=~&sites~, `email`=~&email~, `skype`=~&skype~, `ICQ`=~&ICQ~,
+        `phones`=~&phones~, `address`=~&address~, `manager`=~&manager~, `operating_condition`=~&operating_condition~,
+        `order_fulfment`=~&order_fulfment~, `rating`=~&rating~, `country`=~&country~
+        <~T test=~#Q.adminUpdate .up&pricelist~>, `file` = ~#Q.adminUpdate .up&pricelist~, `filename` = ~#Q.adminUpdate .up&pricename~</~>
+        WHERE id = ~&id~
+    </~>
+    <~Q_Forward db="Market_Db_Supplier_SupportTypes" query="updateSupportTypes" !newid=~$id~ />
+</~>
+
+<~Q.adminRemove>
+    <~My_Query link=~#My_Link~>
+        DELETE FROM ~#@table~ WHERE `id` = ~&id~
+    </~>
+    <~Q_Forward db="Market_Db_Supplier_SupportTypes" query="removeSupportTypes" />
+</~>

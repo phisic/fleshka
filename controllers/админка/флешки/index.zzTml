@@ -1,0 +1,124 @@
+<@Admin_>
+    <~Body title="Флешки">
+        <~Html>
+            <table class="mainList">
+                <tr>
+                    <td>
+                        <a href="/админка/флешки">Флешки</a>
+                        <a href="/админка/упаковки">Упаковки</a>
+                <tr>
+                    <td>
+                        <div id="Mcat"></div>
+                    <td>
+                        <div id="Mview"></div>
+            </table>
+        </~>
+        <~List_Table.editor viewID="#Mcat">
+            <~List_Table_Create>Создать</~>
+            <~List_Table_Tbody>
+                <tr>
+                    <td class="name">
+                        ~$name~ #~$id~
+            </~>
+        </~>
+        <~View.editor viewID="#Mview">
+            <~Block.editor !created !copy="Копировать">
+                <~Input name="name" title="Название" ?Input_Empty />
+                <~Input name="index" title="Index" value="0" ?Input_Empty ?Input_Int />
+                <~Input name="description" title="Описание" />
+                <~Description>2 Гб</~>
+                <~Input name="pricesize2" title="цена" value="0" ?Input_Empty />
+                <~Input name="count2" title="кол-во" value="0" ?Input_Empty ?Input_Int />
+                <~Description>4 Гб</~>
+                <~Input name="pricesize4" title="цена" value="0" ?Input_Empty />
+                <~Input name="count4" title="кол-во" value="0" ?Input_Empty ?Input_Int />
+                <~Description>8 Гб </~>
+                <~Input name="pricesize8" title="цена" value="0" ?Input_Empty />
+                <~Input name="count8" title="кол-во" value="0" ?Input_Empty ?Input_Int />
+                <~Description>16 Гб </~>
+                <~Input name="pricesize16" title="цена" value="0" ?Input_Empty />
+                <~Input name="count16" title="кол-во" value="0" ?Input_Empty ?Input_Int />
+                <~Description>32 Гб </~>
+                <~Input name="pricesize32" title="цена" value="0" ?Input_Empty />
+                <~Input name="count32" title="кол-во" value="0" ?Input_Empty ?Input_Int />
+                <~Checkbox name="instock" title="На складе" value="1" />
+            </~>
+            <~List_UL.colors name="Цвета и фотографии флешки" >
+                <~List_UL_LI data-ident=~#Admin_List_UL.colors$id~>
+                    <@_>
+                        <~Market_ColorMaker color=~$color_html~ />
+                    </@>
+                </~>
+                <~List_UL_LICreate !id=~#Admin_List_UL.colors$id~>
+                    Новый цвет
+                </~>
+            </~>
+            <~View.colors>
+                <~Block.colors !onlycreated>
+                    <~Select name="color_id" title="Новый цвет">
+                        <~Options.selectedcolors value="id" text="name" />
+                    </~>
+                </~>
+                <~List_UL.photo name="Фотографии флешки" >
+                    <~List_UL_LICreate !id=~#Admin_List_UL.photo$id~>
+                        Добавить
+                    </~>
+                    <~List_UL_LI>
+                            <img src="<~Image_Link.photo !id=~$id~ />" style="height:105px" />
+                    </~>
+                </~>
+                <~View.photo>
+                    <~Block.photo !created>
+                        <~Image name="photo" !src="thumbnail" ?File_Exists title="Новая картинка">
+                            <~Image_Thumbnail name="body" !width="600" !height="450" />
+                            <~Image_Thumbnail name="thumbnail" !width="280" !height="210" />
+                        </~>
+                    </~>
+                </~>
+                <~List_UL.colorchange name="Цвета на картинке" >
+                    <~List_UL_LI>
+                        <@Market_>
+                            <~ColorMaker color=~$color_html~ />
+                        </~>
+                    </~>
+                    <~List_UL_LICreate !id=~#Admin_List_UL.colorchange$id~ data-ident=~$ident~>
+                        Добавить ещё один
+                    </~>
+                </~>
+                <~View.colorchange>
+                    <~Block.colorchange !created>
+                        <~Hidden name="ident" value="~$ident~" />
+                        <~Select name="color_id" title="Цвет">
+                            <~Options.selectedcolors value="id" text="name" />
+                        </~>
+                    </~>
+                </~>
+                <~Block_Remove.colors !remove="Удалить цветовое решение" />
+            </~>
+            <~List_UL.catalogs name="Выводить в каталоги">
+                <~List_UL_LI>
+                    ~$name~
+                </~>
+                <~List_UL_LICreate !id=~#Admin_List_UL.catalogs$id~>Добавить</~>
+            </~>
+            <~View.catalogs>
+                <~Block.catalogs !created>
+                    <~Select name="catalog_id" title="Каталог">
+                        <~Options.selectedcatalogs value="id" text="name" />
+                    </~>
+                </~>
+            </~>
+            <~Block.searcher !remove>
+                <~Input name="words" title="Поисковые фразы" />
+            </~>
+            <~Block.specialoffer !emptycreate >
+                <~Description>Специальное предложение</~>
+                <~Input name="header" title="Заголовок" ?Input_Empty />
+                <~Image name="body" !src="thumbnail" title="Картинка">
+                    <~Image_Thumbnail name="photo" !height="300" />
+                </~>
+                <~Textarea name="description" title="Спецпредложение" />
+            </~>
+        </~>
+    </~>
+</@>

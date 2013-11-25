@@ -1,0 +1,8 @@
+                      <div class="leftmenu">
+                          <div class="header">Каталог</div>
+                          <ul class="middle order">
+                              <~Each_Param>
+                                <li<~Market_Goods_MenuSelect test=~$url~> class="selected"</~>><a href="/прайс/~$url~?<~Qs />">~$name~ <var>~$count~</var></a>
+                              </~>
+                          </ul>
+                      </div>

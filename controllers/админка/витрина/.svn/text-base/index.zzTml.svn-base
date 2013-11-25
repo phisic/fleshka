@@ -1,0 +1,22 @@
+<@Admin_>
+    <~Body title="Флешки">
+        <~List_Table.editor>
+            <~List_Table_Create>Создать</~>
+            <~List_Table_Tbody>
+                <tr>
+                    <td class="name">
+                        ~$id~ <img src="<~Image_Link.photo !id=~$id~ />" width="200" />
+            </~>
+        </~>
+        <~View.editor>
+            <~Block.editor !created>
+                <~Image name="photo" !src="thumbnail" ?File_Exists title="Картинка">
+                    <~Image_Thumbnail name="body" !height="600" />
+                    <~Image_Thumbnail name="thumbnail" !height="220" />
+                </~>
+                <~Input name="index" title="Index" value="0" ?Input_Empty />
+                <~Checkbox name="show" title="Показывать" checked value="1" />
+            </~>
+        </~>
+    </~>
+</@>

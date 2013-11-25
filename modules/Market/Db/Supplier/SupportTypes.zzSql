@@ -1,0 +1,24 @@
+<~Config_Link />
+
+<~My_Query_Index.loadSupportTypes index="name" link=~#My_Link~>
+    SELECT * FROM ~#@table~ WHERE `supplier_id` = ~&id~
+</~>
+
+<~My_Query.findSupportTypes link=~#My_Link~>
+    SELECT DISTINCT `name` FROM ~#@table~ WHERE `name` LIKE '~$name|sqlExpr~%' LIMIT 5
+</~>
+
+<~Q.updateSupportTypes>
+    <~My_Query link=~#My_Link~>
+        DELETE FROM ~#@table~ WHERE `supplier_id` = ~&newid~
+    </~>
+    <~Q_Each_Value source=~$types~>
+        <~My_Query link=~#My_Link~>
+            INSERT INTO ~#@table~ (`name`, `supplier_id`) VALUES (~&value~, ~&newid~)
+        </~>
+    </~>
+</~>
+
+<~My_Query.removeSupportTypes link=~#My_Link~>
+    DELETE FROM ~#@table~ WHERE `supplier_id` = ~&id~
+</~>

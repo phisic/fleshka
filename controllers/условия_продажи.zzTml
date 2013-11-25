@@ -1,0 +1,260 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Условия продажи fleshka.ru</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="флешки оптом, флешки под логотип, флешки нанесение, флешка цена, fleshka, usb flash" />
+    <meta name="description" content="Условие продажи магазина fleshka.ru через интернет, Category: Shop" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/jquery.datepicker.js"></script>
+    <link REL="StyleSheet" type="text/css" href="/css/main.css" />
+    <link REL="StyleSheet" type="text/css" href="/css/datepicker.css" />
+    <script type="text/javascript">
+        function order(){
+            var colors = [], sizes = [];
+
+            this.getColors = function(){
+                colors = $.cookie('colors').split('_');
+            }
+            
+            this.getSizes = function(){
+                sizes = $.cookie('sizes').split('_');
+            }
+            
+            this.setColors = function(){
+                $.cookie('colors', colors.join('_'), { expires: 1, path: '/'});
+            }
+            
+            this.setSizes = function(){
+                $.cookie('sizes', sizes.join('_'), { expires: 1, path: '/'});
+            }
+            
+            this.indexColor = function(need){
+                for (var i = 0; i<colors.length; i++)
+                    if (colors[i] == need)
+                        return i;
+                
+                return -1;
+            }
+            
+            this.indexSize = function(need){
+                for (var i = 0; i<sizes.length; i++)
+                    if (sizes[i] == need)
+                        return i;
+                
+                return -1;
+            }
+            
+            if ($.cookie('colors'))
+                this.getColors();
+            
+            if ($.cookie('sizes'))
+                this.getSizes();
+            
+            this.addColor = function($id){
+                if (this.indexColor($id) == -1){
+                    colors.push($id);
+                    this.setColors();
+                }
+            };
+            
+            this.removeColor = function($id){
+                var idx = this.indexColor($id);
+                if (idx != -1){
+                    colors.splice(idx, 1);
+                    this.setColors();
+                }
+            };
+            
+            this.addSize = function(id, size){
+                if (this.indexSize(id+'-'+size) == -1){
+                    sizes.push(id+'+'+size);
+                    this.setSizes();
+                }
+            };
+            
+            this.removeSize = function(id, size){
+                var idx = this.indexSize(id+'-'+size);
+                
+                if (idx != -1){
+                    sizes.splice(idx, 1);
+                    this.setSizes();
+                }
+            };
+        }
+        
+        var order = new order();
+
+        function helper($table, text, clas){
+            $('#helper').attr('class', '').hide().appendTo( $table );
+            $('#helper').html(text).fadeIn('fast').addClass(clas);
+        }
+
+        $(document).ready(function(){
+            function colorMouseOver(){
+                $('img.image', $(this).parents('div.flash')).attr('src', '/p/t'+$(this).data().id);
+            }
+            $('table.price ul.colors li').bind('mouseover', colorMouseOver).click(function(){
+                var $box = $('div.colorbox', this);
+                $box.toggleClass('selected')
+                
+                if ($box.hasClass('selected')){
+                    $('img.image', $(this).parents('div.flash')).attr('src', '/p/t'+$(this).data().id);
+                    
+                    $('li', $(this).parents('ul.colors')).unbind('mouseover');
+                    
+                    //add to order
+                    order.addColor($(this).data().id);
+                    
+                }else{
+                    if(!$('div.colorbox.selected', $(this).parents('ul.colors')).length){
+                        $('li', $(this).parents('ul.colors')).bind('mouseover', colorMouseOver);
+                        
+                        $('#helper').hide();
+                    }
+                    
+                    //remove from order
+                    order.removeColor($(this).data().id);
+                }
+
+                var $table = $(this).parents('div.flash');
+                helper( $table , 'Изменения приняты', 'info');
+            });
+            
+            $('ul.colorfilters li').click(function(){
+                var div = $('div.colorbox', this);
+                if (div.length){
+                    var id = div.data().id;
+                    window.open('?<~Qs color="'+id+'" !glue="&" />', '_self');
+                }else
+                    window.open('?<~Qs color !glue="&" />', '_self');
+            });
+            
+            $('table.price div.button').click(function(){
+                var data = $(this).data();
+                
+                $(this).toggleClass('selected');
+                
+                if ($(this).hasClass('selected')){
+                    order.addSize(data.id, data.size);
+                }else{
+                    order.removeSize(data.id, data.size);
+
+                    $('#helper').hide();
+                }
+
+                var $table = $(this).parents('div.flash');
+                helper( $table , 'Изменения приняты', 'info');
+            });
+            
+            $('div.commentform textarea').keyup(function(){
+                $(this).css('height', '0px');
+                var h = 19+this.scrollHeight;
+                if (h < 76)
+                    h = 76;
+                $(this).css('height', h+'px');
+            }).keyup();
+            
+            var date = '<~Date>d.m.Y</~>';
+
+            if ($('#expireDate').val()){
+                $('#pickExpireDate').html(
+                    date = $('#expireDate').val()
+                );
+            }
+
+            if ($('#expireDateTo').val()){
+                $('#pickExpireDateTo').html(
+                    date = $('#expireDateTo').val()
+                );
+            }
+            
+            $('#pickExpireDate').DatePicker({
+                format:'d.m.Y',
+                date: date,
+                current: date,
+                starts: 1,
+                position: 'r',
+                onChange: function(formated, dates){
+                    $('#expireDate').val(formated);
+                    $('#pickExpireDate').html(formated);
+                    $('#pickExpireDate').DatePickerHide();
+                }
+            }).click(function(){return false;});
+
+            $('#pickExpireDateTo').DatePicker({
+                format:'d.m.Y',
+                date: date,
+                current: date,
+                starts: 1,
+                position: 'r',
+                onChange: function(formated, dates){
+                    $('#expireDateTo').val(formated);
+                    $('#pickExpireDateTo').html(formated);
+                    $('#pickExpireDateTo').DatePickerHide();
+                }
+            }).click(function(){return false;});
+            
+            $('#ordersend').click(function(){
+                $('#addemail').show();
+                $(this).hide();
+            });
+        });
+    </script>
+    <~Market_Goods_Var />
+  </head>
+  <body>
+      <div id="helper" class="small"></div>
+      <div class="center">
+          <~Market_Goods_Header />
+          <table class="main">
+              <tr>
+                  <td style="width: 212px">
+                      <div class="testfixed">
+                      <~Market_Goods_Menu />
+                      <~Market_Order_Menu />
+                      </div>
+                  <td>
+                      <div class="catalog">
+                          <h1>Условия продажи</h1>
+                          <div class="border">
+                              <p style="margin-top: 0px">На нашем сайте представлен широкий модельный ряд флешек. У нас вы можете выбрать usb-устройство не только для своего пользования, но и в качестве подарка для друзей. Недорогие подарочные флешки оптом можно купить прямо со склада в Москве, избавив себя от дополнительных накруток и затрат.
+<br />
+<br /><h3>Как оформить заказ</h3>Оформить заказ или уточнить наличие товара можно по телефону 780-80-85. 
+<br />В наличии на складе более 30 000 флешек разных цветов и объемов памяти. Ассортимент постоянно пополняется. У нас вы можете приобрести образцы флешек. Стоимость одного образца 500 руб.
+<br />
+<br /><h3>Цены</h3>Цены указаны в разделе прайс-лист. При заказе свыше 500 штук цены уточняйте у менеджеров. 
+<br />
+<br /><h3>Виды нанесения</h3>Тиснение - метод нанесения изображения с помощью горячего клише на такие материалы, как кожа, дерево, бумага, пластик и т.п. Тиснение наносится на кожаные флешки.
+<br />Тампопечать (тампонная печать) - способ переноса изображения с печатной формы (клише) на любую поверхность с помощью эластичного тампона. Преимущество этого метода заключается в том, что он дает возможность делать нанесение не только на плоские поверхности, но и на изогнутые. Тампопечать наносится на пластиковые флешки.
+<br />Гравировка – способ нанесения изображения с помощью лазера на таких материалах, как дерево, металл, кожа. Главное преимущество данной печати - большая четкость наносимого изображения. Гравировка наносится на металлические флешки.
+<br />
+<br /><h3>Стоимость нанесения логотипа.</h3><b>Тампопечать на белом пластике</b>: 
+<br />1+0 при количестве 100штук 15руб за 1шт 
+<br />2+0 при количестве 100штук 23руб за 1шт 
+<br />3+0 при количестве 100штук 35руб за 1шт 
+<br />4+0 при количестве 100штук 45руб за 1шт 
+<br /><b>Гравировка</b>: 
+<br />Квадратный сантиметр гравировки стоит 7 рублей. Средняя стоимость логотипа размером 3см*1см в среднем составляет 18-20 рублей.
+<br /><b>Тиснение</b>: 
+<br />цена клише 1500руб 
+<br />приладка клише 800 рублей
+<br />цена 1го удара 12 рублей
+<br />цена 1го удара с фольгой 15 рублей
+<br />
+<br /><h3>Условия оплаты</h3>Оплата осуществляется за наличный и безналичный расчет. При покупке флешек со склада - оплата 100%.
+<br />
+<br /><h3>Доставка</h3>Доставка продукции по Москве осуществляется в течение 1-2 рабочих дней с момента поступления денежных средств на наш расчетный счет. 
+<br />При заказе продукции на сумму свыше 5 000 рублей мы осуществляем бесплатную доставку продукции в пределах МКАД.
+<br />При заказе продукции на меньшую сумму, либо при доставке за пределы МКАД доставка продукции осуществляется платно.
+<br />Доставка в регионы осуществляется через транспортные компании. Стоимость доставки определяется массой, габаритами продукции и сроками доставки.
+<br />Самовывоз: бесплатно (необходимо созвониться заранее с менеджером компании, для согласования времени).</p>
+                          </div>
+                      </div>
+          </table>
+          <~Market_Footer />
+      </div>
+      <~Market_YMetrica />
+  </body>
+</html>

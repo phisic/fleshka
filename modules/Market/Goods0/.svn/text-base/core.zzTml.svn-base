@@ -1,0 +1,22 @@
+          <~Form name="orderform" action="/запрос/" !prefix="order" autocomplete="off" >
+          <input type="submit" value="выберите объем" id="order" style="display: none" />
+          <div id="tips" style="display: none">выберите объем</div>
+          <ul class="catalog">
+              <~Market_Goods_Each.goods>
+              <li>
+                  <div class="bgsel">
+                      <div class="img" style="background:url(/p/t~$image~)"><a href="#" class="dl"></a><img src="/p/t~$image~" alt="Флешка ~$name~" /><~H.description><p class="description">~$description~</p></~></div>
+                      <h2><strong>Флешка</strong> ~$name~ <i>#~$goodsgroup_id~</i><~H.oneselect.one> <~Each_Param source="$colors" glue=" "><span style="background: ~$html~" title="~$value~"><~Checkbox.color name="color[]" value="~$goods~" />&nbsp;</span></~></~></h2>
+                      <~H.oneselect.more><p class="color">
+                          <~Each_Param source="$colors" glue=" "><a href="#" <~H.first.no><~H.oneselect.one>class="unselected"</~></~> style="background: ~$html~" title="~$value~" ids="~$imageID~"><~Checkbox.color name="color[]" value="~$goods~" />&nbsp;</a></~>
+                      </p></~>
+                      <p class="order<~H.oneselect.more> hidden</~><~H.oneselect.one><~H.first.yes> hidden</~></~>">
+                          <~Each_Param source=~$size~>
+                            <a href="#"><~Checkbox name="size[]" value="~$goods~" />~$value~</a>
+                          </~>
+                      </p>
+                  </div>
+                  <div class="gfeatures"><~Each_Param source="$features" glue=" "><p>~$type~: ~$value~</p></~></div>
+              </~>
+          </ul>
+          </~>

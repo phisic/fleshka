@@ -1,0 +1,50 @@
+<~Config_Link />
+
+<~My_Query.load link=~#My_Link~>
+    SELECT * FROM ~#@self~ ORDER by `index`
+</~>
+
+<~My_Query.loadMenuCatalog link=~#My_Link~>
+    SELECT * FROM ~#@self~ WHERE `view` = 1 ORDER by `index`
+</~>
+
+<~My_Query.loadAdminMenuCatalog link=~#My_Link~>
+    SELECT * FROM ~#@self~ WHERE `view` != 0 ORDER by `index`
+</~>
+
+<~My_Query.loadById link=~#My_Link~>
+    SELECT * FROM ~#@self~ WHERE `id` = ~&id~
+</~>
+
+<~My_Query.getFilterByUrl link=~#My_Link~>
+    SELECT relcatalogfeature.feature_id
+    FROM ~#@self~
+    JOIN ~#O.joinRelCatalogFeature~ ON `relcatalogfeature`.catalog_id = self.id
+    WHERE `url` = ~&url~
+</~>
+
+<~My_Query.loadByUrl link=~#My_Link~>
+    SELECT *
+    FROM ~#@self~
+    WHERE `url` = ~&url~
+</~>
+
+<~Q.insertNew>
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~ (`name`, `url`, `header`, `description`, `index`, `view`) VALUES
+        (~&name~, ~&url~, ~&header~, ~&description~, ~&index~, ~&view~)
+    </~>
+    <~My_Query link=~#My_Link~>
+        SELECT LAST_INSERT_ID() as last_id;
+    </~>
+</~>
+
+<~My_Query.updateById link=~#My_Link~>
+    UPDATE ~#@table~ SET `name` = ~&name~, `url` = ~&url~, `header` = ~&header~,
+        `description` = ~&description~, `index` = ~&index~, `view` = ~&view~
+    WHERE `id` = ~&id~
+</~>
+
+<~My_Query.loadById link=~#My_Link~>
+    SELECT * FROM ~#@self~ WHERE `id` = ~&id~
+</~>

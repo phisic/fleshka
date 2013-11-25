@@ -1,0 +1,19 @@
+<~Config_Link />
+<~My_Query.logList link=~#My_Link~>
+    SELECT * FROM ~#@self~ ORDER BY `hits` DESC
+</~>
+
+<~Q.logUpdate>
+    <~My_Query link=~#My_Link~>
+        UPDATE ~#@table~ SET `hits` = `hits` + 1 , `results` = ~&results~
+        WHERE `phrase` = ~&phrase~
+    </~>
+    <~My_Query link=~#My_Link~>
+        SELECT ROW_COUNT() as `rows`
+    </~>
+</~>
+
+<~My_Query.logCreate link=~#My_Link~>
+    INSERT INTO ~#@table~ (`hits`, `phrase`, `results`)
+    VALUES (1, ~&phrase~, ~&results~)
+</~>

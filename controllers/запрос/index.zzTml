@@ -1,0 +1,383 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Новый заказ fleshka.ru</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="флешки оптом, флешки под логотип, флешки нанесение, флешка цена, fleshka, usb flash" />
+    <meta name="description" content="Заказ магазина fleshka.ru для покупки товаров через интернет, Category: Shop" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/jquery.datepicker.js"></script>
+    <link REL="StyleSheet" type="text/css" href="/css/main.css" />
+    <link REL="StyleSheet" type="text/css" href="/css/datepicker.css" />
+    <script type="text/javascript">
+        function order(){
+            var colors = [], sizes = [];
+
+            this.getColors = function(){
+                colors = $.cookie('colors').split('_');
+            }
+            
+            this.getSizes = function(){
+                sizes = $.cookie('sizes').split('_');
+            }
+            
+            this.setColors = function(){
+                $.cookie('colors', colors.join('_'), { expires: 1, path: '/'});
+            }
+            
+            this.setSizes = function(){
+                $.cookie('sizes', sizes.join('_'), { expires: 1, path: '/'});
+            }
+            
+            this.indexColor = function(need){
+                for (var i = 0; i<colors.length; i++)
+                    if (colors[i] == need)
+                        return i;
+                
+                return -1;
+            }
+            
+            this.indexSize = function(need){
+                for (var i = 0; i<sizes.length; i++)
+                    if (sizes[i] == need)
+                        return i;
+                
+                return -1;
+            }
+            
+            if ($.cookie('colors'))
+                this.getColors();
+            
+            if ($.cookie('sizes'))
+                this.getSizes();
+            
+            this.addColor = function($id){
+                if (this.indexColor($id) == -1){
+                    colors.push($id);
+                    this.setColors();
+                }
+            };
+            
+            this.removeColor = function($id){
+                var idx = this.indexColor($id);
+                if (idx != -1){
+                    colors.splice(idx, 1);
+                    this.setColors();
+                }
+            };
+            
+            this.addSize = function(id, size){
+                if (this.indexSize(id+'-'+size) == -1){
+                    sizes.push(id+'-'+size);
+                    this.setSizes();
+                }
+            };
+            
+            this.removeSize = function(id, size){
+                var idx = this.indexSize(id+'-'+size);
+                
+                if (idx != -1){
+                    sizes.splice(idx, 1);
+                    this.setSizes();
+                }
+            };
+        }
+        
+        var order = new order();
+
+        function helper($table, text, clas){
+            $('#helper').attr('class', 'small').hide().appendTo( $table );
+            $('#helper').html(text).fadeIn('fast').addClass(clas);
+        }
+
+        $(document).ready(function(){
+            function colorMouseOver(){
+                $('img.smimage', $(this).parents('div.flash')).attr('src', '/p/ph'+$(this).data().id+'x0.jpg');
+            }
+            $('table.price.flash ul.colors li').bind('mouseover', colorMouseOver).click(function(){
+                var $box = $('div.colorbox', this);
+                $box.toggleClass('selected')
+                
+                if ($box.hasClass('selected')){
+                    $('img.smimage', $(this).parents('div.flash')).attr('src', '/p/ph'+$(this).data().id+'x0.jpg');
+                    
+                    $('li', $(this).parents('ul.colors')).unbind('mouseover');
+                    
+                    //add to order
+                    order.addColor($(this).data().id);
+                    
+                }else{
+                    if(!$('div.colorbox.selected', $(this).parents('ul.colors')).length){
+                        $('li', $(this).parents('ul.colors')).bind('mouseover', colorMouseOver);
+                        
+                        $('#helper').hide();
+                    }
+                    
+                    //remove from order
+                    order.removeColor($(this).data().id);
+                }
+
+                var $table = $(this).parents('div.flash');
+                helper( $table , 'Изменения приняты', 'info');
+            });
+            
+            $('ul.colorfilters li').click(function(){
+                var div = $('div.colorbox', this);
+                if (div.length){
+                    var id = div.data().id;
+                    window.open('?<~Qs color="'+id+'" !glue="&" />', '_self');
+                }else
+                    window.open('?<~Qs color !glue="&" />', '_self');
+            });
+            
+            $('table.price.flash div.button').click(function(){
+                var data = $(this).data();
+                
+                $(this).toggleClass('selected');
+                
+                if ($(this).hasClass('selected')){
+                    order.addSize(data.id, data.size);
+                }else{
+                    order.removeSize(data.id, data.size);
+
+                    $('#helper').hide();
+                }
+
+                var $table = $(this).parents('div.flash');
+                helper( $table , 'Изменения приняты', 'info');
+            });
+            
+            $('table.price.package ul.colors li').bind('mouseover', colorMouseOver).click(function(){
+                var $box = $('div.colorbox', this);
+                $box.toggleClass('selected')
+                
+                if ($box.hasClass('selected')){
+                    $('img.smimage', $(this).parents('div.flash')).attr('src', '/p/ph'+$(this).data().id+'x0.jpg');
+                    
+                    $('li', $(this).parents('ul.colors')).unbind('mouseover');
+                    
+                    //add to order
+                    order.addColor($(this).data().id);
+                        
+                    var $table = $(this).parents('div.flash');
+                    order.addSize($table.data().id, 0);
+                }else{
+                    if(!$('div.colorbox.selected', $(this).parents('ul.colors')).length){
+                        $('li', $(this).parents('ul.colors')).bind('mouseover', colorMouseOver);
+                        
+                        order.removeSize($(this).parents('div.flash').data().id, 0);
+                    }
+                    
+                    //remove from order
+                    order.removeColor($(this).data().id);
+                }
+                
+                var $table = $(this).parents('div.flash');
+                helper( $table , 'Изменения приняты', 'info');
+            });
+            
+            $('div.commentform textarea').keyup(function(){
+                $(this).css('height', '0px');
+                var h = 19+this.scrollHeight;
+                if (h < 76)
+                    h = 76;
+                $(this).css('height', h+'px');
+            }).keyup();
+            
+            var date = '<~Date>d.m.Y</~>';
+
+            if ($('#expireDate').val()){
+                $('#pickExpireDate').html(
+                    date = $('#expireDate').val()
+                );
+            }
+
+            if ($('#expireDateTo').val()){
+                $('#pickExpireDateTo').html(
+                    date = $('#expireDateTo').val()
+                );
+            }
+            
+            $('#pickExpireDate').DatePicker({
+                format:'d.m.Y',
+                date: date,
+                current: date,
+                starts: 1,
+                position: 'r',
+                onChange: function(formated, dates){
+                    $('#expireDate').val(formated);
+                    $('#pickExpireDate').html(formated);
+                    $('#pickExpireDate').DatePickerHide();
+                }
+            }).click(function(){return false;});
+
+            $('#pickExpireDateTo').DatePicker({
+                format:'d.m.Y',
+                date: date,
+                current: date,
+                starts: 1,
+                position: 'r',
+                onChange: function(formated, dates){
+                    $('#expireDateTo').val(formated);
+                    $('#pickExpireDateTo').html(formated);
+                    $('#pickExpireDateTo').DatePickerHide();
+                }
+            }).click(function(){return false;});
+            
+            $('#ordersend').click(function(){
+                $('#addemail').show();
+                $(this).hide();
+            });
+
+            $('#addnewgoods').click(function(){
+                window.open('/прайс/', '_self');
+                
+                return false;
+            })
+        });
+    </script>
+    <~Market_Goods_Var />
+  </head>
+  <body>
+      <div id="helper" class="small"></div>
+      <div class="center">
+          <~Market_Goods_Header />
+          <table class="main">
+              <tr>
+                  <td style="width: 212px">
+                      <div>
+                          <div class="testfixed">
+                              <~Market_Goods_Menu />
+                              <~Market_Order_Menu />
+                          </div>
+                      </div>
+                  <td>
+                      <div class="catalog">
+                          <h1>Новый оптовый заказ</h1>
+                          <div class="border">
+                              <table class="order"><tr>
+                                  <td class="leftside">
+                                      <div class="orderblock">
+                                          <~_FormCreateOrder>
+                                          <h2>Опции заказа</h2>
+                                          <p>Срок сдачи заказа: <a href="#" id="pickExpireDate">от</a> <~Input type="hidden" id="expireDate" name="date_expire" value="" /> &minus; <a href="#" id="pickExpireDateTo">до</a> <~Input type="hidden" id="expireDateTo" name="date_expire_to" value="" /></p>
+                                          <p>Способ доставки: <~Select name="delivery" id="delivery">
+                                              <~Option value="0">Курьером</~>
+                                              <~Option value="1">Самовывоз</~>
+                                          </~>
+                                          </p>
+                                          <div style="border-top: 1px solid #7C7C7C"></div>
+                                          <h2>Вопрос менеджеру</h2>
+                                          <div class="commentform">
+                                              <~Textarea.comment name="comment" !filter=~#*.comment@value|HtmlFilter~ />
+                                              <~O.form.nosubmit><input class="button" type="button" id="ordersend" value="Отправить заказ" style="font-size: 18px" /></~>
+                                          </div>
+                                          <div id="addemail" <~O.form.nosubmit>style="display:none"</~>>
+                                            <p>Укажите ваш email: <~Input.email name="email" type="text" ?Input_Empty="обязательное поле" ?Input_Email="введите верный email" !filter=~#*.email@value|HtmlFilter~ /></p>
+                                            <~Error obj=~#*.email~><p class="error" style="padding-left: 160px">~$error~</p></~>
+                                            <p style="font-size:12px">на него к вам придет ответ нашего менеджера</p>
+                                            <p><input class="button" type="submit" value="Отправить заказ" style="font-size: 14px" /></p>
+                                          </div>
+                                          </~>
+                                          <img src="/i/pen.png" alt="" class="pen" />
+                                      </div>
+                                  <td class="rightside">
+                                      <~Market_Goods_Size>
+                                      <div class="flash small">
+                                          <table class="price small flash">
+                                              <tr>
+                                                  <th class="header">~$name~ #~$id~
+                                                  <th class="c">Цвета
+                                                  <th class="c size gradient">Объемы
+                                              <tr>
+                                                  <td rowspan="6" class="image">
+                                                      <div class="imagebg">
+                                                          <img src="<~Market_Goods_ImageLink !goods_id=~#Market_Goods_Size$id~ />" class="smimage" />
+                                                      </div>
+                                                  <td rowspan="5" class="color">
+                                                      <ul class="colors">
+                                                      <~Market_Goods_GoodsColors !goods_id=~#Market_Goods_Size$id~>
+                                                        <li data-id="~$color_group~">
+                                                        <~Market_ColorMaker color=~$color_html~ id=~$color_group~ />
+                                                      </~>
+                                                      </ul>
+                                                  <td class="odd">
+                                                      <~T test="~$pricesize2~"><~Market_Goods_SizeButton size="2" id=~#Market_Goods_Size$id~ /></~>
+                                                      <~T test="~$pricesize2~" invert>
+                                                          <~T test="~#Market_Goods_Size$instock~" invert><~Market_Goods_SizeButton size="2" id=~#Market_Goods_Size$id~ /></~>
+                                                      </~>
+                                              <tr>
+                                                  <td class="odd">
+                                                      <~T test="~$pricesize4~"><~Market_Goods_SizeButton size="4" id=~#Market_Goods_Size$id~ /></~>
+                                                      <~T test="~$pricesize4~" invert>
+                                                          <~T test="~#Market_Goods_Size$instock~" invert><~Market_Goods_SizeButton size="4" id=~#Market_Goods_Size$id~ /></~>
+                                                      </~>
+                                              <tr>
+                                                  <td class="odd">
+                                                      <~T test="~$pricesize8~"><~Market_Goods_SizeButton size="8" id=~#Market_Goods_Size$id~ /></~>
+                                                      <~T test="~$pricesize8~" invert>
+                                                          <~T test="~#Market_Goods_Size$instock~" invert><~Market_Goods_SizeButton size="8" id=~#Market_Goods_Size$id~ /></~>
+                                                      </~>
+                                              <tr>
+                                                  <td class="odd">
+                                                      <~T test="~$pricesize16~"><~Market_Goods_SizeButton size="16" id=~#Market_Goods_Size$id~ /></~>
+                                                      <~T test="~$pricesize16~" invert>
+                                                          <~T test="~#Market_Goods_Size$instock~" invert><~Market_Goods_SizeButton size="16" id=~#Market_Goods_Size$id~ /></~>
+                                                      </~>
+                                              <tr>
+                                                  <td class="odd">
+                                                      <~T test="~$pricesize32~"><~Market_Goods_SizeButton size="32" id=~#Market_Goods_Size$id~ /></~>
+                                                      <~T test="~$pricesize32~" invert>
+                                                          <~T test="~#Market_Goods_Size$instock~" invert><~Market_Goods_SizeButton size="32" id=~#Market_Goods_Size$id~ /></~>
+                                                      </~>
+                                              <tr>
+                                                  <td class="description" colspan="6">
+                                                      ~$description~
+                                          </table>
+                                      </div>
+                                      </~>
+                                      <~Market_Goods_Price>
+                                      <div class="flash small" data-id="~$id~">
+                                          <table class="price small package">
+                                              <tr>
+                                                  <th class="header">~$name~ #~$id~
+                                                  <th class="c">Цвета
+                                                  <th class="c size gradient">
+                                              <tr>
+                                                  <td rowspan="6" class="image">
+                                                      <div class="imagebg">
+                                                          <img src="<~Market_Goods_ImageLink !goods_id=~#Market_Goods_Price$id~ />" class="smimage" />
+                                                      </div>
+                                                  <td rowspan="5" class="color">
+                                                      <ul class="colors">
+                                                      <~Market_Goods_GoodsColors !goods_id=~#Market_Goods_Price$id~>
+                                                        <li data-id="~$color_group~">
+                                                        <~Market_ColorMaker color=~$color_html~ id=~$color_group~ />
+                                                      </~>
+                                                      </ul>
+                                                  <td class="odd">
+                                              <tr>
+                                                  <td class="odd">
+                                              <tr>
+                                                  <td class="odd">
+                                              <tr>
+                                                  <td class="odd">
+                                              <tr>
+                                                  <td class="odd">
+                                              <tr>
+                                                  <td class="description" colspan="6">
+                                                      ~$description~
+                                          </table>
+                                      </div>
+                                      </~>
+                                      <input id="addnewgoods" class="button" type="button" value="Добавить другие модели флешек" />
+                              </table>
+                          </div>
+                      </div>
+          </table>
+          <~Market_Footer />
+      </div>
+      <~Market_YMetrica />
+  </body>
+</html>

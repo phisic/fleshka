@@ -1,0 +1,64 @@
+<~Config_Link />
+
+/*
+CREATE TABLE `goods`.`orderfiles` (
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    `order_id` VARCHAR( 255 ) NOT NULL ,
+    `hash` VARCHAR( 255 ) NOT NULL ,
+    `name` VARCHAR( 255 ) NOT NULL ,
+    `ext` VARCHAR( 10 ) NOT NULL ,
+    `size` INT NOT NULL ,
+    `body` MEDIUMBLOB NOT NULL ,
+    `date_created` DATETIME NOT NULL ,
+  INDEX ( `order_id` )
+) ENGINE = InnoDB;
+*/
+
+<~Q.saveFile>
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~
+               (`order_id`, `name`, `ext`, `size`, `body`, `date_created`)
+        VALUES (~&order_id~, ~&name~ , ~&ext~, ~&size~, ~&body~, NOW())
+    </~>
+    <~My_Query link=~#My_Link~>
+        SELECT LAST_INSERT_ID() as `id`
+    </~>
+</~>
+
+<~My_Query.loadCatalog link=~#My_Link~>
+    SELECT self.`id`, self.`name`, self.`ext`, round(self.`size`/1024, 1) as `size`
+    FROM ~#@self~
+    WHERE
+        `order_id` = ~&order_id~ AND `trash` = 0
+</~>
+
+<~My_Query.loadBody link=~#My_Link~>
+    SELECT self.`body`, self.`name`, self.`ext`
+    FROM ~#@self~
+    WHERE
+        `order_id` = ~&order_id~ AND `id` = ~&id~ AND `trash` = 0
+    LIMIT 1
+</~>
+
+<~My_Query.getCountFileNames link=~#My_Link~>
+    SELECT count(self.`id`) as `count`
+    FROM ~#@self~
+    WHERE
+        `order_id` = ~&order_id~
+        AND 
+        (`name` LIKE '~$name|sqlExpr~ #%' OR `name` = ~&name~)
+</~>
+
+<~My_Query.renameFile link=~#My_Link~>
+    UPDATE ~#@table~
+    SET `name` = ~&name~
+    WHERE
+        `order_id` = ~&order_id~
+        AND `id` = ~&id~
+        AND `trash` = 0
+</~>
+
+<~My_Query.removeFile link=~#My_Link~>
+    UPDATE ~#@table~ SET `trash` = 1
+    WHERE `order_id` = ~&order_id~ AND `id` = ~&id~
+</~>

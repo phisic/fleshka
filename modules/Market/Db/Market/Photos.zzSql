@@ -1,0 +1,37 @@
+<~Config_Link />
+
+<~My_Query.adminList link=~#My_Link~>
+    SELECT self.ident, self.`id` FROM ~#@self~
+    WHERE self.ident = ~&id~ AND self.`type` = 0
+</~>
+
+<~My_Query.flashList link=~#My_Link~>
+    SELECT self.ident, self.`id` FROM ~#@self~
+    WHERE self.ident = ~&id~ AND self.`type` = 1
+</~>
+
+<~My_Query.adminLoad.adminCheck.flashLoad.flashCheck link=~#My_Link~>
+    SELECT self.id as `id` FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+
+<~My_Query.adminPhoto.flashPhoto link=~#My_Link~>
+    SELECT `thumbnail` as `image` FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+
+<~My_Query.adminCreate link=~#My_Link~>
+    INSERT INTO ~#@table~ (`body`, `thumbnail`, `ident`, `type`)
+    VALUES (~&body~, ~&thumbnail~, ~&id~, 0)
+</~>
+
+<~My_Query.flashCreate link=~#My_Link~>
+    INSERT INTO ~#@table~ (`body`, `thumbnail`, `ident`, `type`)
+    VALUES (~&body~, ~&thumbnail~, ~&id~, 1)
+</~>
+
+<~My_Query.adminUpdate.flashUpdate link=~#My_Link~>
+    UPDATE ~#@self~
+    SET `thumbnail` = ~&thumbnail~, `body` = ~&body~
+    WHERE self.id = ~&id~
+</~>

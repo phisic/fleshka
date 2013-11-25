@@ -1,0 +1,44 @@
+          <input type="submit" value="Выберите цвет" disabled="disabled" id="order" style="display: none" />
+          <~Form name="orderform" action="/запрос/" !prefix="order" autocomplete="off" >
+          <table class="price">
+              <tr>
+                  <th>Название
+                  <td style="width: 540px">
+                      <table class="header" style="width: 100%"><tr><th>Цены<td>до 100 шт<td>до 300 шт<td>до 500 шт<td>на заказ</table>
+                  <th style="width: 200px">Фото
+              <~Market_Goods_Each.goods>
+              <tr id="~$ids~">
+                  <td>
+                      <h2><strong>Флешка</strong> ~$name~ <i>#~$goodsgroup_id~</i></h2>
+                      <p class="color">
+                      <~H.oneselect.one><~Each_Param source="$colors" glue=" "><span style="background: ~$html~" title="~$value~"><~Checkbox.color name="color[]" value="~$goods~" />&nbsp;</span></~></~>
+                      <~H.oneselect.more><~Each_Param source="$colors" glue=" "><a href="#" style="background: ~$html~" title="~$value~" ids="~$imageID~"><~Checkbox name="color[]" value="~$goods~" />&nbsp;</a></~></~>
+                      </p>
+                      <~H.first.yes><div id="tips">Выберите цвет</div></~>
+                      <~Each_Param source="$features" glue=" "><p>~$type~: ~$value~</p></~>
+                  <td>
+                    <table style="width: 100%">
+                      <~Market_Goods_Price_Each source=~$size~>
+                        <tr>
+                            <td style="width: 20%">
+                                <p class="order"><a href="#"><~Checkbox name="size[]" value="~$goods~" />~$value~</a></p>
+                            <~O.manager.price>
+                            <td style="width: 20%">
+                                ~$price~ руб
+                            <td style="width: 20%">
+                                ~$price2~ руб
+                            <td style="width: 20%">
+                                ~$price3~ руб
+                            <td style="width: 20%">
+                                ~$price4~ руб
+                            </~><~H.manager.noprice>
+                            <td style="width: 80%;color:#507090" colspan="4">
+                                Цену уточнит менеджер. Отправьте ему запрос.
+                            </~>
+                      </~>
+                        <tr><td class="orderhere noline" colspan="5">
+                    </table>
+                  <td><img src="/p/t~$image~" />
+              </~>
+          </table>
+          </~>

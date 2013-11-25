@@ -1,0 +1,17 @@
+                      <div class="leftmenu">
+                          <div class="header">Консультация</div>
+                          <ul class="middle order">
+                              <li class="manager">
+                                  <a href="#">Менеджер Валерий</a>
+                              <li style="height: auto;padding: 0px 4px 7px;font-size:12px;display:none">
+                                  <div class="ask">
+                                      <div class="answer">
+                                          <p class="a">Здравствуйте, что вы хотите узнать по флешкам?</p>
+                                      </div>
+                                      <form>
+                                          <textarea></textarea>
+                                          <input type="submit" value="Задать вопрос" />
+                                      </form>
+                                  </div>
+                          </ul>
+                      </div>

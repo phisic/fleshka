@@ -1,0 +1,37 @@
+<~Config_Link />
+<@^>-- Get parent directory for include class Market_Db_Goods_RelGoodsFeature
+    <~MarketConfig.config />
+</@>
+
+<~My_Query.adminList link=~#My_Link~>
+    SELECT * FROM ~#@self~
+</~>
+
+<~My_Query.adminLoad.adminCheck link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+
+<~My_Query.adminUpdate link=~#My_Link~>
+    UPDATE ~#@self~
+    SET
+        `name` = ~&name~,
+        `description` = ~&description~
+        <~Market_Db_Market_ChangePrice value=~$price~>`price`</~>
+    WHERE self.id = ~&id~
+</~>
+
+<~Q.adminCreate>
+    <~Q_Forward query=~#}.config}.incrementGoodsCount~ />
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~
+            (`id`, `name`, `description`, `price`, `index`)
+        VALUES
+            (~#}.config}.incrementGoodsCount}.value&value~, ~&name~, ~&description~, ~&price~, ~&index~)
+    </~>
+</~>
+
+<~My_Query.adminRemove link=~#My_Link~>
+    DELETE FROM ~#@table~
+    WHERE `id` = ~&id~
+</~>

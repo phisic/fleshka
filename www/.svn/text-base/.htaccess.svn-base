@@ -1,0 +1,23 @@
+### Full Mod Rewrite
+php_value upload_max_filesize "5M"
+php_value post_max_size "5M"
+
+AddDefaultCharset utf-8
+AddCharset utf-8 *
+<IfModule mod_charset.c>
+    CharsetSourceEnc utf-8
+    CharsetDefault utf-8
+</IfModule>
+
+RedirectMatch 404 /\\.svn(/|$)
+
+Order Allow,Deny
+Allow from all
+
+RewriteEngine On
+
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php?%{QUERY_STRING} [L]

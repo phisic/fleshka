@@ -1,0 +1,95 @@
+<~Config_Link />
+
+<~My_Query.ids link=~#My_Link~>
+    SELECT self.`id` FROM ~#@self~
+</~>
+
+<~My_Query.loadBody link=~#My_Link~>
+    SELECT self.body FROM ~#@self~
+    WHERE self.id = ~&id~
+</~>
+
+<~My_Query.updateThumbnail link=~#My_Link~>
+    UPDATE ~#@self~
+    SET `thumbnail` = ~&thumbnail~
+    WHERE self.id = ~&id~
+</~>
+
+<~My_Query.adminList link=~#My_Link~>
+    SELECT self.ident, self.`id` FROM ~#@self~
+    WHERE self.ident = ~&id~
+</~>
+
+<~My_Query.adminListValue link=~#My_Link~>
+    SELECT self.ident as `id`, self.id as `selecteditemid` FROM ~#@self~ WHERE self.id = ~&id~
+</~>
+
+<~My_Query.photoThumbsByIdent.adminThumb link=~#My_Link~>
+    SELECT `thumbnail` as `image` FROM ~#@self~
+    WHERE self.ident = ~&id~
+</~>
+
+<~My_Query.photoBodyByIdent.adminThumb link=~#My_Link~>
+    SELECT `body` as `image` FROM ~#@self~
+    WHERE self.ident = ~&id~ LIMIT 1
+</~>
+
+<~My_Query.photosIdByGoodsIds link=~#My_Link~>
+    SELECT count(self.id) as `count`, self.ident
+    FROM ~#@self~
+    WHERE self.ident in ~&ids~
+    GROUP BY `ident`
+</~>
+
+<~My_Query.photoThumb.adminThumb link=~#My_Link~>
+    SELECT `thumbnail` as `image` FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+
+<~My_Query.photoBody.adminBody link=~#My_Link~>
+    SELECT `body` as `image` FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+
+<~My_Query.adminLoad.adminCheck link=~#My_Link~>
+    SELECT self.id as `id` FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+
+<~My_Query.adminPhoto link=~#My_Link~>
+    SELECT `thumbnail` as `image` FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+
+<~Q.adminCreate>
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~ (`body`, `thumbnail`, `ident`, `index`)
+        VALUES (~&body~, ~&thumbnail~, ~&id~, 0)
+    </~>
+    <~My_Query link=~#My_Link~>
+        SELECT LAST_INSERT_ID() as `id`
+    </~>
+</~>
+
+<~My_Query.adminUpdate link=~#My_Link~>
+    UPDATE ~#@self~
+    SET `thumbnail` = ~&thumbnail~, `body` = ~&body~
+    WHERE self.id = ~&id~
+</~>
+
+<~My_Query.adminRemove link=~#My_Link~>
+    DELETE FROM ~#@table~
+    WHERE id = ~&id~
+</~>
+
+<~My_Query.adminCopy link=~#My_Link~>
+    INSERT INTO ~#@table~
+        (`ident`, `body`, `thumbnail`, `index`)
+    SELECT ~&newId~, `body`, `thumbnail`, `index`
+    FROM ~#@table~ WHERE `ident` = ~&id~
+</~>
+
+<~My_Query.adminRemoveAll link=~#My_Link~>
+    DELETE FROM ~#@table~
+    WHERE ident = ~&id~
+</~>

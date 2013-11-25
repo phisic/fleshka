@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/1300/fleshka.ru/trunk/fleshka.ru/modules/Mail
+END
+OrderComment.zzMail
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/1300/fleshka.ru/trunk/fleshka.ru/modules/Mail/OrderComment.zzMail
+END
+OrderCreated.zzMail
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/1300/fleshka.ru/trunk/fleshka.ru/modules/Mail/OrderCreated.zzMail
+END
+NewOrder.zzMail
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/1300/fleshka.ru/trunk/fleshka.ru/modules/Mail/NewOrder.zzMail
+END

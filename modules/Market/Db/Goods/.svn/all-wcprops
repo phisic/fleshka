@@ -1,0 +1,119 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods
+END
+Pricelist.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/Pricelist.zzSql
+END
+OrderFiles.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/OrderFiles.zzSql
+END
+OrderGoods.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/OrderGoods.zzSql
+END
+Texts.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/Texts.zzSql
+END
+Catalog.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/Catalog.zzSql
+END
+Order.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/Order.zzSql
+END
+Goods.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/Goods.zzSql
+END
+Userphotos.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/Userphotos.zzSql
+END
+Photos.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/Photos.zzSql
+END
+News.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/News.zzSql
+END
+Goods.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/Goods.php
+END
+OrderComments.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/OrderComments.zzSql
+END
+GoodsGroup.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/GoodsGroup.zzSql
+END
+RelCatalogFeature.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/RelCatalogFeature.zzSql
+END
+Spreadsheets.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/Spreadsheets.zzSql
+END
+RelGoodsFeature.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/RelGoodsFeature.zzSql
+END
+Feature.zzSql
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/Feature.zzSql
+END
+GoodsGroup.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/GoodsGroup.php
+END
+core.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/1234/fleshka.ru/trunk/fleshka.ru/modules/Market/Db/Goods/core.php
+END

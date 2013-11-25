@@ -1,0 +1,30 @@
+<~Config_Link />
+
+<~O.joinOrderGoods>~#@table~ order_goods</~>
+
+/*
+    CREATE TABLE `goods`.`ordergoods` (
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    `order_id` INT NOT NULL ,
+    `goods_id` INT NOT NULL ,
+    INDEX ( `order_id` )
+    ) ENGINE = InnoDB;
+*/
+
+<~My_Query.loadOrderGoods link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    WHERE order_id = ~&order_id~
+</~>
+
+<~My_Query.addOrderGoods link=~#My_Link~>
+    INSERT INTO ~#@table~
+    (`order_id`, `goods_id`)
+    VALUES
+    <~Each_Value glue="," source=~$goods~>(~&order_id~, ~@value~)</~>
+</~>
+
+<~My_Query.removeOrderGoods link=~#My_Link~>
+    DELETE FROM ~#@table~
+    WHERE `order_id` = ~&order_id~ AND `goods_id` in ~&goods~
+</~>
+

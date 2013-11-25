@@ -1,0 +1,32 @@
+<~Config_Link />
+
+<~My_Query.adminList link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    WHERE self.ident = ~&id~
+</~>
+
+<~My_Query.adminLoad link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+
+<~My_Query.adminUpdate link=~#My_Link~>
+    UPDATE ~#@self~
+    SET
+        `catalog` = ~&catalog~
+    WHERE self.id = ~&id~
+</~>
+
+<~Q.adminCreate>
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~
+            (`ident`, `catalog`)
+        VALUES
+            (~&id~, ~&catalog~)
+    </~>
+</~>
+
+<~My_Query.adminRemove link=~#My_Link~>
+    DELETE FROM ~#@table~
+    WHERE `id` = ~&id~
+</~>

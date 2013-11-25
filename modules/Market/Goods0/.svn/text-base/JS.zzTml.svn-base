@@ -1,0 +1,112 @@
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var tips = 0;
+
+            function colorMO(){
+                var $p = $(this).parents('li');
+                $('p img', $p).attr('src', '/p/t'+$(this).attr('ids'));
+                $('div.img', $p).css('background', 'url(/p/t'+$(this).attr('ids')+')');
+            }
+
+            function checkOrder($li){
+                var color = ($('p.color', $li).length==0)?1:$('p.color input:checked', $li).length;
+                if (color > 0){
+                    var size = $('p.order input:checked', $li).length;
+                    if (size > 0){
+                        $li.addClass('selected');
+
+                        var count = $('ul.catalog li.selected').length;
+
+                        var ending = false;
+                        ending = ending || ((count==0)?'флешек':false);
+                        ending = ending || ((count==1)?'флешку':false);
+                        ending = ending || ((count<5)?'флешки':false);
+                        ending = ending || ((count<21)?'флешек':false);
+                        ending = ending || (((count%10)==0)?'флешек':false);
+                        ending = ending || (((count%10)==1)?'флешку':false);
+                        ending = ending || (((count%10)<5)?'флешки':false);
+                        ending = ending || 'флешек';
+
+                        $('#order').show().val('Добавить '+count+' '+ending+' в запрос')
+                            .hide().show();//opera bug
+
+                        $('#tips').hide();
+                    }else{
+                        $li.removeClass('selected');
+
+                        $('#order').hide();
+
+                        $('#tips').show().html('выберите необходимый объем').insertAfter($('p.order', $li));
+                    }
+                }else{
+                    $li.removeClass('selected');
+
+                    $('#order').hide();
+
+                    $('#tips').show().html('выберите цвет').insertAfter($('p.color', $li));
+                }
+            }
+
+            $('ul.catalog li div.bgsel').mouseover(function(){
+                if ($('#order', this).length == 0)//opera fix
+                    $('#order').appendTo(this);
+                checkOrder($(this).parents('li').addClass('hover'));
+            }).mouseout(function(){
+                $(this).parents('li').removeClass('hover');
+            });
+
+            function showTips($li){
+                $('#tips').hide('fast');
+
+                tips++;
+            }
+
+            $('p.color a').mouseover(colorMO).click(function(){
+                var $li = $(this).parents('li');
+                var $p = $(this).parents('p');
+                var $div = $('div.img', $li).css('background', 'url(/p/t'+$(this).attr('ids')+')');
+
+                $(this).toggleClass('selected');
+
+                if (!$(this).hasClass('selected')){
+                    $('input', this).removeAttr('checked');
+                }else{
+                    $('input', this).attr('checked', 'checked');
+//                    $('a', $div).show();
+                }
+
+                if ($('a.selected', $p).length > 0){
+                    $('a', $p).unbind('mouseover');
+                    var p = $('p.order', $li).removeClass('hidden');
+                }else{
+  //                  $('a', $div).hide();
+                    $('a', $p).mouseover(colorMO);
+                    var p = $('p.order', $li).addClass('hidden');
+                }
+
+                checkOrder($li);
+
+                return false;
+            });
+
+            $('p.order a').click(function(){
+                $(this).toggleClass('selected');
+
+                if (!$(this).hasClass('selected')){
+                    $('input', this).removeAttr('checked');
+                }else{
+                    $('input', this).attr('checked', 'checked');
+                }
+
+                checkOrder($(this).parents('li'));
+
+                return false;
+            });
+
+            $('div.img a.dl').click(function(){
+                window.open($(this).parents('div.img').css('background-image').replace(/"/gmi, '').replace('url(', '').replace(')', '').replace('/p/t', '/p/s'), '_self');
+
+                return false;
+            });
+        });
+    </script>

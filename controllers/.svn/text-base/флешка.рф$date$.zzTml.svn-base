@@ -1,0 +1,44 @@
+<~Cache_File lifetime="86400"><~PDF>
+        <~PDF_Page author="100 заказов" title="Каталог fleshka.ru" />
+            <~PDF_Font font="Verdana" size="30" style="B" />
+            <~PDF_Text left="0" top="50" width="210" height="20" type="C">Каталог флешек</~>
+            <~PDF_Font font="Verdana" size="16" style="" />
+            <~PDF_Text left="0" top="65" width="210" height="10" type="C">за <~Market_Date year>~#@datetime~</~></~>
+            <~PDF_Img src="i/pdfheader.jpg" left="30" top="100" width="150"/>
+        <~PDF_Each.catalogs>
+            <~Market_Goods_PDF_Goods.goods !goods_id=~#PDF_Each.catalogs$id~><@PDF_>
+                <~EachCounter.g mod="6">
+                    <~Page />
+                    <~Font font="Verdana" size="22" style="B" />
+                    <~Text left="0" top="10" width="210" height="10" type="C">~#PDF_Each.catalogs$name~</~>
+                </~>
+
+                <~Font font="Verdana" size="15" />
+                <~Text left=~#PDF_EachCounter.g$left1~ top=~#PDF_EachCounter.g$top1~ width="90" height="10">~#PDF_Each.goods$name~ #~#PDF_Each.goods$id~</~>
+                <~Font font="Verdana" size="11" />
+                <~Text left=~#PDF_EachCounter.g$left1~ top=~#PDF_EachCounter.g$top2~ width="90" height="10">Цвета:</~>
+                <@_><~Market_Goods_PDF_GoodsColors left=~#PDF_EachCounter.g$left2~ top=~#PDF_EachCounter.g$top3~ !goods_id=~#PDF_Each.goods$id~>
+                        <~PDF_FillRect top=~#PDF_EachCounter.g$top3~ width="3" height="3" color="#FF00FF" />
+                    </~>
+                    <~Market_Goods_PDF_ImageLink !goods_id=~#PDF_Each.goods$id~><~PDF_Img left=~#PDF_EachCounter.g$left1~ top=~#PDF_EachCounter.g$top4~ width="70"/></~>
+                </@>
+            </@></~>
+            <~Market_Goods_PDF_Goods.price !goods_id=~#PDF_Each.catalogs$id~><@PDF_>
+                <~EachCounter.p mod="6">
+                    <~Page />
+                    <~Font font="Verdana" size="22" style="B" />
+                    <~Text left="0" top="10" width="210" height="10" type="C">~#PDF_Each.catalogs$name~</~>
+                </~>
+
+                <~Font font="Verdana" size="15" />
+                <~Text left=~#PDF_EachCounter.p$left1~ top=~#PDF_EachCounter.p$top1~ width="90" height="10">~#PDF_Each.price$name~ #~#PDF_Each.price$id~</~>
+                <~Font font="Verdana" size="11" />
+                <~Text left=~#PDF_EachCounter.p$left1~ top=~#PDF_EachCounter.p$top2~ width="90" height="10">Цвета:</~>
+                <@_><~Market_Goods_PDF_GoodsColors left=~#PDF_EachCounter.p$left2~ top=~#PDF_EachCounter.p$top3~ !goods_id=~#PDF_Each.price$id~>
+                        <~PDF_FillRect top=~#PDF_EachCounter.p$top3~ width="3" height="3" color="#FF00FF" />
+                    </~>
+                    <~Market_Goods_PDF_ImageLink !goods_id=~#PDF_Each.price$id~><~PDF_Img left=~#PDF_EachCounter.p$left1~ top=~#PDF_EachCounter.p$top4~ width="70"/></~>
+                </@>
+            </@></~>
+        </~>
+    </~></~>

@@ -1,0 +1,280 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Специальное предложение fleshka.ru</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="интернет магазин, инет магазин" />
+    <meta name="description" content="Специальное предложение магазина fleshka.ru для покупки товаров через интернет, Category: Shop" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/jquery.datepicker.js"></script>
+    <link REL="StyleSheet" type="text/css" href="/css/main.css" />
+    <link REL="StyleSheet" type="text/css" href="/css/datepicker.css" />
+    <script type="text/javascript">
+        function order(){
+            var colors = [], sizes = [];
+
+            this.getColors = function(){
+                colors = $.cookie('colors').split('_');
+            }
+            
+            this.getSizes = function(){
+                sizes = $.cookie('sizes').split('_');
+            }
+            
+            this.setColors = function(){
+                $.cookie('colors', colors.join('_'), { expires: 1, path: '/'});
+            }
+            
+            this.setSizes = function(){
+                $.cookie('sizes', sizes.join('_'), { expires: 1, path: '/'});
+            }
+            
+            this.indexColor = function(need){
+                for (var i = 0; i<colors.length; i++)
+                    if (colors[i] == need)
+                        return i;
+                
+                return -1;
+            }
+            
+            this.indexSize = function(need){
+                for (var i = 0; i<sizes.length; i++)
+                    if (sizes[i] == need)
+                        return i;
+                
+                return -1;
+            }
+            
+            if ($.cookie('colors'))
+                this.getColors();
+            
+            if ($.cookie('sizes'))
+                this.getSizes();
+            
+            this.addColor = function($id){
+                if (this.indexColor($id) == -1){
+                    colors.push($id);
+                    this.setColors();
+                }
+            };
+            
+            this.removeColor = function($id){
+                var idx = this.indexColor($id);
+                if (idx != -1){
+                    colors.splice(idx, 1);
+                    this.setColors();
+                }
+            };
+            
+            this.addSize = function(id, size){
+                if (this.indexSize(id+'-'+size) == -1){
+                    sizes.push(id+'-'+size);
+                    this.setSizes();
+                }
+            };
+            
+            this.removeSize = function(id, size){
+                var idx = this.indexSize(id+'-'+size);
+                
+                if (idx != -1){
+                    sizes.splice(idx, 1);
+                    this.setSizes();
+                }
+            };
+        }
+        
+        var order = new order();
+        var $testfixed ;
+
+        function helper($table, text, clas){
+            $('#helper').attr('class', '').hide().appendTo( $table );
+            $('#helper').html(text).fadeIn('fast').addClass(clas);
+        }
+
+        $(document).ready(function(){
+            $('div.flash').mouseover(function(){
+                $('div.thumbnails.show').removeClass('show');
+                
+                $('div.thumbnails', this).addClass('show');
+            });
+            
+            $('div.thumbnails img').click(function(){
+                $('img.image', $(this).parents('div.flash')).attr('src', $(this).attr('src'));
+            });
+            
+            function colorMouseOver(){}
+            
+            $('table.price.flash ul.colors li').bind('mouseover', colorMouseOver).click(function(){
+                var $box = $('div.colorbox', this);
+                $box.toggleClass('selected')
+                
+                if ($box.hasClass('selected')){
+                    colorMouseOver();
+                    
+                    $('li', $(this).parents('ul.colors')).unbind('mouseover');
+                    
+                    //add to order
+                    order.addColor($(this).data().id);
+                    
+                    var $table = $(this).parents('div.flash');
+                    
+                    if($('div.button.selected', $table).length){
+                        helper( $table , '<input type="button" value="Заказать флешки" onclick="window.open(\'/запрос/~#Market_Goods_Var$myorder~\',\'_self\')" /> &larr; вы можете задать вопрос и отправить заказ менеджеру.', 'add');
+                    }else{
+                        helper( $table , '<input type="button" value="Заказать" disabled /> Выберите интересующие вас объемы', 'selected');
+                    }
+                }else{
+                    if(!$('div.colorbox.selected', $(this).parents('ul.colors')).length){
+                        $('li', $(this).parents('ul.colors')).bind('mouseover', colorMouseOver);
+                        
+                        $('#helper').hide();
+                    }
+                    
+                    //remove from order
+                    order.removeColor($(this).data().id);
+                }
+            });
+            
+            $('table.price.flash div.button').click(function(){
+                var data = $(this).data();
+                
+                $(this).toggleClass('selected');
+                
+                if ($(this).hasClass('selected')){
+                    order.addSize(data.id, data.size);
+                    
+                    var $table = $(this).parents('div.flash');
+                    
+                    if($('div.colorbox.selected', $table).length){
+                        helper( $table , '<input type="button" value="Заказать флешки" onclick="window.open(\'/запрос/~#Market_Goods_Var$myorder~\',\'_self\')" /> &larr; вы можете задать вопрос и отправить заказ менеджеру.', 'add');
+                    }else{
+                        helper( $table , '<input type="button" value="Заказать" disabled /> Выберите интересующие вас модели', 'selected');
+                    }
+                }else{
+                    order.removeSize(data.id, data.size);
+
+                    $('#helper').hide();
+                }
+            });
+            
+            $('table.price.package ul.colors li').bind('mouseover', colorMouseOver).click(function(){
+                var $box = $('div.colorbox', this);
+                $box.toggleClass('selected')
+                
+                if ($box.hasClass('selected')){
+                    $('img.image', $(this).parents('div.flash')).attr('src', '/p/t'+$(this).data().id);
+                    
+                    $('li', $(this).parents('ul.colors')).unbind('mouseover');
+                    
+                    //add to order
+                    order.addColor($(this).data().id);
+                        
+                    var $table = $(this).parents('div.flash');
+                    order.addSize($table.data().id, 0);
+
+                    helper( $table , '<input type="button" value="Заказать упаковки" onclick="window.open(\'/запрос/~#Market_Goods_Var$myorder~\',\'_self\')" /> &larr; вы можете задать вопрос и отправить заказ менеджеру.', 'add');
+                }else{
+                    if(!$('div.colorbox.selected', $(this).parents('ul.colors')).length){
+                        $('li', $(this).parents('ul.colors')).bind('mouseover', colorMouseOver);
+                        
+                        $('#helper').hide();
+                        
+                        order.removeSize($(this).parents('div.flash').data().id, 0);
+                    }
+                    
+                    //remove from order
+                    order.removeColor($(this).data().id);
+                }
+            });
+            
+            $('ul.colorfilters li').click(function(){
+                var div = $('div.colorbox', this);
+                if (div.length){
+                    var id = div.data().id;
+                    window.open('?<~Qs color="'+id+'" !glue="&" />', '_self');
+                }else
+                    window.open('?<~Qs color !glue="&" />', '_self');
+            });
+            
+<~Market_Goods_InSearch>
+            helper($('div.flash:first'), '<input type="button" value="Заказать" disabled /> Вам нужно выбрать интересующие модели и объемы флешек', 'selected');</~>
+            
+            $testfixed = $('div.testfixed');
+            
+            window.setInterval(function(){
+                var y = window.pageYOffset?window.pageYOffset:document.documentElement.scrollTop;
+                
+                if (y > 140){
+                    if (!$testfixed.hasClass('fix'))
+                        $testfixed.addClass('fix')
+                }else{
+                    $testfixed.removeClass('fix')
+                }
+            }, 100);
+        });
+    </script>
+    <~Market_Goods_Var />
+  </head>
+  <body>
+      <div id="helper" class="small"></div>
+      <div class="center">
+          <~Market_Goods_Header />
+          <table class="main">
+              <tr>
+                  <td style="width: 212px">
+                      <div class="testfixed">
+                          <~Market_Goods_Menu />
+                          <~Market_Order_Menu />
+                      </div>
+                  <td>
+                      <div class="catalog">
+                          <h1>Специальные предложения</h1>
+                          <div class="border special">
+                                  <~Market_Goods_Empty><p>Данных моделей сейчас нет в каталоге. Выберите другую категорию.</p></~>
+                                  <~Market_Goods_Size>
+                                  <h2>~#Market_Goods_Size$header~</h2>
+                                  <p><img src="/p/special~#Market_Goods_Size$id~" alt="~#Market_Goods_Size$name~" /></p>
+                                  <p>~#Market_Goods_Size$description~</p>
+                                  <div class="flash" style="height: 120px">
+                                      <table class="price flash">
+                                      <tr class="sizes"><td style="width: 1%" rowspan="2"><ul class="colors">
+                                              <~Market_Goods_GoodsColors !goods_id=~#Market_Goods_Size$id~>
+                                              <li data-id="~$color_group~"><~Market_ImageMaker id=~$color_group~ />
+                                              </~>
+                                          </ul>
+                                          <~T test="~$pricesize2~">
+                                            <td class="odd"><~Market_Goods_SizeButton size="2" id=~#Market_Goods_Size$id~ />
+                                          </~><~T test="~$pricesize4~">
+                                            <td><~Market_Goods_SizeButton size="4" id=~#Market_Goods_Size$id~ />
+                                          </~><~T test="~$pricesize8~">
+                                            <td class="odd"><~Market_Goods_SizeButton size="8" id=~#Market_Goods_Size$id~ />
+                                          </~><~T test="~$pricesize16~">
+                                            <td><~Market_Goods_SizeButton size="16" id=~#Market_Goods_Size$id~ />
+                                          </~><~T test="~$pricesize32~">
+                                            <td class="odd"><~Market_Goods_SizeButton size="32" id=~#Market_Goods_Size$id~ />
+                                          </~>
+                                          <tr>
+                                          <~T test="~$pricesize2~">
+                                            <td class="odd">&nbsp;&nbsp;~#Market_Goods_Size$pricesize2~ руб
+                                          </~><~T test="~$pricesize4~">
+                                            <td>&nbsp;&nbsp;~#Market_Goods_Size$pricesize4~ руб
+                                          </~><~T test="~$pricesize8~">
+                                            <td class="odd">&nbsp;&nbsp;~#Market_Goods_Size$pricesize8~ руб
+                                          </~><~T test="~$pricesize16~">
+                                            <td>&nbsp;&nbsp;~#Market_Goods_Size$pricesize16~ руб
+                                          </~><~T test="~$pricesize32~">
+                                            <td class="odd">&nbsp;&nbsp;~#Market_Goods_Size$pricesize32~ руб
+                                          </~>
+                                      </table>
+                                  </div>
+                                  </~>
+                              </div>
+                          </div>
+                      </div>
+          </table>
+          <~Market_Footer />
+      </div>
+      <~Market_YMetrica />
+  </body>
+</html>

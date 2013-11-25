@@ -1,0 +1,42 @@
+<~Config_Link />
+
+<~O.joinNews>~#@table~ `news`</~>
+
+<~My_Query.loadNews link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    ORDER BY `date_created` DESC
+    LIMIT 3
+</~>
+
+<~My_Query.loadById link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    WHERE `id` = ~&id~
+    LIMIT 1
+</~>
+
+<~My_Query.loadNewsAdmin link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    ORDER BY `date_created` DESC
+</~>
+
+<~Q.insertNew>
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~
+        (`news`)
+        VALUES
+        (~&news~)
+    </~>
+    <~My_Query link=~#My_Link~>
+        SELECT LAST_INSERT_ID() as last_id;
+    </~>
+</~>
+
+<~My_Query.updateById link=~#My_Link~>
+    UPDATE ~#@table~ SET `news` = ~&news~
+    WHERE `id` = ~&id~
+</~>
+
+<~My_Query.removeNews link=~#My_Link~>
+    DELETE FROM ~#@table~
+    WHERE `id` = ~&id~
+</~>

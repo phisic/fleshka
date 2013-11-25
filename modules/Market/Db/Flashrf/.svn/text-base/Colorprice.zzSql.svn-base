@@ -1,0 +1,96 @@
+<~Config_Link />
+
+<~My_Query_Join.adminList join="color_html" group="color_group" link=~#My_Link~>
+    SELECT self.*, colors.html as color_html, self.color_group as id FROM ~#@self~
+    JOIN ~#@base~.colors as colors ON colors.id = self.color_id
+    WHERE self.ident = ~&id~
+</~>
+
+<~My_Query.adminListValue link=~#My_Link~>
+    SELECT self.ident as `id`, self.id as `selecteditemid` FROM ~#@self~ WHERE self.id = ~&id~
+</~>
+
+<~My_Query.adminLoad.adminCheck link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+
+<~My_Query.adminUpdate link=~#My_Link~>
+    UPDATE ~#@self~
+    SET
+        `color_id` = ~&color_id~
+    WHERE self.id = ~&id~
+</~>
+
+<~Q.adminCreate>
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~
+            (`color_id`, `ident`)
+        VALUES
+            (~&color_id~, ~&id~)
+    </~>
+    <~My_Query link=~#My_Link~>
+        UPDATE ~#@table~
+        SET `color_group` = `id`
+        WHERE `id` = LAST_INSERT_ID()
+    </~>
+    <~My_Query link=~#My_Link~>
+        SELECT LAST_INSERT_ID() as `id`, ~&id~ as `ident`
+    </~>
+</~>
+
+<~Q.adminRemove>
+    <~My_Query link=~#My_Link~>
+        DELETE FROM ~#@table~
+        WHERE `color_group` = ~&id~
+    </~>
+    <~My_Query link=~#My_Link~>
+        DELETE FROM ~#@base~.photos
+        WHERE `ident` = ~&id~
+    </~>
+</~>
+
+<~My_Query_Join.colorsList join="color_html" group="id" link=~#My_Link~>
+    SELECT self.*, colors.html as color_html FROM ~#@self~
+    JOIN flashrf.`colors` as colors ON colors.id = self.color_id
+    WHERE self.color_group = ~&id~
+</~>
+
+<~My_Query.colorsListValue link=~#My_Link~>
+    SELECT self.`color_group` as `id`, self.id as `selecteditemid` FROM ~#@self~ WHERE self.id = ~&id~
+</~>
+
+<~My_Query.colorsLoad.adminCheck link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    WHERE self.id = ~&id~ LIMIT 1
+</~>
+
+<~My_Query.colorsUpdate link=~#My_Link~>
+    UPDATE ~#@self~
+    SET
+        `color_id` = ~&color_id~
+    WHERE self.id = ~&id~
+</~>
+
+<~Q.colorsCreate>
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~
+            (`color_id`, `ident`, `color_group`)
+        VALUES
+            (~&color_id~, ~&ident~, ~&id~)
+    </~>
+    <~My_Query link=~#My_Link~>
+        SELECT LAST_INSERT_ID() as `id`
+    </~>
+</~>
+
+<~My_Query.colorsRemove link=~#My_Link~>
+    DELETE FROM ~#@table~
+    WHERE `id` = ~&id~
+</~>
+
+<~My_Query_Join.colorsByGoodsIds join="color_html" group="color_group" link=~#My_Link~>
+    SELECT self.*, colors.html as color_html FROM ~#@self~
+    JOIN ~#@base~.colors as colors ON colors.id = self.color_id
+    WHERE self.ident in ~&ids~
+</~>

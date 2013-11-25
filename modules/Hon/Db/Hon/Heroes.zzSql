@@ -1,0 +1,16 @@
+<~Config_Link />
+
+<~My_Query.load link=~#My_Link~>
+    SELECT * FROM ~#@self~
+    WHERE
+        <~Each_Value source=~$name~ glue=" AND ">
+        `group` in
+        (SELECT `group` FROM ~#@self~
+        WHERE `name` = '~@value~')</~>
+</~>
+
+<~My_Query.insertNew link=~#My_Link~>
+    INSERT INTO ~#@table~
+    (`name`, `group`) VALUES
+    (~&name~, ~&group~)
+</~>

@@ -1,0 +1,77 @@
+<~Config_Link />
+<@^>-- Get parent directory for include class Market_Db_Goods_RelGoodsFeature
+    <~RelGoodsFeature.relgf />
+    <~Order.order />
+</@>
+
+<~O.joinGoods>~#@table~ goods</~>
+
+<~Q.insertGoods>
+    <~My_Query link=~#My_Link~>
+        INSERT INTO ~#@table~
+        (<~T test=~$price~>`price`,</~> `goodsgroup_id`, `chserial`<~T test=~$comments~>, `comments`</~>)
+        VALUES
+        (<~T test=~$price~>~&price~,</~> ~&goodsgroup_id~, ''<~T test=~$comments~>, ~&comments~</~>);
+    </~>
+    <~My_Query.last link=~#My_Link~>
+        SELECT LAST_INSERT_ID() as goods_id;
+    </~>
+    <~Q_Each source="$features">
+        <~Q_Forward query=~#zzSql.relgf}.addRelation~ !goods_id=~^Q}.last$goods_id~ !feature_id=~$id~ />
+    </~>
+</~>
+
+<~My_Query.updateGoodsGroup link=~#My_Link~>
+    UPDATE ~#@table~ SET `goodsgroup_id` = ~&goodsgroup_id~ WHERE id in ~&ids~
+</~>
+
+<~Q.regroup>
+    <~My_Query.last link=~#My_Link~>
+        SELECT goodsgroup_id FROM ~#@self~ WHERE self.id in ~&ids~ LIMIT 1
+    </~>
+    <~My_Query link=~#My_Link~>
+        UPDATE ~#@table~ SET `goodsgroup_id` = ~^Q Query.last&goodsgroup_id~ WHERE id in ~&ids~
+    </~>
+</~>
+
+<~Q.editGoods>
+    <~_ChangePrice link=~#My_Link~>
+        UPDATE ~#@table~
+        SET `id` = `id`
+        <~H.price.eq>, `price` = ~&price~</~>
+        <~H.price.plus>, `price` = <~H.percent>`price` + `price` * ~&price~</~><~H.number>`price` + ~&price~</~></~>
+        <~H.price.minus>, `price` = <~H.percent>`price` - `price` * ~&price~</~><~H.number>`price` - ~&price~</~></~>
+        WHERE id in ~&ids~
+    </~>
+    <~Q_Each_Value.ids source="$ids">
+        <~Q_Each_Value.feature source="$feature">
+            <~Q_Forward query=~#Query.removeRelationBySeparateId~ !goods_id="~^.ids$value~" !feature_id="~^.feature$value~" />
+            <~Q_Forward query=~#Query.addRelation~ !goods_id="~^.ids$value~" !feature_id="~^.feature$value~" />
+        </~>
+    </~>
+</~>
+
+<~Q.getGoods>
+    <~My_Query link=~#My_Link~>
+        SELECT * FROM ~#@table~
+    </~>
+</~>
+
+<~Q.getGoodsByFilter>
+    <~My_Query link=~#My_Link~>
+        SELECT self.*
+        FROM ~#@self~
+        WHERE 
+        <~Each_Value glue=" AND " source="$filter">self.id in (
+            ~#Query.filterFeatures|Set !feature="~^Each@value~"~
+        )</~>
+    </~>
+</~>
+
+<~My_Query_Join.getGoodsByIds group="id" join="features" link=~#My_Link~>
+    SELECT self.*, feature.type, feature.value, feature.id as type_id
+    FROM ~#@self~
+    JOIN ~#O.joinRelGoodsFeature~ ON relgoodsfeature.goods_id = self.id
+    JOIN ~#O.joinFeature~ ON feature.id = relgoodsfeature.feature_id
+    WHERE self.id in ~&ids~
+</~>

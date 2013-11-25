@@ -1,0 +1,66 @@
+<~Config_Link />
+<@^>-- Get parent directory for include class Market_Db_Goods_Feature
+    <~Feature.feature />
+</@>
+
+<~O.joinRelGoodsFeature>~#@table~ relgoodsfeature</~>
+
+<~My_Query.addRelation link=~#My_Link~>
+    INSERT INTO ~#@table~ (`goods_id`, `feature_id`) VALUES (~&goods_id~, ~&feature_id~)
+</~>
+
+<~My_Query.removeRelationBySeparateId link=~#My_Link~>
+    DELETE FROM ~#@table~
+    WHERE `goods_id` = ~&goods_id~
+    AND `feature_id` in (~#Query.getFeatureTypeId|Set !id="~^$feature_id~"~)
+</~>
+
+<~My_Query.removeRelationByGoodsId link=~#My_Link~>
+    DELETE FROM ~#@table~ WHERE `goods_id` = ~&goods_id~
+</~>
+
+<~Q.addRelationsByIds>
+    <~Q_Each source="$ids">
+        <~My_Query link=~#My_Link~>
+            INSERT INTO ~#@table~ (`goods_id`, `feature_id`) VALUES (~&goods_id~, ~&feature_id~)
+        </~>
+    </~>
+</~>
+
+<~My_Query_Group.getFeaturesByIds link=~#My_Link~ group="goods_id">
+    SELECT self.id, self.goods_id, self.feature_id, feature.type, feature.html, feature.value
+    FROM ~#@self~
+    JOIN ~#O.joinFeature~ ON feature.id = self.feature_id
+    WHERE `goods_id` in ~&ids~
+</~>
+
+<~My_Query_Group.getFeaturesByGroupIds link=~#My_Link~ group="goodsgroup_id">
+    SELECT self.id, self.goods_id, self.feature_id, feature.type, feature.value
+    FROM ~#@self~
+    JOIN ~#O.joinFeature~ ON feature.id = self.feature_id
+    WHERE `goodsgroup_id` in ~&ids~
+</~>
+
+<~My_Query_Join.getFeaturesGroup link=~#My_Link~ group="type" join="values">
+    SELECT feature.id, feature.type, feature.value, count(self.goods_id) as count
+    FROM ~#@self~
+    RIGHT JOIN ~#O.joinFeature~ ON feature.id = self.feature_id
+    GROUP BY feature.id
+</~>
+
+<~My_Query.filterFeatures link=~#My_Link~>
+    SELECT goods_id
+    FROM ~#@self~
+    WHERE `feature_id` = ~$feature~
+</~>
+
+<~Q.removeFeatureById>
+    <~My_Query link=~#My_Link~>
+        DELETE FROM ~#@table~ WHERE feature_id = ~&id~
+    </~>
+    <~My_Query link=~#My_Link~>
+        ~#Query.removeFeature|Set !id="~^$id~"~
+    </~>
+</~>
+
+
