@@ -34,7 +34,7 @@
 <head>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/main.css" />
 
 	<title>Админка</title>
@@ -66,17 +66,17 @@ $this->widget('bootstrap.widgets.TbNavbar', array(
 				)),
 				//array('label'=>'Пользователы', 'url' => Yii::app()->urlManager->createUrl('/admin/users')),
 				array('label'=>'Контент', 'items'=> array(
-					array('label'=>'Новости', 'url' => Yii::app()->urlManager->createUrl('/news'), 'active' => (Yii::app()->getGlobalState('top_menu')=='news'?true:false)),
+					array('label'=>'Новости', 'url' => Yii::app()->urlManager->createUrl('/news/index'), 'active' => (Yii::app()->getGlobalState('top_menu')=='news'?true:false)),
 					array('label'=>'Контакты', 'url'=>Yii::app()->urlManager->createUrl('/admin/contacts'), 'active' => (Yii::app()->getGlobalState('top_menu')=='contacts'?true:false)),
 					array('label'=>'Телефоны', 'url'=>Yii::app()->urlManager->createUrl('/admin/phones'), 'active' => (Yii::app()->getGlobalState('top_menu')=='phones'?true:false)),
 					array('label'=>'Мета контрол', 'url'=>Yii::app()->urlManager->createUrl('/admin/meta_control'), 'active' => (Yii::app()->getGlobalState('top_menu')=='meta_control'?true:false)),
 					array('label'=>'Email шаблоны', 'url'=>Yii::app()->urlManager->createUrl('/admin/email_template'), 'active' => (Yii::app()->getGlobalState('top_menu')=='email_template'?true:false)),
-				)),				
+				)),
 				array('label'=>'Условия продажи', 'items'=> array(
 				     array('label'=>'Условия продажи', 'url'=>Yii::app()->urlManager->createUrl('/admin/selling_rules'), 'active' => (Yii::app()->getGlobalState('top_menu')=='selling_rules'?true:false)),
 				     array('label'=>'Стандартный договор', 'url'=>Yii::app()->urlManager->createUrl('/admin/dogovor'), 'active' => (Yii::app()->getGlobalState('top_menu')=='dogovor'?true:false)),
 				     array('label'=>'Презентация', 'url'=>Yii::app()->urlManager->createUrl('/admin/presentation'), 'active' => (Yii::app()->getGlobalState('top_menu')=='presentation'?true:false)),
-				)),				
+				)),
 				array('label'=>'Реклама', 'url'=>Yii::app()->urlManager->createUrl('/advertising'), 'active' => (Yii::app()->getGlobalState('top_menu')=='advertising'?true:false)),
 			),
 		),
