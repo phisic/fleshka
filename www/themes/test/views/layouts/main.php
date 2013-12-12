@@ -208,9 +208,9 @@ unset($SxGeo);
 				// skip catalog if its'nt printable
 				if ($print_catalog==false) continue;
 
-				if ($ind==round($count_of_catalogs/2)) {
+				/*if ($ind==round($count_of_catalogs/2)) {
 					echo '<div style="clear:both;"></div>';
-				}
+				}*/
 
 				// check if category selected before
 				if (Yii::app()->session['catalog_id']==$catalog->id) {
@@ -242,7 +242,7 @@ unset($SxGeo);
 
 				echo '<div class="items '.(Yii::app()->session['catalog_id']==$catalog->id?'items_selected':'').'"
 						onclick="location.href=\''.Yii::app()->urlManager->createUrl('/site/all_item', array('id' => $catalog->id, 'type' => 'in_stock')).'\';">';
-					echo '<center><img style="margin-top:2px;width:110px;" src="'.Yii::app()->theme->baseUrl.'/img/flash/'.$catalog->image.'" alt="'.$catalog->name.'"/></center>';
+					echo '<center><img style="margin-top:2px;" src="'.Yii::app()->theme->baseUrl.'/img/flash/'.$catalog->image.'" alt="'.$catalog->name.'"/></center>';
 					echo '<div class="top_menu_text">'.$catalog->name.'</div>';
 				echo '</div>';
 

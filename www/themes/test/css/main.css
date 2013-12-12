@@ -6,14 +6,14 @@
 }
 
 /*
-Back to top button 
+Back to top button
 */
 
 #back-top {
     position: fixed;
     bottom: 10px;
-    left: 10px;  
-    z-index: 3000;  
+    left: 10px;
+    z-index: 3000;
 }
 #back-top a {
     width: 108px;
@@ -70,7 +70,7 @@ Back to top button
     border:1px solid #ededed;
     z-index:1100;
     border-radius: 5px;
-    background: white;    
+    background: white;
     right: 20px;
     top: 370px;
 }
@@ -119,7 +119,7 @@ Back to top button
     background: #dbe1ed;
 }
 
-.head_text_selected 
+.head_text_selected
 {
     color: black;
     background: #3986BC;
@@ -145,11 +145,15 @@ Back to top button
     float:left;
     margin: 10px 5px 5px 10px;
     width: 120px;
-    height: 110px;
+    min-height: 150px;
     cursor: pointer;
-    /*border:1px solid;*/
+    display:block;
+ /*   border:1px solid;*/
 }
-
+.top_menu .items img
+{
+height:100px;
+	}
 .top_menu_text
 {
     margin-top: 3px;
@@ -296,8 +300,8 @@ Back to top button
 
 .right_panel
 {
-    float: left; 
-    width: 270px; 
+    float: left;
+    width: 270px;
     margin-left: -100%;
 }
 
@@ -342,7 +346,7 @@ Back to top button
     font-size: 12px;
     font-family: arial;
     padding: 4px 8px;
-    width: auto;    
+    width: auto;
 }
 
 .single_fleshka {
