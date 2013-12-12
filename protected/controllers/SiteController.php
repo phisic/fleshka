@@ -38,7 +38,7 @@ class SiteController extends Controller
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 
-		// new flash		
+		// new flash
 		// $criteria = new CDbCriteria;
 		// $criteria->condition = 'trash=0';
 		// $criteria->order = 'id DESC';
@@ -58,7 +58,7 @@ class SiteController extends Controller
 
 		Yii::app()->session['type'] = 'in_stock';
 		Yii::app()->session['catalog_id'] = 1;
-		
+
 		$this->render('index', array(
 			'new_items' => $new_items,
 			'popular_items' => $popular_items
@@ -99,7 +99,7 @@ class SiteController extends Controller
 			} else {
 
 				//$word = ucfirst(mb_strtolower($id, mb_detect_encoding($id)));
-				//$word = ucfirst($id);			
+				//$word = ucfirst($id);
 				$word = mb_convert_case($search, MB_CASE_TITLE, 'UTF-8');
 
 				$sql = 'select descriptionsize.id as my_id from descriptionsize, `search`
@@ -192,7 +192,7 @@ class SiteController extends Controller
 			case 'in_stock':
 				// get all fleshkas
 				$relgoodscatalogs = Relgoodscatalog::model()->with('descriptionsize')
-						->findAll(array('condition' => 'descriptionsize.trash=0 and instock=1 and catalog_id=:id', 
+						->findAll(array('condition' => 'descriptionsize.trash=0 and instock=1 and catalog_id=:id',
 							'params' => array(':id' => $id),
 							'order' => 'descriptionsize.index ASC',
 							'limit' => $limit));
@@ -200,7 +200,7 @@ class SiteController extends Controller
 				// get all upakovkas
 
 				$relgoodscatalog_upakovkas = Relgoodscatalog::model()->with('descriptionprice')
-						->findAll(array('condition' => 'descriptionprice.trash=0 and instock=1 and catalog_id=:id', 
+						->findAll(array('condition' => 'descriptionprice.trash=0 and instock=1 and catalog_id=:id',
 							'params' => array(':id' => $id),
 							'order' => 'descriptionprice.index ASC'));
 
@@ -209,30 +209,30 @@ class SiteController extends Controller
 			// na zakaz
 			case 'to_order':
 
-				// get all fleshkas			
+				// get all fleshkas
 				$relgoodscatalogs = Relgoodscatalog::model()->with('descriptionsize')
-						->findAll(array('condition' => 'descriptionsize.trash=0 and instock=0 and catalog_id=:id', 
-							'params' => array(':id' => $id), 
+						->findAll(array('condition' => 'descriptionsize.trash=0 and instock=0 and catalog_id=:id',
+							'params' => array(':id' => $id),
 							'order' => 'descriptionsize.index ASC',
 							'limit' => $limit));
 
 				// get all upakovkas
 				$relgoodscatalog_upakovkas = Relgoodscatalog::model()->with('descriptionprice')
-						->findAll(array('condition' => 'descriptionprice.trash=0 and instock=0 and catalog_id=:id', 
+						->findAll(array('condition' => 'descriptionprice.trash=0 and instock=0 and catalog_id=:id',
 							'params' => array(':id' => $id),
 							'order' => 'descriptionprice.index ASC'));
-						
+
 				break;
-			
+
 			default:
 				$relgoodscatalogs = Relgoodscatalog::model()->with('descriptionsize')
-						->findAll(array('condition' => 'descriptionsize.trash=0 and catalog_id=:id', 
-							'params' => array(':id' => $id), 
+						->findAll(array('condition' => 'descriptionsize.trash=0 and catalog_id=:id',
+							'params' => array(':id' => $id),
 							'order' => 'descriptionsize.index ASC',
 							'limit' => $limit));
 				// get all upakovkas
 				$relgoodscatalog_upakovkas = Relgoodscatalog::model()->with('descriptionprice')
-						->findAll(array('condition' => 'descriptionprice.trash=0 and catalog_id=:id', 
+						->findAll(array('condition' => 'descriptionprice.trash=0 and catalog_id=:id',
 							'params' => array(':id' => $id),
 							'order' => 'descriptionprice.index ASC'));
 
@@ -271,7 +271,7 @@ class SiteController extends Controller
 				$sql = 'select relgoodscatalog.id as my_id from relgoodscatalog, descriptionsize, colorprice
 					 	where relgoodscatalog.goods_id=descriptionsize.id
 						and colorprice.ident=descriptionsize.id
-						and catalog_id='.$id.' and trash=0 and instock=1 and color_id='.$color_id.' 
+						and catalog_id='.$id.' and trash=0 and instock=1 and color_id='.$color_id.'
 						group by relgoodscatalog.id
 						order by descriptionsize.id limit 10';
 
@@ -287,7 +287,7 @@ class SiteController extends Controller
 				$sql = 'select relgoodscatalog.id as my_id from relgoodscatalog, descriptionsize, colorprice
 					 	where relgoodscatalog.goods_id=descriptionsize.id
 						and colorprice.ident=descriptionsize.id
-						and catalog_id='.$id.' and trash=0 and instock=0 and color_id='.$color_id.' 
+						and catalog_id='.$id.' and trash=0 and instock=0 and color_id='.$color_id.'
 						group by relgoodscatalog.id
 						order by descriptionsize.id limit 10';
 
@@ -297,13 +297,13 @@ class SiteController extends Controller
 					$relgoodscatalogs[] = Relgoodscatalog::model()->findByPk($item['my_id']);
 				}
 				break;
-			
+
 			default:
 
 				$sql = 'select relgoodscatalog.id as my_id from relgoodscatalog, descriptionsize, colorprice
 					 	where relgoodscatalog.goods_id=descriptionsize.id
 						and colorprice.ident=descriptionsize.id
-						and catalog_id='.$id.' and trash=0 and color_id='.$color_id.' 
+						and catalog_id='.$id.' and trash=0 and color_id='.$color_id.'
 						group by relgoodscatalog.id
 						order by descriptionsize.id limit 10';
 
@@ -350,11 +350,11 @@ class SiteController extends Controller
 						and catalog_id='.$id.' and trash=0 and instock=1'.$where_color.
 						' group by relgoodscatalog.id
 						order by descriptionsize.id ASC limit '.$limit.', '.$this->limitAjax;*/
-				$sql ='SELECT `t`.`id` AS `my_id` FROM `relgoodscatalog` `t`  LEFT OUTER JOIN `descriptionsize` `descriptionsize` ON (`t`.`goods_id`=`descriptionsize`.`id`) 
-						WHERE (descriptionsize.trash=0 and instock=1 and catalog_id='.$id.') 
-						ORDER BY descriptionsize.index ASC 
+				$sql ='SELECT `t`.`id` AS `my_id` FROM `relgoodscatalog` `t`  LEFT OUTER JOIN `descriptionsize` `descriptionsize` ON (`t`.`goods_id`=`descriptionsize`.`id`)
+						WHERE (descriptionsize.trash=0 and instock=1 and catalog_id='.$id.')
+						ORDER BY descriptionsize.index ASC
 						LIMIT '.$limit.', '.$this->limitAjax;
-				
+
 				$items = Yii::app()->db->createCommand($sql)->query();
 
 				foreach ($items as $item) {
@@ -372,9 +372,9 @@ class SiteController extends Controller
 						' and catalog_id='.$id.' and trash=0 and instock=0'.$where_color.
 						' group by relgoodscatalog.id
 						order by descriptionsize.id ASC limit 10';*/
-				$sql ='SELECT `t`.`id` AS `my_id` FROM `relgoodscatalog` `t`  LEFT OUTER JOIN `descriptionsize` `descriptionsize` ON (`t`.`goods_id`=`descriptionsize`.`id`) 
-						WHERE (descriptionsize.trash=0 and instock=0 and catalog_id='.$id.') 
-						ORDER BY descriptionsize.index ASC 
+				$sql ='SELECT `t`.`id` AS `my_id` FROM `relgoodscatalog` `t`  LEFT OUTER JOIN `descriptionsize` `descriptionsize` ON (`t`.`goods_id`=`descriptionsize`.`id`)
+						WHERE (descriptionsize.trash=0 and instock=0 and catalog_id='.$id.')
+						ORDER BY descriptionsize.index ASC
 						LIMIT '.$limit.', '.$this->limitAjax;
 
 				$items = Yii::app()->db->createCommand($sql)->query();
@@ -384,7 +384,7 @@ class SiteController extends Controller
 				}
 
 				break;
-			
+
 			default:
 
 				/*$sql = 'select relgoodscatalog.id as my_id from relgoodscatalog, descriptionsize, colorprice
@@ -394,9 +394,9 @@ class SiteController extends Controller
 						' and catalog_id='.$id.' and trash=0'.$where_color.
 						' group by relgoodscatalog.id
 						order by descriptionsize.id ASC limit 10';*/
-				$sql ='SELECT `t`.`id` AS `my_id` FROM `relgoodscatalog` `t`  LEFT OUTER JOIN `descriptionsize` `descriptionsize` ON (`t`.`goods_id`=`descriptionsize`.`id`) 
-						WHERE (descriptionsize.trash=0 and catalog_id='.$id.') 
-						ORDER BY descriptionsize.index ASC 
+				$sql ='SELECT `t`.`id` AS `my_id` FROM `relgoodscatalog` `t`  LEFT OUTER JOIN `descriptionsize` `descriptionsize` ON (`t`.`goods_id`=`descriptionsize`.`id`)
+						WHERE (descriptionsize.trash=0 and catalog_id='.$id.')
+						ORDER BY descriptionsize.index ASC
 						LIMIT '.$limit.', '.$this->limitAjax;
 
 				$items = Yii::app()->db->createCommand($sql)->query();
@@ -407,11 +407,11 @@ class SiteController extends Controller
 
 				break;
 		}
-		
+
 		if (count($relgoodscatalogs)==0) {
 
 			echo 0;
-			
+
 		} else {
 
 			$this->renderPartial('pages/all_item_show', array('relgoodscatalogs' => $relgoodscatalogs, 'color_id' => $color_id, 'limit_ajax' => $this->limitAjax));
@@ -624,7 +624,7 @@ class SiteController extends Controller
 	public function actionColor()
 	{
 		// Content type
-		header('Content-type: image/png');	
+		header('Content-type: image/png');
 
 		$colors = unserialize($_GET['color']);
 
@@ -642,11 +642,11 @@ class SiteController extends Controller
 			$rgb = $this->HexToRGB($colors[$i]);
 
 			// Draw a white rectangle
-			imagefilledrectangle($im, 
-								$width_begin, 
-								0, 
-								($width_begin+$width_step), 
-								30, 
+			imagefilledrectangle($im,
+								$width_begin,
+								0,
+								($width_begin+$width_step),
+								30,
 								imagecolorallocate($im, $rgb['r'], $rgb['g'], $rgb['b']));
 
 			$width_begin += $width_step;
@@ -660,7 +660,7 @@ class SiteController extends Controller
 	function HexToRGB($hex) {
 		$hex = ereg_replace("#", "", $hex);
 		$color = array();
- 
+
 		if(strlen($hex) == 3) {
 			$color['r'] = hexdec(substr($hex, 0, 1) . $r);
 			$color['g'] = hexdec(substr($hex, 1, 1) . $g);
@@ -671,7 +671,7 @@ class SiteController extends Controller
 			$color['g'] = hexdec(substr($hex, 2, 2));
 			$color['b'] = hexdec(substr($hex, 4, 2));
 		}
- 
+
 		return $color;
 	}
 
@@ -758,14 +758,14 @@ class SiteController extends Controller
 			$error['address'] = '"Адрес" обязательное поле';
 		}
 
-		// 
+		//
 		if (count($error)>0) {
 
 			Yii::app()->setGlobalState('error', $error);
 
 			$this->redirect(array('site/korzinka'));
 		}
-		
+
 		$order_id = 0;
 		if (isset($_POST['order_id'])) {
 			$order_id = $_POST['order_id'];
@@ -855,7 +855,7 @@ class SiteController extends Controller
 
 	}
 
-	function save_size_colors($order_id) 
+	function save_size_colors($order_id)
 	{
 		$order_id = addslashes($order_id);
 		$order = Morder::model()->find('order_id="'.$order_id.'"');
@@ -962,7 +962,7 @@ class SiteController extends Controller
 
 	}
 
-	function get_size_colors($order_id) 
+	function get_size_colors($order_id)
 	{
 		$order_id = addslashes($order_id);
 		$order = Morder::model()->find('order_id="'.$order_id.'"');
@@ -972,7 +972,7 @@ class SiteController extends Controller
 			unset(Yii::app()->session['korzina_fleshkas']);
 			unset(Yii::app()->session['korzina_volume']);
 			unset(Yii::app()->session['korzina_color']);
-		
+
 			// get sizes to session
 
 			$sizes = $order->sizes;
@@ -1041,7 +1041,7 @@ class SiteController extends Controller
 
 	}
 
-	public function actionReply_comment() 
+	public function actionReply_comment()
 	{
 		$order_id = $_POST['order_id'];
 
@@ -1125,7 +1125,7 @@ class SiteController extends Controller
 		// echo '<br>korzina_logos<br>';
 		// print_r(Yii::app()->session['korzina_logos']);
 		// die('kk');
-
+         Yii::app()->setGlobalState('top_menu', 'korzinka');
 		$order_id = 0;
 
 		if (isset($_GET['order_id'])) {
@@ -1156,7 +1156,7 @@ class SiteController extends Controller
 
 			$fleshkas = array();
 
-			if (isset($_POST['flesh_id'])) {			
+			if (isset($_POST['flesh_id'])) {
 				$fleshkas[$_POST['flesh_id']] = 1;
 			}
 
@@ -1177,7 +1177,7 @@ class SiteController extends Controller
 				$colorprices = Colorprice::model()->findAll('id in ('.$new_colors.')');
 
 				foreach ($colorprices as $colorprice) {
-					
+
 					$fleshkas[$colorprice->ident] = 1;
 				}
 
@@ -1226,8 +1226,8 @@ class SiteController extends Controller
 		$this->send_mime_mail('Название от кого пришло - Ваше ФИО или название фирмы',
 		               'dmin@leadsyou.ru', //Ваш емайл, или куда им отвечать на письмо
 		               'adhamcoder@gmail.com, adham_uz22@mail.ru, adham_uz22@yahoo.com',  //куда письма рассылаем
-		               'UTF-8',  
-		               'KOI8-R', 
+		               'UTF-8',
+		               'KOI8-R',
 		               'Тема письма',
 		               'Я пишу письмо большое, не плохое и кривое... Прочитай его без скуки В Бате или Аутлуке.. ну и так далее.. ');
 
@@ -1259,7 +1259,7 @@ class SiteController extends Controller
 	                        $send_charset, // кодировка письма
 	                        $subject, // тема письма
 	                        $body // текст письма
-	                        ) 
+	                        )
 	{
 	  $to = $email_to;
 	  $subject = $this->mime_header_encode($subject, $data_charset, $send_charset);
@@ -1267,7 +1267,7 @@ class SiteController extends Controller
 	  if($data_charset != $send_charset) {
 	    $body = iconv($data_charset, $send_charset, $body);
 	  }
-	  
+
 	  $headers ="Content-type: text/html; charset=\"".$send_charset."\"\n";
 	  $headers .="From: $from\n";
 	  $headers .="Mime-Version: 1.0\n";
@@ -1305,7 +1305,7 @@ class SiteController extends Controller
 					}
 				}
 
-			} 
+			}
 
 			// if any managers don't participate in conversation, send email to all managers
 			if (count($email)==0) {
@@ -1334,7 +1334,7 @@ class SiteController extends Controller
 
 			$content = $email_template->content;
 
-			if ($manager_id==0) {			
+			if ($manager_id==0) {
 
 				// content of email to manager
 
@@ -1353,7 +1353,7 @@ class SiteController extends Controller
 				$content = str_replace('{LINK}', $url, $content);
 
 				$content = str_replace('{NUMBER}', $oder->id, $content);
-				
+
 			}
 
 			$emails = implode(", ", $email);
@@ -1362,12 +1362,12 @@ class SiteController extends Controller
 			$this->send_mime_mail($email_template->from_name,
 			               $email_template->from, //Ваш емайл, или куда им отвечать на письмо
 			               $emails,  //куда письма рассылаем
-			               'UTF-8',  
-			               'KOI8-R', 
+			               'UTF-8',
+			               'KOI8-R',
 			               $email_template->subject,
 			               $content);
 
-		} 
+		}
 	}
 
 	public function actionSendChatEmail()
@@ -1394,8 +1394,8 @@ class SiteController extends Controller
 		$this->send_mime_mail($chat_name,
 		               $chat_email, //Ваш емайл, или куда им отвечать на письмо
 		               $emails,  //куда письма рассылаем
-		               'UTF-8',  
-		               'KOI8-R', 
+		               'UTF-8',
+		               'KOI8-R',
 		               'Запрос из fleshka.ru',
 		               $chat_text);
 
@@ -1409,7 +1409,7 @@ class SiteController extends Controller
 
 		Yii::app()->session['logoff'] = 1;
 
-		$order_id = $_GET['order_id'];		
+		$order_id = $_GET['order_id'];
 
 		$this->redirect(array('site/manager', 'order_id' => $order_id));
 	}
@@ -1505,7 +1505,7 @@ class SiteController extends Controller
 		$result = '121';
 		$cache_key = 'key_12';
 		Yii::app()->cache->set($cache_key,$result,300);
-		echo Yii::app()->cache->get($cache_key);// always return false		
+		echo Yii::app()->cache->get($cache_key);// always return false
 	}
 
 	public function actionFixColorprice()
@@ -1539,7 +1539,7 @@ class SiteController extends Controller
 
 		$webroot = Yii::getPathOfAlias('webroot');
 
-		$type = $_GET['type'];		
+		$type = $_GET['type'];
 
 		if ($type=='in_stock') {
 
@@ -1550,7 +1550,7 @@ class SiteController extends Controller
 		} elseif ($type=='special') {
 
 			$relgoodscatalogs = Relgoodscatalog::model()->with('descriptionsize')
-					->findAll(array('condition' => 'descriptionsize.trash=0 and instock=1 and catalog_id=:id', 
+					->findAll(array('condition' => 'descriptionsize.trash=0 and instock=1 and catalog_id=:id',
 						'params' => array(':id' => 1),
 						'order' => 'descriptionsize.id ASC'));
 
@@ -1559,7 +1559,7 @@ class SiteController extends Controller
 				$goods_id = '';
 
 				foreach ($relgoodscatalogs as $relgoodscatalog) {
-					
+
 					$goods_id .= $relgoodscatalog->goods_id.',';
 				}
 
@@ -1581,7 +1581,7 @@ class SiteController extends Controller
 			// 	'fleshkas' => $fleshkas
 			// ));
 
-			// return;		
+			// return;
 
 		$file_name = $webroot.'/dogovor/pdf/'.$file;
 
@@ -1609,14 +1609,14 @@ class SiteController extends Controller
 											9,     // margin header
 											9,     // margin footer
 											'L');  // L - landscape, P - portrait
-	        
+
 			// renderPartial (only 'view' of current controller)
 			$mPDF1->WriteHTML($pdf);
 
 			// Outputs ready PDF to file
 	        $mPDF1->Output($file_name, 'F');
 
-		} 
+		}
 
 		MyClass::file_download($file_name, $file);
 
@@ -1628,9 +1628,9 @@ class SiteController extends Controller
 		$fleshka = Descriptionsize::model()->findByPk(495);
 
 		foreach ($fleshka->colorprices as $colorprice) {
-			
+
 			foreach ($colorprice->photoss as $photo) {
-				
+
 				echo '<img src="data:image/jpeg;base64, '.base64_encode( $photo->body).'"/>';
 			}
 		}
@@ -1641,25 +1641,25 @@ class SiteController extends Controller
   //       $html2pdf->WriteHTML('jjjj');
   //       $html2pdf->Output();
 
-		// return;		
+		// return;
 
         # You can easily override default constructor's params
         $mPDF1 = Yii::app()->ePdf->mpdf('', 'A5');
- 
+
         # render (full page)
         //$mPDF1->WriteHTML($this->render('index', array(), true));
- 
+
         # Load a stylesheet
         // $stylesheet = file_get_contents(Yii::getPathOfAlias('webroot.css') . '/main.css');
         // $mPDF1->WriteHTML($stylesheet, 1);
- 
+
         # renderPartial (only 'view' of current controller)
         //$mPDF1->WriteHTML($this->renderPartial('index', array(), true));
         $mPDF1->WriteHTML('this is test');
- 
+
         # Renders image
         //$mPDF1->WriteHTML(CHtml::image(Yii::getPathOfAlias('webroot.css') . '/bg.gif' ));
- 
+
         # Outputs ready PDF
 		$webroot = Yii::getPathOfAlias('webroot');
 
@@ -1687,8 +1687,8 @@ class SiteController extends Controller
 
 			header('Content-type: image/jpeg');
 
-			print $image; 
-			exit; 			
+			print $image;
+			exit;
 		}
 
 	}
@@ -1702,7 +1702,7 @@ class SiteController extends Controller
     	}
 
         $this->renderPartial('chat', array(
-        		
+
         	));
     }
 
@@ -1711,7 +1711,7 @@ class SiteController extends Controller
     	$chats = $this->get_chats();
 
 		if (count($chats)>0) {
-		
+
 			foreach($chats as $key => $chat) {
 
 				$count = $this->get_new_messages_count($chat->hash);
@@ -1719,9 +1719,9 @@ class SiteController extends Controller
 				echo '<a href="javascript:see_chat(\''.$chat->hash.'\')">user '.substr($chat->hash,-4).'</a>'.($count>0?' <span class="'.$chat->hash.'">('.$count.')</span>':'').'<br>';
 
 			}
-	
+
 		}
-    	
+
     }
 
     function get_new_messages_count($hash)
@@ -1795,7 +1795,7 @@ class SiteController extends Controller
 	    	$criteria->condition = 'hash="'.$hash.'"';
 
 	    	$criteria->order = 'lastmessagedate asc';
-	    	
+
 	    	$messages = Chatwindow::model()->findAll($criteria);
 
 	    	if (count($messages)>0) {
@@ -1859,7 +1859,7 @@ class SiteController extends Controller
 				$all_chat_window->status = 2;
 				$all_chat_window->save();
 			}
-		}    	
+		}
     }
 
     public function actionSaveWindowWidth()

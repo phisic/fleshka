@@ -10,7 +10,7 @@
 
 	<meta name="keywords" content="<?php echo  $keywords->content;?>"/>
     <meta name="description" content="<?php echo $description->content; ?>"/>
-    
+
 	<!--[if lt IE 8]>
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 	<![endif]-->
@@ -29,7 +29,7 @@
             map.setCenter(new YMaps.GeoPoint(37.751071,55.752805), 17);
             map.addControl(new YMaps.Zoom());
             map.addControl(new YMaps.TypeControl());
-            map.addControl(new YMaps.ScaleLine()); 
+            map.addControl(new YMaps.ScaleLine());
             // Создает метку в центре Москвы
             var placemark = new YMaps.Placemark(new YMaps.GeoPoint(37.751071,55.752805));
 			// Устанавливает содержимое балуна
@@ -38,7 +38,7 @@
 			//Значок метки
 			placemark.setIconContent("www.fleshka.ru");
 			// Добавляет метку на карту
-			map.addOverlay(placemark);             
+			map.addOverlay(placemark);
         }
     </script>
     <!-- /yandex map -->
@@ -53,9 +53,9 @@
 
 <body id="top">
 
-<?php 
+<?php
 
-// *** define visitors count *** 
+// *** define visitors count ***
 @session_start();
 //выделяем уникальный идентификатор сессии
 $id = session_id();
@@ -72,9 +72,9 @@ if ($id!="")
  $file = @file($base);
 
  $is_sid_in_file = 0;
- 
+
  if ($file) {
-     
+
 
     $k = 0;
     for ($i = 0; $i < sizeof($file); $i++) {
@@ -84,7 +84,7 @@ if ($id!="")
     $k++;
     }
     }
-    
+
     if (isset($ResFile)) {
 
         for ($i = 0; $i<sizeof($ResFile); $i++) {
@@ -99,10 +99,10 @@ if ($id!="")
         $fp = fopen($base, "w");
         for ($i = 0; $i<sizeof($ResFile); $i++) { fputs($fp, $ResFile[$i]); }
         fclose($fp);
-    
+
     }
  }
- 
+
  if (!$is_sid_in_file) {
   $fp = fopen($base, "a-");
   $line = $id."|".$CurrentTime."\n";
@@ -110,16 +110,16 @@ if ($id!="")
   fclose($fp);
  }
 }
-// *** /define visitors count *** 
+// *** /define visitors count ***
 
 $na_sayte = 'Сейчас на сайте: '.sizeof(file($base));
 
-include('SxGeo.php'); 
+include('SxGeo.php');
 $SxGeo = new SxGeo('SxGeoCity.dat', SXGEO_BATCH | SXGEO_MEMORY);
 
 $ip = $_SERVER['REMOTE_ADDR'];
 
-$city = $SxGeo->get($ip); 
+$city = $SxGeo->get($ip);
 
 $work_city = '';
 
@@ -156,7 +156,7 @@ unset($SxGeo);
 	<div class="reklama"></div>
 
   <!-- <div class="mid">Всегда в наличии <strong>60 000</strong> флешек</div> -->
-  <div class="clear"></div>  
+  <div class="clear"></div>
 </div>
 
 <!-- show catalog menu -->
@@ -166,7 +166,7 @@ unset($SxGeo);
 
 		<?php
 
-			$catalogs = Catalogs::model()->findAll(array('condition' => '`show`=1 and is_delete=0', 
+			$catalogs = Catalogs::model()->findAll(array('condition' => '`show`=1 and is_delete=0',
 						'order' => '`index` ASC'));
 
 			$ind = 1;
@@ -245,19 +245,19 @@ unset($SxGeo);
 					echo '<center><img style="margin-top:2px;width:110px;" src="'.Yii::app()->theme->baseUrl.'/img/flash/'.$catalog->image.'" alt="'.$catalog->name.'"/></center>';
 					echo '<div class="top_menu_text">'.$catalog->name.'</div>';
 				echo '</div>';
-				
+
 				$ind++;
 			}
 
 			// zaprosi
-			echo '<div class="items '.(Yii::app()->session['catalog_id']==0?'items_selected':'').'"
+			/*echo '<div class="items '.(Yii::app()->session['catalog_id']==0?'items_selected':'').'"
 					onclick="location.href=\''.Yii::app()->urlManager->createUrl('/site/korzinka').'\';">';
 				echo '<center><img style="margin-top:2px;" src="'.Yii::app()->theme->baseUrl.'/img/flash/orderfl.png" alt="Запрос" style="f_left" width="63"/></center>';
 				echo '<div class="top_menu_text">Запрос</div>';
 			echo '</div>';
-
+*/
 		?>
-	
+
 	</div>
 
 </div>
@@ -303,11 +303,11 @@ unset($SxGeo);
 
 				}
 
-				// zaprosi
+				/*// zaprosi
 				echo '<div class="items '.(Yii::app()->session['catalog_id']==0?'items_selected':'').'" style="height:27px;margin: 3px 10px 5px 5px;"
 					onclick="location.href=\''.Yii::app()->urlManager->createUrl('/site/korzinka').'\';">';
 					echo '<div class="top_menu_text" style="margin-top:5px;">Запрос</div>';
-				echo '</div>';
+				echo '</div>';*/
 			?>
 
 		</div>
@@ -337,13 +337,15 @@ unset($SxGeo);
 						array('label'=>'Специальные предложения', 'url'=>Yii::app()->urlManager->createUrl('/site/catalog', array('type' => 'special'))),
 						array('label'=>'В наличии', 'url'=>Yii::app()->urlManager->createUrl('/site/catalog', array('type' => 'in_stock'))),
 						array('label'=>'На заказ', 'url'=>Yii::app()->urlManager->createUrl('/site/catalog', array('type' => 'to_order'))),
-					)),								
+					)),
 					//array('label'=>'Условия продажи', 'url'=>Yii::app()->urlManager->createUrl('/site/selling_rules'), 'active' => (Yii::app()->getGlobalState('top_menu')=='selling'?true:false)),
 				    array('label'=>'Стандартный договор', 'url'=>Yii::app()->urlManager->createUrl('/site/dogovor')),
-					array('label'=>'Статьи', 'url'=> Yii::app()->urlManager->createUrl('/site/news')),					
+					array('label'=>'Статьи', 'url'=> Yii::app()->urlManager->createUrl('/site/news')),
 					array('label'=>'Скачать презентацию', 'url'=>Yii::app()->urlManager->createUrl('/site/presentation')),
 
 					array('label'=>'Контакты', 'url'=> Yii::app()->urlManager->createUrl('/site/contacts'), 'active' => (Yii::app()->getGlobalState('top_menu')=='contact'?true:false)),
+					array('label'=>'Добавить запрос', 'url'=> Yii::app()->urlManager->createUrl('/site/korzinka'), 'active' => (Yii::app()->getGlobalState('top_menu')=='korzinka'?true:false)),
+
 				),
 			),
 
@@ -361,11 +363,11 @@ unset($SxGeo);
 
 </div>
 
-	<?php 
+	<?php
 		// if(isset($this->breadcrumbs)) {
 		// 	$this->widget('zii.widgets.CBreadcrumbs', array(
 		// 		'links'=>$this->breadcrumbs,
-		// 	)); 
+		// 	));
 		// }
 	?>
 
@@ -441,11 +443,11 @@ $(function() {
 				scrollTop: 0
 			}, 800);
 			return false;
-		});	
+		});
 		$('#back-top').hide();
 
 	// if monitor wide, increase widht of top menu items
-	if ($(window).width()>1200) {	
+	if ($(window).width()>1200) {
 
 		$('.top_menu .items').css('width', '135');
 	}
@@ -473,7 +475,7 @@ $(function() {
 		}, function() {
 			$('#chat_content').html('<div class="text">Спасибо. Менеджер свяжется с вами в ближайшее время.</div>');
 		});
-		
+
 	});
 
 	// flash size checkbox button
@@ -488,7 +490,7 @@ $(function() {
 
 	// change picture on mouse over
 	$('.single_fleshka_thumb a').live("mouseover", function(){
-	
+
 		var fleshka_id = $(this).attr('fleshka_id');
 
 		$('#big_image_'+fleshka_id).html($(this).html());
@@ -542,7 +544,7 @@ $(function() {
 		  '<input type="text" name="flesh_id" value="' + the_flesh_id + '" />' +
 		  '</form>');
 		$('body').append(form);
-		$(form).submit();		
+		$(form).submit();
 
 	});
 
@@ -610,7 +612,7 @@ function check_zakazat(elem)
 
     	return true;
 
-    } 
+    }
 
     // if color not selected and volum selected, show choose color
     if ($(elem).parent().parent().find('i.icon-ok').length==0 && $(elem).parent().parent().find('.my_pressed').length>0) {
@@ -652,7 +654,7 @@ function color_mouse_over()
 				show_thumb: show_thumb
       		}, function(data) {
 				$('#show_colorprice_'+fleshka_id).html(data);
-				pics[fleshka_id+'_'+colorprice] = data;				
+				pics[fleshka_id+'_'+colorprice] = data;
 				return true;
 		});
 	} else {
@@ -660,7 +662,7 @@ function color_mouse_over()
 	  $('#show_colorprice_'+fleshka_id).html(pics[fleshka_id+'_'+colorprice]);
 
 	  return true;
-	} 			 
+	}
 
 }
 
@@ -670,7 +672,7 @@ $(window).resize(function() {
 	} else {
 		$('.reklama').show();
 	}
-});    
+});
 
 function show_reklama()
 {
@@ -693,7 +695,7 @@ var scrollingDiv = $("#moving_top_menu");
 var show_top_menu_status = 0;
 
 $(window).scroll(function(){
-    
+
     var y = $(this).scrollTop();
 //console.log($(window).height());
 console.log(y);
@@ -713,7 +715,7 @@ console.log(y);
 	    	//show_top_menu_status = 1;
 	    	//show_top_menu(show_top_menu_status);
 
-	    } 
+	    }
 	    if (y <= 340 && show_top_menu_status==1){
 
 	    	//show_top_menu_status = 0;
@@ -761,7 +763,7 @@ function show_top_menu(show)
 
 		$('#hidden_top_menu').hide();
         scrollingDiv.css('position', 'relative');
-        scrollingDiv.css('marginTop', "0px");		
+        scrollingDiv.css('marginTop', "0px");
         scrollingDiv.css('width', '104%');
 	}
 }
@@ -840,7 +842,7 @@ chat.throwMessage = function (message) {
 				chat.fetchMessages;
 				chat.entry.val('');
 			}
-		});		
+		});
 	}
 }
 

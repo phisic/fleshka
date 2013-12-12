@@ -66,7 +66,7 @@ $this->widget('bootstrap.widgets.TbNavbar', array(
 				)),
 				//array('label'=>'Пользователы', 'url' => Yii::app()->urlManager->createUrl('/admin/users')),
 				array('label'=>'Контент', 'items'=> array(
-					array('label'=>'Новости', 'url' => Yii::app()->urlManager->createUrl('/news/index'), 'active' => (Yii::app()->getGlobalState('top_menu')=='news'?true:false)),
+					array('label'=>'Статьи', 'url' => Yii::app()->urlManager->createUrl('/news/index'), 'active' => (Yii::app()->getGlobalState('top_menu')=='news'?true:false)),
 					array('label'=>'Контакты', 'url'=>Yii::app()->urlManager->createUrl('/admin/contacts'), 'active' => (Yii::app()->getGlobalState('top_menu')=='contacts'?true:false)),
 					array('label'=>'Телефоны', 'url'=>Yii::app()->urlManager->createUrl('/admin/phones'), 'active' => (Yii::app()->getGlobalState('top_menu')=='phones'?true:false)),
 					array('label'=>'Мета контрол', 'url'=>Yii::app()->urlManager->createUrl('/admin/meta_control'), 'active' => (Yii::app()->getGlobalState('top_menu')=='meta_control'?true:false)),
