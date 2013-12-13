@@ -51,7 +51,7 @@ if (isset($show_hints)) {
 				<li>300 шт</li>
 				<li>500 шт</li>
 				<li><div>под заказ</div></li>
-				<li><div>в наличии</div></li>			
+				<li><div>в наличии</div></li>
 			<?php else : ?>
 				<li>Цена</li>
 				<li><div>в наличии</div></li>
@@ -94,7 +94,7 @@ if (isset($show_hints)) {
 						'show_thumb' => 1
 					));
 				?>
-			</div>		
+			</div>
 		</div>
 
 		<!-- fleshka colors -->
@@ -105,7 +105,7 @@ if (isset($show_hints)) {
 
 				<?php if (count($upakovka->colorprices[$key]->photoss)>0) : ?>
 
-					<?php 
+					<?php
 						// defile colors
 						// define more colors in single item
 						$color_ = array();
@@ -118,7 +118,7 @@ if (isset($show_hints)) {
 						} else {
 							$pechat = 1;
 						}
-						
+
 						foreach($upakovka->colorprices as $key1 => $color1) {
 
 							if ($key==$key1) continue;
@@ -144,7 +144,7 @@ if (isset($show_hints)) {
 
 						} else {
 
-							$pass_array = serialize($color_);
+							$pass_array = $pass_array = base64_encode(serialize($color_));
 
 							$my_color = 'url('.Yii::app()->createUrl('site/color', array('color' => $pass_array)).')';
 
@@ -155,7 +155,7 @@ if (isset($show_hints)) {
 
 						<div class="my_color_icon"
 								fleshka_id="<?php echo $upakovka->id; ?>"
-								mycolorprice="<?php echo $key; ?>" 
+								mycolorprice="<?php echo $key; ?>"
 								colorprice_id="<?php echo $color->id;?>"
 								width_picture="<?php echo $width_picture; ?>"
 								height_picture="<?php echo $height_picture; ?>"
@@ -172,7 +172,7 @@ if (isset($show_hints)) {
 				<?php endif;?>
 
 			<?php endforeach; ?>
-			
+
 		</div>
 
 		<?php if ($upakovka->is_custom_text==0) : ?>
@@ -195,7 +195,7 @@ if (isset($show_hints)) {
 						<div class="my_cost_div"><?php echo $price;?> руб</div>
 
 					<?php endif; ?>
-							
+
 				</div>
 
 				<?php if (!$upakovka->is_special()) : ?>
@@ -205,7 +205,7 @@ if (isset($show_hints)) {
 
 						<?php if ($upakovka->price>0): ?>
 
-							<?php 
+							<?php
 								if ($price - $price300>0) {
 
 									$price -= $price300;
@@ -215,7 +215,7 @@ if (isset($show_hints)) {
 							<div class="my_cost_div"><?php echo $price; ?> руб</div>
 
 						<?php endif; ?>
-					
+
 					</div>
 
 					<!-- 500 шт -->
@@ -223,7 +223,7 @@ if (isset($show_hints)) {
 
 						<?php if ($upakovka->price>0): ?>
 
-							<?php 
+							<?php
 								if ($price - $price500>0) {
 
 									$price -= $price500;
@@ -233,7 +233,7 @@ if (isset($show_hints)) {
 							<div class="my_cost_div"><?php echo $price; ?> руб</div>
 
 						<?php endif; ?>
-					
+
 					</div>
 
 					<!-- podzakaz -->
@@ -241,7 +241,7 @@ if (isset($show_hints)) {
 
 						<?php if ($upakovka->price>0): ?>
 
-							<?php 
+							<?php
 								if ($price - $price_zakaz>0) {
 
 									$price -= $price_zakaz;
@@ -251,7 +251,7 @@ if (isset($show_hints)) {
 							<div class="my_cost_div"><?php echo $price; ?> руб</div>
 
 						<?php endif; ?>
-					
+
 					</div>
 
 				<?php endif; ?>
@@ -264,15 +264,15 @@ if (isset($show_hints)) {
 						<div class="my_cost_div"><?php echo ($upakovka->count>0)?$upakovka->count:''; ?></div>
 
 					<?php endif; ?>
-				
+
 				</div>
 
 			</div>
 
 		<?php else : ?>
 
-			<div class="div_prices">		
-				
+			<div class="div_prices">
+
 				<?php echo nl2br($upakovka->custom_text); ?>
 
 			</div>
@@ -302,12 +302,12 @@ $(function() {
 		// if it special item, put special logo
 		$('#parent_colorprice_<?php echo $upakovka->id; ?>').append('<img style="position:absolute;top:2px;left:260px;" src="<?php echo Yii::app()->theme->baseUrl; ?>/img/aksiya.gif"/>');
 
-	<?php else : ?>	
+	<?php else : ?>
 
 		<?php if ($upakovka->is_new==1) : ?>
 			$('#parent_colorprice_<?php echo $upakovka->id; ?>').append('<img style="position:absolute;top:2px;left:260px;" src="<?php echo Yii::app()->theme->baseUrl; ?>/img/new.gif"/>');
 		<?php endif; ?>
 
-	<?php endif; ?>		
+	<?php endif; ?>
 });
 </script>

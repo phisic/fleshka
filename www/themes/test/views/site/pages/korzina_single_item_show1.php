@@ -43,7 +43,7 @@
 						'show_thumb' => 0
 					));
 				?>
-			</div>		
+			</div>
 		</div>
 
 		<!-- fleshka colors -->
@@ -55,7 +55,7 @@
 
 					<?php if (count($upakovka->colorprices[$key]->photoss)>0) : ?>
 
-						<?php 
+						<?php
 							// defile colors
 							// define more colors in single item
 							$color_ = array();
@@ -68,7 +68,7 @@
 							} else {
 								$pechat = 1;
 							}
-							
+
 							foreach($upakovka->colorprices as $key1 => $color1) {
 
 								if ($key==$key1) continue;
@@ -94,7 +94,7 @@
 
 							} else {
 
-								$pass_array = serialize($color_);
+								$pass_array = $pass_array = base64_encode(serialize($color_));
 
 								$my_color = 'url('.Yii::app()->createUrl('site/color', array('color' => $pass_array)).')';
 
@@ -123,9 +123,9 @@
 					<?php endif;?>
 
 				<?php endforeach; ?>
-				
+
 			<?php endif; ?>
-			
+
 		</div>
 
 		<br/>
