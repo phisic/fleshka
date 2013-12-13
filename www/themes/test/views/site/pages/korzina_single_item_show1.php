@@ -94,7 +94,7 @@
 
 							} else {
 
-								$pass_array = $pass_array = base64_encode(serialize($color_));
+							 $pass_array = base64_encode(serialize($color_));
 
 								$my_color = 'url('.Yii::app()->createUrl('site/color', array('color' => $pass_array)).')';
 
