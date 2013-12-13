@@ -93,7 +93,7 @@ if (isset($show_hints)) {
 						'show_thumb' => 1
 					));
 				?>
-			</div>		
+			</div>
 		</div>
 
 		<!-- fleshka colors -->
@@ -104,7 +104,7 @@ if (isset($show_hints)) {
 
 				<?php if (count($fleshka->colorprices[$key]->photoss)>0) : ?>
 
-					<?php 
+					<?php
 						// defile colors
 						// define more colors in single item
 						$color_ = array();
@@ -117,7 +117,7 @@ if (isset($show_hints)) {
 						} else {
 							$pechat = 1;
 						}
-						
+
 						foreach($fleshka->colorprices as $key1 => $color1) {
 
 							if ($key==$key1) continue;
@@ -143,18 +143,23 @@ if (isset($show_hints)) {
 
 						} else {
 
-							$pass_array = serialize($color_);
+							$pass_array = base64_encode(serialize($color_));
 
 							$my_color = 'url('.Yii::app()->createUrl('site/color', array('color' => $pass_array)).')';
 
+
 						}
+
+
+
+
 					?>
 
 					<?php if ($pechat==1) : ?>
 
 						<div class="my_color_icon"
 								fleshka_id="<?php echo $fleshka->id; ?>"
-								mycolorprice="<?php echo $key; ?>" 
+								mycolorprice="<?php echo $key; ?>"
 								colorprice_id="<?php echo $color->id;?>"
 								width_picture="<?php echo $width_picture; ?>"
 								height_picture="<?php echo $height_picture; ?>"
@@ -171,7 +176,7 @@ if (isset($show_hints)) {
 				<?php endif;?>
 
 			<?php endforeach; ?>
-			
+
 		</div>
 
 		<div class="div_flesh_buttons" style="width:80px;">
@@ -185,7 +190,7 @@ if (isset($show_hints)) {
 					</div>
 
 				<?php endif; ?>
-			
+
 				<!-- 4 gb-->
 				<?php if ($fleshka->pricesize4>0): ?>
 
@@ -252,7 +257,7 @@ if (isset($show_hints)) {
 					<div class="my_cost_div"><?php echo $pricesize2;?> руб</div>
 
 				<?php endif; ?>
-			
+
 				<!-- 4 gb-->
 				<?php if ($fleshka->pricesize4>1): ?>
 
@@ -280,7 +285,7 @@ if (isset($show_hints)) {
 					<div class="my_cost_div"><?php echo $pricesize32;?> руб</div>
 
 				<?php endif; ?>
-				
+
 			</div>
 
 			<?php if (!$fleshka->is_special()) : ?>
@@ -291,7 +296,7 @@ if (isset($show_hints)) {
 					<!-- 2 gb-->
 					<?php if ($fleshka->pricesize2>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize2 - $calculation['price300']>0) {
 
 								$pricesize2 -= $calculation['price300'];
@@ -301,11 +306,11 @@ if (isset($show_hints)) {
 						<div class="my_cost_div"><?php echo $pricesize2; ?> руб</div>
 
 					<?php endif; ?>
-				
+
 					<!-- 4 gb-->
 					<?php if ($fleshka->pricesize4>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize4 - $calculation['price300']>0) {
 
 								$pricesize4 -= $calculation['price300'];
@@ -319,7 +324,7 @@ if (isset($show_hints)) {
 					<!-- 8 gb-->
 					<?php if ($fleshka->pricesize8>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize8 - $calculation['price300']>0) {
 
 								$pricesize8 -= $calculation['price300'];
@@ -333,7 +338,7 @@ if (isset($show_hints)) {
 					<!-- 16 gb-->
 					<?php if ($fleshka->pricesize16>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize16 - $calculation['price300']>0) {
 
 								$pricesize16 -= $calculation['price300'];
@@ -347,7 +352,7 @@ if (isset($show_hints)) {
 					<!-- 32 gb-->
 					<?php if ($fleshka->pricesize32>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize32 - $calculation['price300']>0) {
 
 								$pricesize32 -= $calculation['price300'];
@@ -366,7 +371,7 @@ if (isset($show_hints)) {
 					<!-- 2 gb-->
 					<?php if ($fleshka->pricesize2>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize2 - $calculation['price500']>0) {
 
 								$pricesize2 -= $calculation['price500'];
@@ -376,11 +381,11 @@ if (isset($show_hints)) {
 						<div class="my_cost_div"><?php echo $pricesize2; ?> руб</div>
 
 					<?php endif; ?>
-				
+
 					<!-- 4 gb-->
 					<?php if ($fleshka->pricesize4>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize4 - $calculation['price500']>0) {
 
 								$pricesize4 -= $calculation['price500'];
@@ -394,7 +399,7 @@ if (isset($show_hints)) {
 					<!-- 8 gb-->
 					<?php if ($fleshka->pricesize8>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize8 - $calculation['price500']>0) {
 
 								$pricesize8 -= $calculation['price500'];
@@ -408,7 +413,7 @@ if (isset($show_hints)) {
 					<!-- 16 gb-->
 					<?php if ($fleshka->pricesize16>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize16 - $calculation['price500']>0) {
 
 								$pricesize16 -= $calculation['price500'];
@@ -422,7 +427,7 @@ if (isset($show_hints)) {
 					<!-- 32 gb-->
 					<?php if ($fleshka->pricesize32>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize32 - $calculation['price500']>0) {
 
 								$pricesize32 -= $calculation['price500'];
@@ -441,7 +446,7 @@ if (isset($show_hints)) {
 					<!-- 2 gb-->
 					<?php if ($fleshka->pricesize2>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize2 - $calculation['price1000']>0) {
 
 								$pricesize2 -= $calculation['price1000'];
@@ -451,11 +456,11 @@ if (isset($show_hints)) {
 						<div class="my_cost_div"><?php echo $pricesize2; ?> руб</div>
 
 					<?php endif; ?>
-				
+
 					<!-- 4 gb-->
 					<?php if ($fleshka->pricesize4>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize4 - $calculation['price1000']>0) {
 
 								$pricesize4 -= $calculation['price1000'];
@@ -469,7 +474,7 @@ if (isset($show_hints)) {
 					<!-- 8 gb-->
 					<?php if ($fleshka->pricesize8>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize8 - $calculation['price1000']>0) {
 
 								$pricesize8 -= $calculation['price1000'];
@@ -483,7 +488,7 @@ if (isset($show_hints)) {
 					<!-- 16 gb-->
 					<?php if ($fleshka->pricesize16>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize16 - $calculation['price1000']>0) {
 
 								$pricesize16 -= $calculation['price1000'];
@@ -497,7 +502,7 @@ if (isset($show_hints)) {
 					<!-- 32 gb-->
 					<?php if ($fleshka->pricesize32>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize32 - $calculation['price1000']>0) {
 
 								$pricesize32 -= $calculation['price1000'];
@@ -516,7 +521,7 @@ if (isset($show_hints)) {
 					<!-- 2 gb-->
 					<?php if ($fleshka->pricesize2>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize2 - $calculation['price_zakaz']>0) {
 
 								$pricesize2 -= $calculation['price_zakaz'];
@@ -526,11 +531,11 @@ if (isset($show_hints)) {
 						<div class="my_cost_div"><?php echo $pricesize2; ?> руб</div>
 
 					<?php endif; ?>
-				
+
 					<!-- 4 gb-->
 					<?php if ($fleshka->pricesize4>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize4 - $calculation['price_zakaz']>0) {
 
 								$pricesize4 -= $calculation['price_zakaz'];
@@ -544,7 +549,7 @@ if (isset($show_hints)) {
 					<!-- 8 gb-->
 					<?php if ($fleshka->pricesize8>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize8 - $calculation['price_zakaz']>0) {
 
 								$pricesize8 -= $calculation['price_zakaz'];
@@ -558,7 +563,7 @@ if (isset($show_hints)) {
 					<!-- 16 gb-->
 					<?php if ($fleshka->pricesize16>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize16 - $calculation['price_zakaz']>0) {
 
 								$pricesize16 -= $calculation['price_zakaz'];
@@ -572,7 +577,7 @@ if (isset($show_hints)) {
 					<!-- 32 gb-->
 					<?php if ($fleshka->pricesize32>1): ?>
 
-						<?php 
+						<?php
 							if ($pricesize32 - $calculation['price_zakaz']>0) {
 
 								$pricesize32 -= $calculation['price_zakaz'];
@@ -596,7 +601,7 @@ if (isset($show_hints)) {
 					<div class="my_cost_div"><?php echo ($fleshka->count2>0)?$fleshka->count2:''; ?></div>
 
 				<?php endif; ?>
-			
+
 				<!-- 4 gb-->
 				<?php if ($fleshka->pricesize4>0): ?>
 
@@ -653,7 +658,7 @@ $(function() {
 		// if it special item, put special logo
 		$('#parent_colorprice_<?php echo $fleshka->id; ?>').append('<img style="position:absolute;top:2px;left:260px;" src="<?php echo Yii::app()->theme->baseUrl; ?>/img/aksiya.gif"/>');
 
-	<?php else : ?>	
+	<?php else : ?>
 
 		// if not special item, and it's new item, put new logo
 		<?php if ($fleshka->is_new==1) : ?>

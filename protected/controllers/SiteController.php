@@ -91,9 +91,11 @@ class SiteController extends Controller
 
 				if (count($searches)>0) {
 					foreach ($searches as $search) {
+
 						$fleshkas[] = $search['my_id'];
 					}
 				}
+
 
 
 			} else {
@@ -621,12 +623,12 @@ class SiteController extends Controller
 		$this->redirect(Yii::app()->homeUrl);
 	}
 
-	public function actionColor()
+	public function actionColor()    //to built color gradient of products
 	{
 		// Content type
 		header('Content-type: image/png');
 
-		$colors = unserialize($_GET['color']);
+		$colors = unserialize(base64_decode($_GET['color']));
 
 		$width = 30;
 		$height = 20;
