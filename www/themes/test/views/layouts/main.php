@@ -384,10 +384,11 @@ unset($SxGeo);
 	<div class="footer">
 		Наш адрес: г. Москва, ул. Электродная, д.2 стр.25.
 		<p>© 2007–2023 Компания «100 заказов»</p>
-		<p style="float:right"><a href="http://yandex.ru/cy?base=0&amp;host=fleshka.ru"><img src="http://www.yandex.ru/cycounter?fleshka.ru" width="88" height="31" alt="Яндекс цитирования" border="0" /></a>&nbsp;<!--Openstat-->
-<span id="openstat2348917"></span>
+		<p style="float:right"><a href="http://yandex.ru/cy?base=0&amp;host=fleshka.ru"><img src="http://www.yandex.ru/cycounter?fleshka.ru" width="88" height="31" alt="Яндекс цитирования" border="0" /></a>&nbsp;
+<!--Openstat-->
+<span id="openstat2349032"></span>
 <script type="text/javascript">
-var openstat = { counter: 2348917, image: 5083, color: "458efc", next: openstat };
+var openstat = { counter: 2349032, image: 5081, color: "458efc", next: openstat };
 (function(d, t, p) {
 var j = d.createElement(t); j.async = true; j.type = "text/javascript";
 j.src = ("https:" == p ? "https:" : "http:") + "//openstat.net/cnt.js";
