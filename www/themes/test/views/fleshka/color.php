@@ -20,7 +20,7 @@
 		<div style="float:left;margin-right:7px;">
 			<?php foreach($fleshka->colorprices as $key => $color) : ?>
 
-				<?php 
+				<?php
 					// skip if not main color
 					if ($color->id!=$color->color_group) {
 						continue;
@@ -52,7 +52,7 @@
 
 					} else {
 
-						$pass_array = serialize($color_);
+						$pass_array = $pass_array = base64_encode(serialize($color_));
 
 						$my_color = 'url('.Yii::app()->createUrl('site/color', array('color' => $pass_array)).')';
 
@@ -61,7 +61,7 @@
 
 				<div class="my_color_icon"
 						fleshka_id="<?php echo $fleshka->id; ?>"
-						mycolorprice="<?php echo $key; ?>" 
+						mycolorprice="<?php echo $key; ?>"
 						colorprice_id="<?php echo $color->id;?>"
 						style="width:<?php echo $width; ?>px;
 								height:<?php echo $height; ?>px;
@@ -73,7 +73,7 @@
 		</div>
 
 		<a style="cursor:pointer;" id="new_color">Новый цвет</a>
-			
+
 	</div>
 
 	<div style="clear:both;"></div>
