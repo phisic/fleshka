@@ -1,0 +1,118 @@
+.phone {
+    font-size: 30px;
+    height: 60px;
+    line-height: 110%;
+    color: white;
+    font-weight: bold;
+}
+
+.my_description
+{
+    border:1px solid #aaa;
+    height:auto;
+    width: 40%;
+    margin:10px 0 10px 10px;
+    padding: 10px 10px 0 10px;
+    border-radius:10px;
+    background: #E9E9E9;
+    float:right;
+}
+
+.div_prices {
+     overflow: hidden;
+     min-height: 50px;
+}
+
+.my_unpressed
+{
+    width: 70px;
+    height: 20px;
+    background: #eee;
+    border: 1px solid #aaa;
+    float: left;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 0 10px 0;
+}
+
+.div_flesh_buttons
+{
+    margin:10px 0 0 10px;
+    width:120px;
+    float:left;
+}
+
+.single_item_li {
+    width: 100%;
+}
+
+ul.single_item_li {
+    padding: 0;
+    margin: 5px 0 0 0;
+    width: 100%;
+    display: table;
+    table-layout: fixed; /* optional */
+}
+
+ul.single_item_li li {
+    display: table-cell;
+    width: auto;
+    text-align: center;
+}
+
+.shapka {
+    background: #E9E9E9;
+    /*font-weight: bold;*/
+    font-size: 13px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    height: 23px;
+}
+
+.fleshka_colors_div
+{   display:block;
+    margin:10px 0 0 10px;
+    height:200px;
+    width:400px;
+    text-align:left;
+}
+
+.my_color_icon
+{   display:inline;
+width: 60px; height:40px;
+    border:0px solid;
+    float:left;
+    margin-left:2px;
+    margin-bottom:5px;
+
+
+    cursor: pointer;
+}
+.item_class
+{float:left;
+display:block;
+height:200px;
+width:100%;
+background-color:#DFDFDF;
+ -moz-border-radius: 7px;
+	 -webkit-border-radius: 7px;
+	 -khtml-border-radius: 7px;
+	 border-radius:7px;
+	 -o-border-radius: 7px;
+	 border:1px solid #F6F2FA;
+	  box-shadow: 1px 3px 7px #303030;
+	-moz-box-shadow:1px 3px 7px #303030;
+	-webkit-box-shadow: 1px 3px 7px #303030;
+	margin:0 20px 20px 20px;
+}
+.fleshkas_list{ display:block;
+width:100%;
+height:100%;
+clear:both;
+
+}
+.item_header td {font-size:12px; font-weight:bold;color:#004B97}
+.flash_size{
+	  padding:9px;display:block; width:50px; height: 40px; float:left; margin:5px 15px 0 20px;font-size:17px; font-weight:bold; }
+

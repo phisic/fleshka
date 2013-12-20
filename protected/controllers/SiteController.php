@@ -91,11 +91,9 @@ class SiteController extends Controller
 
 				if (count($searches)>0) {
 					foreach ($searches as $search) {
-
 						$fleshkas[] = $search['my_id'];
 					}
 				}
-
 
 
 			} else {
@@ -588,6 +586,36 @@ class SiteController extends Controller
 		));
 	}
 
+  //returns parsed pricelist file
+
+	public function actionGetPricelist()
+	{
+		$model=new LoginForm;
+
+		// if it is ajax validation request
+		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+
+		// collect user input data
+		if(isset($_POST['LoginForm']))
+		{
+			$model->attributes=$_POST['LoginForm'];
+			// validate user input and redirect to the previous page if valid
+			if($model->validate() && $model->login())
+				$this->redirect(Yii::app()->user->returnUrl);
+		}
+		// display the login form
+		$this->render('login',array('model'=>$model));
+
+		header('Content-type: image/png');
+
+
+
+
+	}
 	/**
 	 * Displays the login page
 	 */
@@ -623,7 +651,7 @@ class SiteController extends Controller
 		$this->redirect(Yii::app()->homeUrl);
 	}
 
-	public function actionColor()    //to built color gradient of products
+	public function actionColor()
 	{
 		// Content type
 		header('Content-type: image/png');
@@ -1127,7 +1155,7 @@ class SiteController extends Controller
 		// echo '<br>korzina_logos<br>';
 		// print_r(Yii::app()->session['korzina_logos']);
 		// die('kk');
-         Yii::app()->setGlobalState('top_menu', 'korzinka');
+
 		$order_id = 0;
 
 		if (isset($_GET['order_id'])) {
@@ -1540,9 +1568,10 @@ class SiteController extends Controller
 	{
 
 		$webroot = Yii::getPathOfAlias('webroot');
-
+        $catalog = Catalogs::model()->findByPk(Yii::app()->session['catalog_id']);
 		$type = $_GET['type'];
-
+        $pdf_template ='pdf_fleshka_full';
+        $paper_type='L';
 		if ($type=='in_stock') {
 
 			$fleshkas = Descriptionsize::model()->findAll('trash=0 and instock=1');
@@ -1571,7 +1600,33 @@ class SiteController extends Controller
 
 			$file = 'fleshka.ru(special)'.date('d.m.Y').'.pdf';
 
-		} else {
+		}
+		 elseif ($type=='in_catalog') {
+		$relgoodscatalogs = Relgoodscatalog::model()->with('descriptionsize')
+					->findAll(array('condition' => 'descriptionsize.trash=0 and instock=1 and catalog_id=:id',
+						'params' => array(':id' => $catalog->id),
+						'order' => 'descriptionsize.id ASC'));
+
+			if (count($relgoodscatalogs)>0) {
+
+				$goods_id = '';
+
+				foreach ($relgoodscatalogs as $relgoodscatalog) {
+
+					$goods_id .= $relgoodscatalog->goods_id.',';
+				}
+
+				$goods_id .= '0';
+			}
+			$fleshkas = Descriptionsize::model()->findAll('id in ('.$goods_id.')');
+
+
+
+			$file = 'fleshka.ru_'.$catalog->id.'_'.date('d.m.Y').'.pdf';
+          $pdf_template ='pdf_fleshka_catalog';
+          $paper_type='L';
+		}
+		 else {
 
 			$fleshkas = Descriptionsize::model()->findAll('trash=0 and instock=0');
 
@@ -1592,9 +1647,9 @@ class SiteController extends Controller
 			ini_set('memory_limit', '-1');
 			ini_set ( 'max_execution_time', 1200);
 
-			//$pdf = $this->renderPartial('pdf_fleshka', array(
-			$pdf = $this->renderPartial('pdf_fleshka_full', array(
-				'fleshkas' => $fleshkas
+
+			$pdf = $this->renderPartial($pdf_template, array(
+				'fleshkas' => $fleshkas,'catalog_name' => $catalog->name
 			), true);
 
 	        // mPDF
@@ -1610,7 +1665,7 @@ class SiteController extends Controller
 											16,    // margin bottom
 											9,     // margin header
 											9,     // margin footer
-											'L');  // L - landscape, P - portrait
+											$paper_type);  // L - landscape, P - portrait
 
 			// renderPartial (only 'view' of current controller)
 			$mPDF1->WriteHTML($pdf);

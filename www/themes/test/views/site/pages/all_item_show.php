@@ -23,10 +23,10 @@ if (isset($catalog)) {
 
         echo ' ';
 
-      } 
+      }
     }
 
-    echo '<div class="my_hint" style="display:none;"></div>';
+    echo '<div style="float:right;text-align:center"><a href="'.Yii::app()->urlManager->createUrl('/site/catalog', array('type' => 'in_catalog')).'">Скачать каталог <img src="'.Yii::app()->theme->baseUrl.'/img/pdf.png"   alt=""/></a></div><div class="my_hint" style="display:none;"></div>';
 
   }
 }
@@ -44,7 +44,7 @@ if (count($relgoodscatalogs)>0) {
 
   	$last_flesh_id = $fleshka->id;
   }
-} 
+}
 
 // show upakovkas
 if (count($relgoodscatalog_upakovkas)>0) {
@@ -54,8 +54,8 @@ if (count($relgoodscatalog_upakovkas)>0) {
     $upakovka = Descriptionprice::model()->findByPk($relgoodscatalog->goods_id);
 
     $this->renderPartial('pages/single_item_show1', array('upakovka'=>$upakovka, 'color_id' => $color_id));
-  }  
-} 
+  }
+}
 
 if (count($relgoodscatalogs)==0 && count($relgoodscatalog_upakovkas==0)) {
   echo 'К сожалению, по вашему запросу ничего не найдено';
@@ -66,7 +66,7 @@ if (count($relgoodscatalogs)==0 && count($relgoodscatalog_upakovkas==0)) {
 
 $(function() {
 
-  //$('.div_on_single_fleshka:odd').addClass('even_single_item');  
+  //$('.div_on_single_fleshka:odd').addClass('even_single_item');
 
   last_flesh_id = <?php echo $last_flesh_id; ?>;
   limit = <?php echo $limit ?  $limit : $_POST['limit']?>;
