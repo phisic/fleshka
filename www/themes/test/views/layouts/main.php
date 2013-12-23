@@ -380,7 +380,22 @@ unset($SxGeo);
 	</div>
 
 	<div class="clear"></div>
+ <table><tr><td align="center">   <div class="footer_links"><ul>
+    <?php $footer_links=array('FLASHKA.BIZ','FLASHKA.COM.RU','FLASHKA.INFO','FLASHKA.ME','FLASHKA.MSK.RU','FLASHKA.NET.RU','FLASHKA.PRO','FLASHKA.SPB.RU','FLASHKI.BIZ',
+'FLASHKI.COM.RU','FLASHKI.INFO','FLASHKI.ME','FLASHKI.MSK.RU','FLASHKI.NET.RU','FLASHKI.PRO','FLASHKI.SPB.RU','FLESHKA.BIZ','FLESHKA.COM.RU','FLESHKA.ME','FLESHKA.MSK.RU',
+'FLESHKA.NET.RU','FLESHKA.RU','FLESHKA.SPB.RU','FLESHKI.BIZ','FLESHKI.COM.RU','FLESHKI.ME','FLESHKI.MSK.RU','FLESHKI.NET.RU','FLESHKI.ORG','FLESHKI.PRO','FLESHKI.SPB.RU',
+'FLESHKI.TEL','FLESHKI-OPTOM.RU','FRISBE.RU','FRISBEE.COM.RU','FRISBEE.MSK.RU','FRISBEE.NET.RU','FRISBEE.SU','USBFLASH.RU','USB-FLASH-DRIVE.RU','USB-FLASHKA.RU',
+'КУПИТЬФЛЕШКИ.РФ','КУПИТЬ-ФЛЕШКИ.РФ','КУПИТЬ-ФЛЕШКУ.РФ','ФЛЕШ-ДРАЙВ.РФ','ФЛЕШКА.NET','ФЛЕШКА.РФ','ФЛЕШКИ.NET','ФЛЕШКИ.РФ','ФЛЕШКИ-ЛОГОТИП.РФ','ФЛЕШКИ-ОПТОМ.РФ',
+'ФЛЕШМАСТЕР.РФ','ФЛЕШПАМЯТЬ.РФ','ФЛЭШ-ДИСК.РФ','ФЛЭШ-ДИСКИ.РФ','ФЛЭШ-ДРАЙВ.РФ','ФЛЭШКА.NET','ФЛЭШКА.РФ','ФЛЭШ-КАРТЫ.РФ','ФЛЭШКИ.РФ','ФЛЭШКИОПТОМ.РФ','ФЛЭШКИ-ОПТОМ.РФ','ФЛЭШПАМЯТЬ.РФ',
+'ФРИСБИ.COM','ФРИСБИ.NET','ФРИСБИ.SU','ФРИСБИ-ОПТОМ.РФ','ЛЕТАЮЩИЕ-ТАРЕЛКИ.РФ','СУВЕНИРЫ-КИТАЙ.РФ');
+for($i=0;$i<count($footer_links);$i++){
 
+    echo '<li><a href="http://'.$footer_links[$i].'">'.$footer_links[$i].'</li>';
+     }?>
+
+    </ul></div> 	<div class="clear"></div>
+    </td></tr>
+    <tr><td>
 	<div class="footer">
 		Наш адрес: г. Москва, ул. Электродная, д.2 стр.25.
 		<p>© 2007–2023 Компания «100 заказов»</p>
@@ -427,7 +442,7 @@ var s = d.getElementsByTagName(t)[0]; s.parentNode.insertBefore(j, s);
 </script>
 <noscript><div><img src="//mc.yandex.ru/watch/10322905" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
-
+      </td></tr></table>
 </body>
 </html>
 
