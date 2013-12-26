@@ -51,7 +51,7 @@ if (isset($show_hints)) {
 			<li>300 шт</li>
 			<li>500 шт</li>
 			<li><div>1000 шт</div></li>
-			<li><div>под заказ</div></li>
+			<li><div class="pod_zakaz" style="margin-left:-10px">под заказ</div></li>
 			<li><div>в наличии</div></li>
 		<?php else: ?>
 			<li>Цена</li>
@@ -147,12 +147,7 @@ if (isset($show_hints)) {
 
 							$my_color = 'url('.Yii::app()->createUrl('site/color', array('color' => $pass_array)).')';
 
-
 						}
-
-
-
-
 					?>
 
 					<?php if ($pechat==1) : ?>
@@ -528,7 +523,7 @@ if (isset($show_hints)) {
 							}
 						?>
 
-						<div class="my_cost_div"><?php echo $pricesize2; ?> руб</div>
+						<div class="my_cost_div pod_zakaz"><?php echo $pricesize2; ?> руб</div>
 
 					<?php endif; ?>
 
@@ -542,7 +537,7 @@ if (isset($show_hints)) {
 							}
 						?>
 
-						<div class="my_cost_div"><?php echo $pricesize4; ?> руб</div>
+						<div class="my_cost_div  pod_zakaz"><?php echo $pricesize4; ?> руб</div>
 
 					<?php endif; ?>
 
@@ -556,7 +551,7 @@ if (isset($show_hints)) {
 							}
 						?>
 
-						<div class="my_cost_div"><?php echo $pricesize8; ?> руб</div>
+						<div class="my_cost_div pod_zakaz"><?php echo $pricesize8; ?> руб</div>
 
 					<?php endif; ?>
 
@@ -570,7 +565,7 @@ if (isset($show_hints)) {
 							}
 						?>
 
-						<div class="my_cost_div"><?php echo $pricesize16; ?> руб</div>
+						<div class="my_cost_div pod_zakaz"><?php echo $pricesize16; ?> руб</div>
 
 					<?php endif; ?>
 
@@ -584,7 +579,7 @@ if (isset($show_hints)) {
 							}
 						?>
 
-						<div class="my_cost_div"><?php echo $pricesize32; ?> руб</div>
+						<div class="my_cost_div pod_zakaz"><?php echo $pricesize32; ?> руб</div>
 
 					<?php endif; ?>
 
