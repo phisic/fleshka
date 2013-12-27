@@ -234,10 +234,15 @@ if (isset($show_hints)) {
 			$calculation = unserialize($calc->content);
 
 			$pricesize2 = $fleshka->pricesize2;
+			$pricesize2_z = $fleshka->pricesize2_z;
 			$pricesize4 = $fleshka->pricesize4;
+			$pricesize4_z = $fleshka->pricesize4_z;
 			$pricesize8 = $fleshka->pricesize8;
+			$pricesize8_z = $fleshka->pricesize8_z;
 			$pricesize16 = $fleshka->pricesize16;
+			$pricesize16_z = $fleshka->pricesize16_z;
 			$pricesize32 = $fleshka->pricesize32;
+			$pricesize32_z = $fleshka->pricesize32_z;
 		?>
 
 		<div class="div_prices">
@@ -514,72 +519,45 @@ if (isset($show_hints)) {
 				<div style="width:16%;float:left;text-align:center;margin-top:10px;">
 
 					<!-- 2 gb-->
-					<?php if ($fleshka->pricesize2>1): ?>
+					<?php if ($fleshka->pricesize2_z>0): ?>
 
-						<?php
-							if ($pricesize2 - $calculation['price_zakaz']>0) {
 
-								$pricesize2 -= $calculation['price_zakaz'];
-							}
-						?>
 
-						<div class="my_cost_div pod_zakaz"><?php echo $pricesize2; ?> руб</div>
+						<div class="my_cost_div pod_zakaz"><?php echo $pricesize2_z; ?> руб</div>
 
 					<?php endif; ?>
 
 					<!-- 4 gb-->
-					<?php if ($fleshka->pricesize4>1): ?>
+					<?php if ($fleshka->pricesize4_z>0): ?>
 
-						<?php
-							if ($pricesize4 - $calculation['price_zakaz']>0) {
 
-								$pricesize4 -= $calculation['price_zakaz'];
-							}
-						?>
-
-						<div class="my_cost_div  pod_zakaz"><?php echo $pricesize4; ?> руб</div>
+						<div class="my_cost_div  pod_zakaz"><?php echo $pricesize4_z; ?> руб</div>
 
 					<?php endif; ?>
 
 					<!-- 8 gb-->
-					<?php if ($fleshka->pricesize8>1): ?>
+					<?php if ($fleshka->pricesize8_z>0): ?>
 
-						<?php
-							if ($pricesize8 - $calculation['price_zakaz']>0) {
 
-								$pricesize8 -= $calculation['price_zakaz'];
-							}
-						?>
-
-						<div class="my_cost_div pod_zakaz"><?php echo $pricesize8; ?> руб</div>
+						<div class="my_cost_div pod_zakaz"><?php echo $pricesize8_z; ?> руб</div>
 
 					<?php endif; ?>
 
 					<!-- 16 gb-->
-					<?php if ($fleshka->pricesize16>1): ?>
+					<?php if ($fleshka->pricesize16_z>0): ?>
 
-						<?php
-							if ($pricesize16 - $calculation['price_zakaz']>0) {
 
-								$pricesize16 -= $calculation['price_zakaz'];
-							}
-						?>
 
-						<div class="my_cost_div pod_zakaz"><?php echo $pricesize16; ?> руб</div>
+						<div class="my_cost_div pod_zakaz"><?php echo $pricesize16_z; ?> руб</div>
 
 					<?php endif; ?>
 
 					<!-- 32 gb-->
-					<?php if ($fleshka->pricesize32>1): ?>
+					<?php if ($fleshka->pricesize32_z>0): ?>
 
-						<?php
-							if ($pricesize32 - $calculation['price_zakaz']>0) {
 
-								$pricesize32 -= $calculation['price_zakaz'];
-							}
-						?>
 
-						<div class="my_cost_div pod_zakaz"><?php echo $pricesize32; ?> руб</div>
+						<div class="my_cost_div pod_zakaz"><?php echo $pricesize32_z; ?> руб</div>
 
 					<?php endif; ?>
 

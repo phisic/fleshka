@@ -25,30 +25,35 @@
 	<?php echo $form->textFieldRow($fleshka, 'description', array('class'=>'span7')); ?>
 
 	<?php echo $form->textFieldRow($fleshka, 'pricesize2', array('class'=>'span7')); ?>
+		<?php echo $form->textFieldRow($fleshka, 'pricesize2_z', array('class'=>'span7')); ?>
 	<?php echo $form->textFieldRow($fleshka, 'count2', array('class'=>'span7')); ?>
 
 	<?php echo $form->textFieldRow($fleshka, 'pricesize4', array('class'=>'span7')); ?>
+		<?php echo $form->textFieldRow($fleshka, 'pricesize4_z', array('class'=>'span7')); ?>
 	<?php echo $form->textFieldRow($fleshka, 'count4', array('class'=>'span7')); ?>
 
 	<?php echo $form->textFieldRow($fleshka, 'pricesize8', array('class'=>'span7')); ?>
+		<?php echo $form->textFieldRow($fleshka, 'pricesize8_z', array('class'=>'span7')); ?>
 	<?php echo $form->textFieldRow($fleshka, 'count8', array('class'=>'span7')); ?>
 
 	<?php echo $form->textFieldRow($fleshka, 'pricesize16', array('class'=>'span7')); ?>
+		<?php echo $form->textFieldRow($fleshka, 'pricesize16_z', array('class'=>'span7')); ?>
 	<?php echo $form->textFieldRow($fleshka, 'count16', array('class'=>'span7')); ?>
 
 	<?php echo $form->textFieldRow($fleshka, 'pricesize32', array('class'=>'span7')); ?>
+		<?php echo $form->textFieldRow($fleshka, 'pricesize32_z', array('class'=>'span7')); ?>
 	<?php echo $form->textFieldRow($fleshka, 'count32', array('class'=>'span7')); ?>
 
 	<?php echo $form->checkBoxRow($fleshka, 'instock'); ?>
 
-	<?php echo $form->checkBoxRow($fleshka, 'is_new'); ?>	
+	<?php echo $form->checkBoxRow($fleshka, 'is_new'); ?>
 
 	<?php
 	$this->widget('bootstrap.widgets.TbButton', array(
 		'type'=>'primary',
-		'label'=>($fleshka->id>0)?'Изменить':'Создать', 
+		'label'=>($fleshka->id>0)?'Изменить':'Создать',
 		'id' => 'save_it',
-		'size' => 'mini')); 
+		'size' => 'mini'));
 	?>
 
 	&nbsp;
@@ -86,13 +91,13 @@
 		    'alerts'=>array( // configurations per alert type
 			    'success'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'), // success, info, warning, error or danger
 		    ),
-		));		
-	?>				
+		));
+	?>
 </div>
 
 <?php if ($fleshka->id>0) : ?>
 
-	<?php 
+	<?php
 	echo $this->renderPartial('color', array(
 			'fleshka' => $fleshka,
 		));
@@ -124,7 +129,7 @@
 
 			var form_data = $('#my_form').serialize();
 
-			$.post('<?php echo Yii::app()->createUrl('fleshka/save'); ?>', form_data, 
+			$.post('<?php echo Yii::app()->createUrl('fleshka/save'); ?>', form_data,
 				function(data) {
 
 					console.log(data);
@@ -135,7 +140,7 @@
 						load_fleshka(data);
 						//location.reload();
 					<?php endif; ?>
-					
+
 				});
 		});
 

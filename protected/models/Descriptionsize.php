@@ -28,14 +28,14 @@ class Descriptionsize extends CActiveRecord {
         return array(
             array('index, name', 'required'),
             array('index, trash, count2, count4, count8, count16, count32, instock, is_new', 'numerical', 'integerOnly'=>true),
-            array('pricesize2, pricesize4, pricesize8, pricesize16, pricesize32', 'numerical'),
+            array('pricesize2, pricesize4, pricesize8, pricesize16, pricesize32,pricesize2_z, pricesize4_z, pricesize8_z, pricesize16_z, pricesize32_z', 'numerical'),
             array('name', 'length', 'max'=>255),
             array('description', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, index, trash, name, description, pricesize2, pricesize4, pricesize8, pricesize16, pricesize32, count2, count4, count8, count16, count32, instock, is_new', 'safe', 'on'=>'search'),
         );
-    }    
+    }
 
     /**
      * @return array relational rules.
@@ -65,10 +65,15 @@ class Descriptionsize extends CActiveRecord {
             'name' => 'Название',
             'description' => 'Описание',
             'pricesize2' => 'Цена 2 Гб',
+            'pricesize2_z' => 'Цена под заказ 2 Гб',
             'pricesize4' => 'Цена 4 Гб',
+            'pricesize4_z' => 'Цена под заказ 4 Гб',
             'pricesize8' => 'Цена 8 Гб',
+            'pricesize8_z' => 'Цена под заказ 8 Гб',
             'pricesize16' => 'Цена 16 Гб',
+            'pricesize16_z' => 'Цена под заказ 16 Гб',
             'pricesize32' => 'Цена 32 Гб',
+            'pricesize32_z' => 'Цена под заказ 32 Гб',
             'count2' => 'Кол-во 2 Гб',
             'count4' => 'Кол-во 4 Гб',
             'count8' => 'Кол-во 8 Гб',
@@ -129,5 +134,5 @@ class Descriptionsize extends CActiveRecord {
 
         return false;
     }
-    
+
 }
