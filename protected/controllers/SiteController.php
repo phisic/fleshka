@@ -35,6 +35,7 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
+	echo $_SESSION['myemailer'];
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 
@@ -1340,14 +1341,20 @@ class SiteController extends Controller
 			// if any managers don't participate in conversation, send email to all managers
 			if (count($email)==0) {
 
-				$managers = User::model()->findAll();
 
-				foreach($managers as $manager) {
+				//$managers = User::model()->findAll();
+                $emaillist = Content::model()->find('name="email_list"');
+                $emailsent = Content::model()->find('name="email_sent"');
+				$emaillist=explode(',',$emaillist->content);
+				//получаем соседный email
+                $current_email=current(array_slice($emaillist, array_search($emailsent->content, array_keys($emaillist)) - 1, 1));
+                //сохраняем айди последней отправленной почты
+				$emailsentedit = Content::model()->find('name="email_sent"');
+           		$emailsentedit->content = array_search($current_email, $emaillist);
+          		$emailsentedit->save();
 
-					if ($manager->email!='') {
-						$email[] = $manager->email;
-					}
-				}
+				$email[] = $current_email;
+
 			}
 
 		} else {
@@ -1386,7 +1393,7 @@ class SiteController extends Controller
 
 			}
 
-			$emails = implode(", ", $email);
+			if(is_array($email)){$emails = implode(", ", $email);}else{$emails =  $email;}
 
 			// send email
 			$this->send_mime_mail($email_template->from_name,

@@ -70,7 +70,7 @@ $this->widget('bootstrap.widgets.TbNavbar', array(
 					array('label'=>'Контакты', 'url'=>Yii::app()->urlManager->createUrl('/admin/contacts'), 'active' => (Yii::app()->getGlobalState('top_menu')=='contacts'?true:false)),
 					array('label'=>'Телефоны', 'url'=>Yii::app()->urlManager->createUrl('/admin/phones'), 'active' => (Yii::app()->getGlobalState('top_menu')=='phones'?true:false)),
 					array('label'=>'Мета контрол', 'url'=>Yii::app()->urlManager->createUrl('/admin/meta_control'), 'active' => (Yii::app()->getGlobalState('top_menu')=='meta_control'?true:false)),
-					array('label'=>'Email шаблоны', 'url'=>Yii::app()->urlManager->createUrl('/admin/email_template'), 'active' => (Yii::app()->getGlobalState('top_menu')=='email_template'?true:false)),
+					array('label'=>'Список Email', 'url'=>Yii::app()->urlManager->createUrl('/admin/emails'), 'active' => (Yii::app()->getGlobalState('top_menu')=='emails'?true:false)),
 				)),
 				array('label'=>'Условия продажи', 'items'=> array(
 				     array('label'=>'Условия продажи', 'url'=>Yii::app()->urlManager->createUrl('/admin/selling_rules'), 'active' => (Yii::app()->getGlobalState('top_menu')=='selling_rules'?true:false)),

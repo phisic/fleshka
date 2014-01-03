@@ -71,7 +71,7 @@ class AdminController extends Controller
 
 		$this->render('contacts', array(
 			'model' => $model
-		));		
+		));
 	}
 
 	public function actionDogovor()
@@ -113,7 +113,7 @@ class AdminController extends Controller
 		$this->render('dogovor', array(
 			'content' => $content,
 			'error' => $error
-		));				
+		));
 	}
 
 	public function actionPresentation()
@@ -155,7 +155,7 @@ class AdminController extends Controller
 		$this->render('presentation', array(
 			'content' => $content,
 			'error' => $error
-		));				
+		));
 	}
 
 	public function actionOrders()
@@ -172,8 +172,8 @@ class AdminController extends Controller
         if (isset($_POST['search'])) {
 
         	$search = addslashes($_POST['search']);
-	        $criteria->condition= 'email like "%'.$search.'%" or 
-	        				company like "%'.$search.'%" or 
+	        $criteria->condition= 'email like "%'.$search.'%" or
+	        				company like "%'.$search.'%" or
 	        				phone like "%'.$search.'%" or
 	        				address like "%'.$search.'%"';
 
@@ -210,7 +210,7 @@ class AdminController extends Controller
 			Ordercomments::model()->deleteAll('order_id="'.$order_id.'"');
 			Morder::model()->deleteAll('id='.$id);
 		}
-	}	
+	}
 
 	public function actionUsers()
 	{
@@ -293,6 +293,7 @@ class AdminController extends Controller
 
 		}
 
+
 		$phone1 = Content::model()->find('name="phone1"');
 
 		$phone2 = Content::model()->find('name="phone2"');
@@ -300,6 +301,63 @@ class AdminController extends Controller
 		$this->render('phones', array(
 			'phone1' => $phone1,
 			'phone2' => $phone2,
+			'success' => $success
+		));
+
+	}
+   	public function actionEmails()
+	{
+
+		Yii::app()->setGlobalState('top_menu', 'emails');
+
+		$this->title = 'Список Email для обработки заказов';
+
+		$success = false;
+
+		$emaillist = Content::model()->exists('name="email_list"');
+
+		if (!$emaillist) {
+           $elist = new Content();
+       	   $elist->name = 'email_list';
+
+			$elist->content = '';
+            $elist->created=time();
+			$elist->save(false);
+
+		}
+
+			$sentemail = Content::model()->exists('name="email_sent"');
+
+		if (!($sentemail)) {
+
+			$sentemaila = new Content();
+
+			$sentemaila->name = 'email_sent';
+
+			$sentemaila->content = 0;
+            $sentemaila->created=time();
+			$sentemaila->save(false);
+
+		}
+		if (isset($_POST['emaillist'])) {
+
+			$emaillistedit = Content::model()->find('name="email_list"');
+
+			$emaillistedit->content = $_POST['emaillist'];
+
+			$emaillistedit->save();
+
+
+			$success = true;
+
+		}
+
+		$emaillist = Content::model()->find('name="email_list"');
+
+
+
+		$this->render('emails', array(
+			'emaillist' => $emaillist,
 			'success' => $success
 		));
 
