@@ -41,12 +41,6 @@ switch ($my_type) {
 
 		<div style="float:left;line-height: 80%;">
 			<h3><?php echo $catalog->name.'('.$show_type.')';?></h3>
-			<?php if ($catalog->id!=1) : ?>
-				<p class="head_text">
-					<a href="<?php echo Yii::app()->urlManager->createUrl('/site/all_item', array('id' => $catalog->id, 'type' => 'in_stock')); ?>" <?php echo (Yii::app()->session['type']=='in_stock'?'class="head_text_selected"':''); ?>>В наличии</a>
-					<a href="<?php echo Yii::app()->urlManager->createUrl('/site/all_item', array('id' => $catalog->id, 'type' => 'to_order')); ?>" <?php echo (Yii::app()->session['type']=='to_order'?'class="head_text_selected"':''); ?>>На заказ</a>
-				</p>
-			<?php endif; ?>
 			<div style="clear:both;"></div>
 		</div>
 
@@ -74,7 +68,12 @@ switch ($my_type) {
 
 
 		</div>
-
+		<?php if ($catalog->id!=1) : ?>
+				<div class="head_text" style="float:left;margin-top:15px;">
+					<a href="<?php echo Yii::app()->urlManager->createUrl('/site/all_item', array('id' => $catalog->id, 'type' => 'in_stock')); ?>" <?php echo (Yii::app()->session['type']=='in_stock'?'class="head_text_selected"':''); ?>>В наличии</a>
+					<a href="<?php echo Yii::app()->urlManager->createUrl('/site/all_item', array('id' => $catalog->id, 'type' => 'to_order')); ?>" <?php echo (Yii::app()->session['type']=='to_order'?'class="head_text_selected"':''); ?>>На заказ</a>
+				</div>
+		<?php endif; ?>
 </div>
 
 <?php
