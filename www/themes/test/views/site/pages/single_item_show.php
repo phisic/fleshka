@@ -47,18 +47,12 @@ if (isset($show_hints)) {
 		<li style="width:120px;">Выбор цвета</li>
 		<li style="width:100px;">Выбор объема</li>
 		<?php if (!$fleshka->is_special()) : ?>
-			<li>100 шт</li>
-			<li>300 шт</li>
-			<li>500 шт</li>
-			<li><div>1000 шт</div></li>
-			<li><div class="pod_zakaz" style="margin-left:-10px">под заказ</div></li>
+			<li><div>Цена со склада</div></li>
+			<li><div class="pod_zakaz" style="margin-left:-10px">Цена под заказ</div></li>
 			<li><div>в наличии</div></li>
 		<?php else: ?>
 			<li>Цена</li>
 			<li><div>в наличии</div></li>
-			<li></li>
-			<li></li>
-			<li></li>
 			<li></li>
 		<?php endif; ?>
 	</ul>
@@ -247,201 +241,10 @@ if (isset($show_hints)) {
 
 		<div class="div_prices">
 
-			<!-- 100 шт -->
-
-			<div style="width:16%;float:left;text-align:center;margin:10px 0 0 10px;">
-
-				<!-- 2 gb-->
-				<?php if ($fleshka->pricesize2>1): ?>
-
-					<div class="my_cost_div"><?php echo $pricesize2;?> руб</div>
-
-				<?php endif; ?>
-
-				<!-- 4 gb-->
-				<?php if ($fleshka->pricesize4>1): ?>
-
-					<div class="my_cost_div"><?php echo $pricesize4;?> руб</div>
-
-				<?php endif; ?>
-
-				<!-- 8 gb-->
-				<?php if ($fleshka->pricesize8>1): ?>
-
-					<div class="my_cost_div"><?php echo $pricesize8;?> руб</div>
-
-				<?php endif; ?>
-
-				<!-- 16 gb-->
-				<?php if ($fleshka->pricesize16>1): ?>
-
-					<div class="my_cost_div"><?php echo $pricesize16;?> руб</div>
-
-				<?php endif; ?>
-
-				<!-- 32 gb-->
-				<?php if ($fleshka->pricesize32>1): ?>
-
-					<div class="my_cost_div"><?php echo $pricesize32;?> руб</div>
-
-				<?php endif; ?>
-
-			</div>
-
 			<?php if (!$fleshka->is_special()) : ?>
 
-				<!-- 300 шт -->
-				<div style="width:16%;float:left;text-align:center;margin-top:10px;">
-
-					<!-- 2 gb-->
-					<?php if ($fleshka->pricesize2>1): ?>
-
-						<?php
-							if ($pricesize2 - $calculation['price300']>0) {
-
-								$pricesize2 -= $calculation['price300'];
-							}
-						?>
-
-						<div class="my_cost_div"><?php echo $pricesize2; ?> руб</div>
-
-					<?php endif; ?>
-
-					<!-- 4 gb-->
-					<?php if ($fleshka->pricesize4>1): ?>
-
-						<?php
-							if ($pricesize4 - $calculation['price300']>0) {
-
-								$pricesize4 -= $calculation['price300'];
-							}
-						?>
-
-						<div class="my_cost_div"><?php echo $pricesize4; ?> руб</div>
-
-					<?php endif; ?>
-
-					<!-- 8 gb-->
-					<?php if ($fleshka->pricesize8>1): ?>
-
-						<?php
-							if ($pricesize8 - $calculation['price300']>0) {
-
-								$pricesize8 -= $calculation['price300'];
-							}
-						?>
-
-						<div class="my_cost_div"><?php echo $pricesize8;?> руб</div>
-
-					<?php endif; ?>
-
-					<!-- 16 gb-->
-					<?php if ($fleshka->pricesize16>1): ?>
-
-						<?php
-							if ($pricesize16 - $calculation['price300']>0) {
-
-								$pricesize16 -= $calculation['price300'];
-							}
-						?>
-
-						<div class="my_cost_div"><?php echo $pricesize16;?> руб</div>
-
-					<?php endif; ?>
-
-					<!-- 32 gb-->
-					<?php if ($fleshka->pricesize32>1): ?>
-
-						<?php
-							if ($pricesize32 - $calculation['price300']>0) {
-
-								$pricesize32 -= $calculation['price300'];
-							}
-						?>
-
-						<div class="my_cost_div"><?php echo $pricesize32;?> руб</div>
-
-					<?php endif; ?>
-
-				</div>
-
-				<!-- 500 шт -->
-				<div style="width:16%;float:left;text-align:center;margin-top:10px;">
-
-					<!-- 2 gb-->
-					<?php if ($fleshka->pricesize2>1): ?>
-
-						<?php
-							if ($pricesize2 - $calculation['price500']>0) {
-
-								$pricesize2 -= $calculation['price500'];
-							}
-						?>
-
-						<div class="my_cost_div"><?php echo $pricesize2; ?> руб</div>
-
-					<?php endif; ?>
-
-					<!-- 4 gb-->
-					<?php if ($fleshka->pricesize4>1): ?>
-
-						<?php
-							if ($pricesize4 - $calculation['price500']>0) {
-
-								$pricesize4 -= $calculation['price500'];
-							}
-						?>
-
-						<div class="my_cost_div"><?php echo $pricesize4; ?> руб</div>
-
-					<?php endif; ?>
-
-					<!-- 8 gb-->
-					<?php if ($fleshka->pricesize8>1): ?>
-
-						<?php
-							if ($pricesize8 - $calculation['price500']>0) {
-
-								$pricesize8 -= $calculation['price500'];
-							}
-						?>
-
-						<div class="my_cost_div"><?php echo $pricesize8; ?> руб</div>
-
-					<?php endif; ?>
-
-					<!-- 16 gb-->
-					<?php if ($fleshka->pricesize16>1): ?>
-
-						<?php
-							if ($pricesize16 - $calculation['price500']>0) {
-
-								$pricesize16 -= $calculation['price500'];
-							}
-						?>
-
-						<div class="my_cost_div"><?php echo $pricesize16; ?> руб</div>
-
-					<?php endif; ?>
-
-					<!-- 32 gb-->
-					<?php if ($fleshka->pricesize32>1): ?>
-
-						<?php
-							if ($pricesize32 - $calculation['price500']>0) {
-
-								$pricesize32 -= $calculation['price500'];
-							}
-						?>
-
-						<div class="my_cost_div"><?php echo $pricesize32; ?> руб</div>
-
-					<?php endif; ?>
-
-				</div>
-
 				<!-- 1000 шт -->
-				<div style="width:16%;float:left;text-align:center;margin-top:10px;">
+				<div style="width:33%;float:left;text-align:center;margin-top:10px;">
 
 					<!-- 2 gb-->
 					<?php if ($fleshka->pricesize2>1): ?>
@@ -516,7 +319,7 @@ if (isset($show_hints)) {
 				</div>
 
 				<!-- pod zakaz -->
-				<div style="width:16%;float:left;text-align:center;margin-top:10px;">
+				<div style="width:33%;float:left;text-align:center;margin-top:10px;">
 
 					<!-- 2 gb-->
 					<?php if ($fleshka->pricesize2_z>0): ?>
@@ -566,7 +369,7 @@ if (isset($show_hints)) {
 			<?php endif; ?>
 
 			<!-- v nalichii -->
-			<div style="width:16%;float:left;text-align:center;margin-top:10px;">
+			<div style="width:33%;float:left;text-align:center;margin-top:10px;">
 
 				<!-- 2 gb-->
 				<?php if ($fleshka->pricesize2>0): ?>
