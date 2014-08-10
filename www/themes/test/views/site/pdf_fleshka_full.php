@@ -182,9 +182,12 @@
 
 							<!-- 32 gb-->
 							<?php if ($fleshka->pricesize32>0): ?>
-
 								<div>32 Gb</div>
-
+							<?php endif; ?>
+                                
+                            <!-- 64 gb-->
+							<?php if ($fleshka->pricesize64>0): ?>
+								<div>64 Gb</div>
 							<?php endif; ?>
 
 					</div>
@@ -204,6 +207,7 @@
 					$pricesize8 = $fleshka->pricesize8;
 					$pricesize16 = $fleshka->pricesize16;
 					$pricesize32 = $fleshka->pricesize32;
+                    $pricesize64 = $fleshka->pricesize64;
 				?>
 
 
@@ -243,9 +247,12 @@
 
 						<!-- 32 gb-->
 						<?php if ($fleshka->pricesize32>1): ?>
-
 							<div class="my_cost_div"><?php echo $pricesize32;?> руб</div>
-
+						<?php endif; ?>
+                            
+                       <!-- 64 gb-->
+						<?php if ($fleshka->pricesize64>1): ?>
+							<div class="my_cost_div"><?php echo $pricesize64;?> руб</div>
 						<?php endif; ?>
 
 					</div>
@@ -317,16 +324,22 @@
 
 						<!-- 32 gb-->
 						<?php if ($fleshka->pricesize32>1): ?>
-
 							<?php
 								if ($pricesize32 - $calculation['price300']>0) {
-
 									$pricesize32 -= $calculation['price300'];
 								}
 							?>
-
 							<div class="my_cost_div"><?php echo $pricesize32;?> руб</div>
-
+						<?php endif; ?>
+                            
+                        <!-- 64 gb-->
+						<?php if ($fleshka->pricesize64>1): ?>
+							<?php
+								if ($pricesize64 - $calculation['price300']>0) {
+									$pricesize64 -= $calculation['price300'];
+								}
+							?>
+							<div class="my_cost_div"><?php echo $pricesize64;?> руб</div>
 						<?php endif; ?>
 
 					</div>
@@ -398,16 +411,22 @@
 
 						<!-- 32 gb-->
 						<?php if ($fleshka->pricesize32>1): ?>
-
 							<?php
 								if ($pricesize32 - $calculation['price500']>0) {
-
 									$pricesize32 -= $calculation['price500'];
 								}
 							?>
-
 							<div class="my_cost_div"><?php echo $pricesize32; ?> руб</div>
-
+						<?php endif; ?>
+                            
+                        <!-- 64 gb-->
+						<?php if ($fleshka->pricesize64>1): ?>
+							<?php
+								if ($pricesize64 - $calculation['price500']>0) {
+									$pricesize64 -= $calculation['price500'];
+								}
+							?>
+							<div class="my_cost_div"><?php echo $pricesize64; ?> руб</div>
 						<?php endif; ?>
 
 					</div>
@@ -477,16 +496,22 @@
 
 						<!-- 32 gb-->
 						<?php if ($fleshka->pricesize32>1): ?>
-
 							<?php
 								if ($pricesize32 - $calculation['price1000']>0) {
-
 									$pricesize32 -= $calculation['price1000'];
 								}
 							?>
-
 							<div class="my_cost_div"><?php echo $pricesize32; ?> руб</div>
-
+						<?php endif; ?>
+                        
+                        <!-- 64 gb-->
+						<?php if ($fleshka->pricesize64>1): ?>
+							<?php
+								if ($pricesize64 - $calculation['price1000']>0) {
+									$pricesize64 -= $calculation['price1000'];
+								}
+							?>
+							<div class="my_cost_div"><?php echo $pricesize64; ?> руб</div>
 						<?php endif; ?>
 
 					</div>
@@ -567,6 +592,20 @@
 							<div class="my_cost_div"><?php echo $pricesize32; ?> руб</div>
 
 						<?php endif; ?>
+                            
+                       <!-- 64 gb-->
+						<?php if ($fleshka->pricesize64>1): ?>
+
+							<?php
+								if ($pricesize64 - $calculation['price_zakaz']>0) {
+
+									$pricesize64 -= $calculation['price_zakaz'];
+								}
+							?>
+
+							<div class="my_cost_div"><?php echo $pricesize64; ?> руб</div>
+
+						<?php endif; ?>
 
 					</div>
 
@@ -612,6 +651,13 @@
 						<?php if ($fleshka->pricesize32>0): ?>
 
 							<div class="my_cost_div"><?php echo ($fleshka->count32>0)?$fleshka->count32:''; ?></div>
+
+						<?php endif; ?>
+                            
+                        <!-- 64 gb-->
+						<?php if ($fleshka->pricesize64>0): ?>
+
+							<div class="my_cost_div"><?php echo ($fleshka->count64>0)?$fleshka->count64:''; ?></div>
 
 						<?php endif; ?>
 

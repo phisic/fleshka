@@ -189,13 +189,13 @@
 
 							<!-- 32 gb-->
 							<?php if ($fleshka->pricesize32>0): ?>
-
 								<span class="flash_size">32Gb</span>
-
 							<?php endif; ?>
-
-
-
+                            
+                            <!-- 64 gb-->
+							<?php if ($fleshka->pricesize64>0): ?>
+								<span class="flash_size">64Gb</span>
+							<?php endif; ?>
 				</td>
 
 

@@ -219,6 +219,16 @@ if (isset($show_hints)) {
 					</div>
 
 				<?php endif; ?>
+                
+                <!-- 64 gb-->
+				<?php if ($fleshka->pricesize64>0): ?>
+
+					<div class="my_unpressed"
+							fleshka_volume="<?php echo $fleshka->id.'_64'; ?>">
+						64 Gb
+					</div>
+
+				<?php endif; ?>
 
 		</div>
 
@@ -237,6 +247,8 @@ if (isset($show_hints)) {
 			$pricesize16_z = $fleshka->pricesize16_z;
 			$pricesize32 = $fleshka->pricesize32;
 			$pricesize32_z = $fleshka->pricesize32_z;
+            $pricesize64 = $fleshka->pricesize64;
+			$pricesize64_z = $fleshka->pricesize64_z;
 		?>
 
 		<div class="div_prices">
@@ -315,6 +327,20 @@ if (isset($show_hints)) {
 						<div class="my_cost_div"><?php echo $pricesize32; ?> руб</div>
 
 					<?php endif; ?>
+                    
+                    <!-- 64 gb-->
+					<?php if ($fleshka->pricesize64>1): ?>
+
+						<?php
+							if ($pricesize64 - $calculation['price1000']>0) {
+
+								$pricesize64 -= $calculation['price1000'];
+							}
+						?>
+
+						<div class="my_cost_div"><?php echo $pricesize64; ?> руб</div>
+
+					<?php endif; ?>
 
 				</div>
 
@@ -357,11 +383,12 @@ if (isset($show_hints)) {
 
 					<!-- 32 gb-->
 					<?php if ($fleshka->pricesize32_z>0): ?>
-
-
-
 						<div class="my_cost_div pod_zakaz"><?php echo $pricesize32_z; ?> руб</div>
-
+					<?php endif; ?>
+                        
+                    <!-- 64 gb-->
+					<?php if ($fleshka->pricesize64_z>0): ?>
+						<div class="my_cost_div pod_zakaz"><?php echo $pricesize64_z; ?> руб</div>
 					<?php endif; ?>
 
 				</div>
@@ -401,9 +428,12 @@ if (isset($show_hints)) {
 
 				<!-- 32 gb-->
 				<?php if ($fleshka->pricesize32>0): ?>
-
 					<div class="my_cost_div"><?php echo ($fleshka->count32>0)?$fleshka->count32:''; ?></div>
-
+				<?php endif; ?>
+                    
+                <!-- 64 gb-->
+				<?php if ($fleshka->pricesize64>0): ?>
+					<div class="my_cost_div"><?php echo ($fleshka->count64>0)?$fleshka->count64:''; ?></div>
 				<?php endif; ?>
 
 			</div>

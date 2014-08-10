@@ -179,6 +179,16 @@
 					</div>
 
 				<?php endif; ?>
+                
+                <!-- 64 gb-->
+				<?php if ($fleshka->pricesize64>0): ?>
+
+					<div class="my_unpressed"
+							fleshka_volume="<?php echo $fleshka->id.'_64'; ?>">
+						64 Gb
+					</div>
+
+				<?php endif; ?>
 
 		</div>
 

@@ -43,6 +43,10 @@
 	<?php echo $form->textFieldRow($fleshka, 'pricesize32', array('class'=>'span7')); ?>
 		<?php echo $form->textFieldRow($fleshka, 'pricesize32_z', array('class'=>'span7')); ?>
 	<?php echo $form->textFieldRow($fleshka, 'count32', array('class'=>'span7')); ?>
+    
+    <?php echo $form->textFieldRow($fleshka, 'pricesize64', array('class'=>'span7')); ?>
+		<?php echo $form->textFieldRow($fleshka, 'pricesize64_z', array('class'=>'span7')); ?>
+	<?php echo $form->textFieldRow($fleshka, 'count64', array('class'=>'span7')); ?>
 
 	<?php echo $form->checkBoxRow($fleshka, 'instock'); ?>
 

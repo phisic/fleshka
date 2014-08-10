@@ -27,13 +27,13 @@ class Descriptionsize extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('index, name', 'required'),
-            array('index, trash, count2, count4, count8, count16, count32, instock, is_new', 'numerical', 'integerOnly'=>true),
-            array('pricesize2, pricesize4, pricesize8, pricesize16, pricesize32,pricesize2_z, pricesize4_z, pricesize8_z, pricesize16_z, pricesize32_z', 'numerical'),
+            array('index, trash, count2, count4, count8, count16, count32, count64, instock, is_new', 'numerical', 'integerOnly'=>true),
+            array('pricesize2, pricesize4, pricesize8, pricesize16, pricesize32,pricesize64,pricesize2_z, pricesize4_z, pricesize8_z, pricesize16_z, pricesize32_z, pricesize64_z', 'numerical'),
             array('name', 'length', 'max'=>255),
             array('description', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, index, trash, name, description, pricesize2, pricesize4, pricesize8, pricesize16, pricesize32, count2, count4, count8, count16, count32, instock, is_new', 'safe', 'on'=>'search'),
+            array('id, index, trash, name, description, pricesize2, pricesize4, pricesize8, pricesize16, pricesize32, pricesize64, count2, count4, count8, count16, count32, count64, instock, is_new', 'safe', 'on'=>'search'),
         );
     }
 
@@ -73,12 +73,15 @@ class Descriptionsize extends CActiveRecord {
             'pricesize16' => 'Цена 16 Гб',
             'pricesize16_z' => 'Цена под заказ 16 Гб',
             'pricesize32' => 'Цена 32 Гб',
+            'pricesize64' => 'Цена 64 Гб',
             'pricesize32_z' => 'Цена под заказ 32 Гб',
+            'pricesize64_z' => 'Цена под заказ 64 Гб',
             'count2' => 'Кол-во 2 Гб',
             'count4' => 'Кол-во 4 Гб',
             'count8' => 'Кол-во 8 Гб',
             'count16' => 'Кол-во 16 Гб',
             'count32' => 'Кол-во 32 Гб',
+            'count64' => 'Кол-во 64 Гб',
             'instock' => 'На складе',
             'is_new' => 'Новый?',
         );
@@ -104,11 +107,13 @@ class Descriptionsize extends CActiveRecord {
         $criteria->compare('pricesize8', $this->pricesize8);
         $criteria->compare('pricesize16', $this->pricesize16);
         $criteria->compare('pricesize32', $this->pricesize32);
+        $criteria->compare('pricesize64', $this->pricesize64);
         $criteria->compare('count2', $this->count2);
         $criteria->compare('count4', $this->count4);
         $criteria->compare('count8', $this->count8);
         $criteria->compare('count16', $this->count16);
         $criteria->compare('count32', $this->count32);
+        $criteria->compare('count64', $this->count64);
         $criteria->compare('instock', $this->instock);
         $criteria->compare('is_new', $this->is_new);
 
