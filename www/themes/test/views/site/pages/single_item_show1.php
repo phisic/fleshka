@@ -48,9 +48,6 @@ if (isset($show_hints)) {
 		<?php if ($upakovka->is_custom_text==0) : ?>
 			<?php if (!$upakovka->is_special()) : ?>
 				<li>100 шт</li>
-				<li>300 шт</li>
-				<li>500 шт</li>
-				<li><div>под заказ</div></li>
 				<li><div>в наличии</div></li>
 			<?php else : ?>
 				<li>Цена</li>
@@ -197,64 +194,6 @@ if (isset($show_hints)) {
 					<?php endif; ?>
 
 				</div>
-
-				<?php if (!$upakovka->is_special()) : ?>
-
-					<!-- 300 шт -->
-					<div style="width:20%;float:left;text-align:center;margin-top:10px;">
-
-						<?php if ($upakovka->price>0): ?>
-
-							<?php
-								if ($price - $price300>0) {
-
-									$price -= $price300;
-								}
-							?>
-
-							<div class="my_cost_div"><?php echo $price; ?> руб</div>
-
-						<?php endif; ?>
-
-					</div>
-
-					<!-- 500 шт -->
-					<div style="width:20%;float:left;text-align:center;margin-top:10px;">
-
-						<?php if ($upakovka->price>0): ?>
-
-							<?php
-								if ($price - $price500>0) {
-
-									$price -= $price500;
-								}
-							?>
-
-							<div class="my_cost_div"><?php echo $price; ?> руб</div>
-
-						<?php endif; ?>
-
-					</div>
-
-					<!-- podzakaz -->
-					<div style="width:20%;float:left;text-align:center;margin-top:10px;">
-
-						<?php if ($upakovka->price>0): ?>
-
-							<?php
-								if ($price - $price_zakaz>0) {
-
-									$price -= $price_zakaz;
-								}
-							?>
-
-							<div class="my_cost_div"><?php echo $price; ?> руб</div>
-
-						<?php endif; ?>
-
-					</div>
-
-				<?php endif; ?>
 
 				<!-- v nalichii -->
 				<div style="width:20%;float:left;text-align:center;margin-top:10px;">
