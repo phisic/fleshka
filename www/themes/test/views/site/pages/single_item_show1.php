@@ -185,7 +185,7 @@ if (isset($show_hints)) {
 
 				<!-- 100 шт -->
 
-				<div style="width:20%;float:left;text-align:center;margin-top:10px;">
+				<div style="width:50%;float:left;text-align:center;margin-top:10px;">
 
 					<?php if ($upakovka->price>0): ?>
 
