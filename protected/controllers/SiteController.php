@@ -747,6 +747,13 @@ class SiteController extends Controller
 
 		// check if empty email field
 		$error = array();
+        if(empty($_POST['code']))
+           $error['code'] = 'Введите код';
+        else{
+            $captcha = new CCaptchaAction(Yii::app()->getController(),'captcha');
+            if(!$captcha->validate($_POST['code'], false))
+               $error['code'] = 'Неверный код';
+        }
 		if (isset($_POST['email'])) {
 
 			$validate = filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL );
