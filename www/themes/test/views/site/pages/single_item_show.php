@@ -31,7 +31,7 @@ if (isset($show_hints)) {
 
 <?php if (count($fleshka)==0) : ?>
 
-		По запросу ничего не найдено
+		По запросу ничего не найденo
 
 <?php else: ?>
 

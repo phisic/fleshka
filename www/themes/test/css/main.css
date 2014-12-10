@@ -153,7 +153,8 @@ Back to top button
 .top_menu .items img
 {
 height:100px;
-	}
+
+	}
 .top_menu_text
 {
     margin-top: 3px;
@@ -446,8 +447,8 @@ div.clear{
 
 div.header div.reklama{
     position: absolute;
-    left: 380px;
-    width: 520px;
+    left: 250px;
+    width: 35%;
     height: 150px;
     /*border: 1px solid;*/
 }
@@ -458,12 +459,15 @@ div.header div.left a {
     height: 100%;
 }.footer_links{display:block;width:100%;clear:both;}
 .footer_links ul {
-list-style: none;    color: #fff;
-}
+list-style: none;
+    color: #fff;
+
+}
 .footer_links ul li{width:190px;float:left;}
 .footer_links ul li a,.footer_links ul li a:visited {color:#fff;text-transform:uppercase; text-decoration: none;}
 
-div.footer{	width:100%;
+div.footer{
+	width:100%;
 	color:#fff;
     text-align: center;
     font-size: 12px;

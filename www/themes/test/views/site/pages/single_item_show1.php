@@ -31,7 +31,7 @@ if (isset($show_hints)) {
 
 <?php if (count($upakovka)==0) : ?>
 
-		По запросу ничего не найдено
+		<div><p><br>По запросу ничего не найдено</p></div>
 
 <?php else: ?>
 
@@ -231,8 +231,6 @@ if (isset($show_hints)) {
 
 </div>
 
-<?php endif; ?>
-
 <script type="text/javascript">
 $(function() {
 
@@ -250,3 +248,5 @@ $(function() {
 	<?php endif; ?>
 });
 </script>
+<?php endif; ?>
+

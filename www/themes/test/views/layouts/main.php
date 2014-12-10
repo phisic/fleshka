@@ -153,7 +153,7 @@ unset($SxGeo);
 
   </div>
 
-	<div class="reklama"></div>
+	<div class="reklama" style="padding-top:30px;"><span style="font-size:18pt;color:white;font-weight:bold;">Мы продаем Вам флешки уже 10 лет!</span></div>
 
   <!-- <div class="mid">Всегда в наличии <strong>60 000</strong> флешек</div> -->
   <div class="clear"></div>

@@ -8,7 +8,7 @@ $this->layout = '//layouts/column1';
 
 <?php
 
-    $content = 'По запросу ничего не найдено';
+    $content = 'По запросу ничего не найденo';
 
     if (count($fleshkas)>0) {
 

@@ -109,7 +109,7 @@ class SiteController extends Controller
 						and word like "%'.$word.'%"
 						order by descriptionsize.id limit 30';
 
-				echo $sql;die;
+				
 
 				$searches = Yii::app()->db->createCommand($sql)->query();
 
@@ -124,8 +124,6 @@ class SiteController extends Controller
 						and trash=0
 						and word like "%'.$word.'%"
 						order by descriptionprice.id limit 30';
-
-						echo $sql;die;
 
 				$searches = Yii::app()->db->createCommand($sql)->query();
 
@@ -1608,7 +1606,8 @@ class SiteController extends Controller
 			$file = 'fleshka.ru(special)'.date('d.m.Y').'.pdf';
 
 		}
-		 elseif ($type=='in_catalog') {
+		 elseif ($type=='in_catalog') {
+
 		$relgoodscatalogs = Relgoodscatalog::model()->with('descriptionsize')
 					->findAll(array('condition' => 'descriptionsize.trash=0 and instock=1 and catalog_id=:id',
 						'params' => array(':id' => $catalog->id),
