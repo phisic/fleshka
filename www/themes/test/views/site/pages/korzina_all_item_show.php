@@ -194,8 +194,8 @@
          <?php if (isset($error['email'])) echo '<div class="error">'.$error['email'].'</div>'; ?>
          <input name="email" value="<?php echo (isset($error['email_value'])?$error['email_value']:''); ?>" type="text" class="email">
          <p>на него к вам придет ответ нашего менеджера</p>
-         <p><img src="/site/captcha"> <input name="code" style="width:75px;" type="text"></p>
          <?php if (isset($error['code'])) echo '<div class="error">'.$error['code'].'</div>'; ?>
+         <p><img src="/site/captcha"> <input name="code" style="width:75px;" type="text"></p>
          <p>введите код с картинки</p>
         <?php
         $this->widget('bootstrap.widgets.TbButton', array(
