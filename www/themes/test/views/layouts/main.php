@@ -341,7 +341,7 @@ unset($SxGeo);
 					//array('label'=>'Условия продажи', 'url'=>Yii::app()->urlManager->createUrl('/site/selling_rules'), 'active' => (Yii::app()->getGlobalState('top_menu')=='selling'?true:false)),
 				    array('label'=>'Стандартный договор', 'url'=>Yii::app()->urlManager->createUrl('/site/dogovor')),
 					array('label'=>'Статьи', 'url'=> Yii::app()->urlManager->createUrl('/site/news')),
-					array('label'=>'Скачать презентацию', 'url'=>Yii::app()->urlManager->createUrl('/site/presentation')),
+					//array('label'=>'Скачать презентацию', 'url'=>Yii::app()->urlManager->createUrl('/site/presentation')),
 
 					array('label'=>'Контакты', 'url'=> Yii::app()->urlManager->createUrl('/site/contacts'), 'active' => (Yii::app()->getGlobalState('top_menu')=='contact'?true:false)),
 					array('label'=>'Добавить запрос', 'url'=> Yii::app()->urlManager->createUrl('/site/korzinka'), 'active' => (Yii::app()->getGlobalState('top_menu')=='korzinka'?true:false)),
